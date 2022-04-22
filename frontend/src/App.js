@@ -8,7 +8,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <div style={{ backgroundColor: "#101820F0", minHeight: "80vh" }}>
+      <div style={{ backgroundColor: "#101820F0", minHeight: "100vh" }}>
       </div>
       <Footer />
     </>

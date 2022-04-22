@@ -6,7 +6,7 @@ const Header = () => {
         <>
             <Navbar style={{ height: "8vh", backgroundColor: "#FEE715CF" }} >
                 <Container>
-                    <Navbar.Brand href="#home">FITNETIC</Navbar.Brand>
+                    <Navbar.Brand href="#home"><b>FITNETIC</b></Navbar.Brand>
                     <Nav className="ms-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
                         <Nav.Link href="#features">Updates</Nav.Link>
