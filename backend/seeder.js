@@ -4,6 +4,8 @@ import admins from "./data/admins.js";
 import foods from "./data/food.js";
 import exercises from "./data/exercises.js";
 import dashboard from "./data/dashboard.js";
+import workouts from "./data/workout.js";
+import diets from "./data/diet.js";
 import dotenv from 'dotenv'
 
 import Admin from './models/adminModel.js'
@@ -37,11 +39,34 @@ const importData = async () => {
         await Workout.deleteMany()
         await Exercise.deleteMany()
 
+        const exercisesList = await Exercise.insertMany(exercises)
+        const exercisesIds = exercisesList.map((exercise) => {
+            return exercise._id
+        })
+        const sampleWorkout = workouts.map((workout) => {
+            return {
+                ...workout,
+                exercises: exercisesIds
+            }
+        })
+
+        const foodList = await Food.insertMany(foods)
+        const foodIds = foodList.map((food) => {
+            return food._id
+        })
+        const sampleDiet = diets.map((diet) => {
+            return {
+                ...diet,
+                food: foodIds
+            }
+        })
+
         await User.insertMany(users)
         await Admin.insertMany(admins)
-        await Food.insertMany(foods)
         await Dashboard.insertMany(dashboard)
-        await Exercise.insertMany(exercises)
+        await Workout.insertMany(sampleWorkout)
+        await Diet.insertMany(sampleDiet)
+
         console.log("Data Imported")
         process.exit()
     } catch (error) {

@@ -1,4 +1,6 @@
 import mongoose from "mongoose"
+
+
 const foodSchema = mongoose.Schema({
     name: {
         type: String,
@@ -11,4 +13,5 @@ const foodSchema = mongoose.Schema({
 })
 
 const Food = mongoose.model('Food', foodSchema)
+
 export default Food
