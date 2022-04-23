@@ -16,7 +16,13 @@ const Food = mongoose.model('Food', foodSchema)
 
 
 const dietSchema = mongoose.Schema({
-    exercises: [Exercise],
+    food: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Food'
+        }
+    ],
     totalCaloriesCount: {
         type: Number,
         required: true

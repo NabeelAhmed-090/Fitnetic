@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const exerciseSchema = mongoose.Schema({
     suggestedTime: {
-        type: String,
+        type: Number,
         required: true,
     },
     actualTime: {
@@ -29,13 +29,19 @@ const Exercise = mongoose.model('Exercise', exerciseSchema)
 
 
 const workoutSchema = mongoose.Schema({
-    exercises: [Exercise],
+    exercises: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Exercise'
+        }
+    ],
     totalCaloriesCount: {
         type: Number,
         required: true
     }
 })
 
-const workout = mongoose.model('Workout', workoutSchema)
+const Workout = mongoose.model('Workout', workoutSchema)
 
 export default Workout

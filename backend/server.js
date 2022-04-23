@@ -1,28 +1,21 @@
-const express = require('express')
-const products = require('./data/products')
-const dotenv = require("dotenv")
-
-// const [products, setProducts] = useState([])
-
-// useEffect(() => {
-//   const fetchProducts = async () => {
-//     const { data } = await axios.get('/api/products')
-//     setProducts(data)
-//   }
-//   fetchProducts()
-// }, [])
+import express from 'express'
+import dotenv from 'dotenv'
+import connectDB from './config/db.js'
+import userRoutes from './routes/userRoutes.js'
 
 dotenv.config()
 
+connectDB()
+
 const app = express()
 
-// app.get('/', (req, res) => {
-//     res.send("API is running")
-// })
+app.use(express.json())
+
+app.use('/api/users', userRoutes)
 
 
-app.get('/homepage', (req, res) => {
-    res.json(products)
+app.use("*", (req, res) => {
+    res.send("Page not found")
 })
 
 const PORT = process.env.PORT || 5000
