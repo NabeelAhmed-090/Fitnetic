@@ -1,17 +1,21 @@
 import mongoose from "mongoose";
 import users from "./data/users.js"
+import admins from "./data/admins.js";
+import foods from "./data/food.js";
+import exercises from "./data/exercises.js";
+import dashboard from "./data/dashboard.js";
 import dotenv from 'dotenv'
 
 import Admin from './models/adminModel.js'
 import DailyUpdates from './models/dailyUpdatesModel.js'
 import Dashboard from './models/dashboardModel.js'
 import Diet from './models/dietModel.js'
-import Food from './models/dietModel.js'
+import Food from './models/foodModel.js'
 import Goal from './models/goalModel.js'
 import TrackingProgress from './models/trackingProgressModel.js'
 import User from './models/userModel.js'
 import Workout from './models/workoutModel.js'
-import Exercise from './models/workoutModel.js'
+import Exercise from './models/exerciseModel.js'
 
 
 import connectDB from './config/db.js'
@@ -33,8 +37,11 @@ const importData = async () => {
         await Workout.deleteMany()
         await Exercise.deleteMany()
 
-        const createdUsers = await User.insertMany(users)
-        console.log(createdUsers)
+        await User.insertMany(users)
+        await Admin.insertMany(admins)
+        await Food.insertMany(foods)
+        await Dashboard.insertMany(dashboard)
+        await Exercise.insertMany(exercises)
         console.log("Data Imported")
         process.exit()
     } catch (error) {
