@@ -20,6 +20,7 @@
         "react-bootstrap-icons": "^1.8.1",
         "react-dom": "^18.0.0",
         "react-redux": "^8.0.1",
+        "react-router-dom": "^6.3.0",
         "react-scripts": "5.0.1",
         "react-social-icons": "^5.13.0",
         "redux": "^4.2.0",

@@ -1,11 +1,11 @@
 import asyncHandler from "express-async-handler";
 import User from '../models/userModel.js'
 import generateToken from "../utils/generateToken.js";
+import bcrypt from "bcryptjs";
 
 //@desc   Auth user & get token
 //@route  POST /api/users/login
 //@access Public
-
 const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body
     console.log("Login verification : ", email, password)
@@ -35,7 +35,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     if (user) {
         res.json({
             _id: user._id,
-            name: user.nane,
+            name: user.name,
             email: user.email,
         })
     }
@@ -80,8 +80,63 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 
+//@desc   Update Users
+//@route  POST /api/users/settings
+//@access Private
+const updateUser = asyncHandler(async (req, res) => {
+
+    var { name, age, weight, password, height, image, email } = req.body
+
+    const user = await User.findOne({ email })
+
+    if (user) {
+        if (name === "")
+            name = user.name
+        if (age === 0)
+            age = user.age
+        if (weight === 0)
+            weight = user.weight
+        if (height === 0)
+            height = user.height
+        if (image === "")
+            image = user.image
+        if (password === "") {
+            password = user.password
+        }
+        else {
+            const salt = await bcrypt.genSalt(10)
+            password = await bcrypt.hash(password, salt)
+        }
+
+        const updateUser = await User.findOneAndUpdate(
+            { email: email },
+            {
+                $set: {
+                    name: name,
+                    age: age,
+                    password: password,
+                    weight: weight,
+                    email: email,
+                    height: height,
+                    image: image
+                }
+            }
+        )
+        res.json({
+            _id: updateUser._id,
+            name: name,
+            email: updateUser.email,
+            token: generateToken(updateUser._id)
+        })
+    }
+    else {
+        res.status(404).json({ message: 'User not found' })
+    }
+})
+
 export {
     authUser,
     registerUser,
-    getUserProfile
+    getUserProfile,
+    updateUser,
 }
