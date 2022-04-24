@@ -17,7 +17,7 @@ const Settings = () => {
 
     return (
         <div>
-            <h1>SETTINGS</h1>
+            <h1>SETTINGSSS</h1>
             <h2>{email}</h2>
             <input type="text" placeholder='name' onChange={(event) => setName(event.target.value)} />
             <input type="text" placeholder='age' onChange={(event) => setAge(event.target.value)} />
