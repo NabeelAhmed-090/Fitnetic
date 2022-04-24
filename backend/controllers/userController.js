@@ -5,15 +5,17 @@ import generateToken from "../utils/generateToken.js";
 //@desc   Auth user & get token
 //@route  POST /api/users/login
 //@access Public
+
 const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body
+    console.log("Login verification : ", email, password)
 
-    const user = await User.findOne({ email: email })
+    const user = await User.findOne({ email: email }) //user or null
     if (user && (await user.matchPassword(password))) {
         res.json(
             {
                 _id: user._id,
-                name: user.nane,
+                name: user.name,
                 email: user.email,
                 token: generateToken(user._id)
             }
@@ -67,7 +69,7 @@ const registerUser = asyncHandler(async (req, res) => {
     if (user) {
         res.status(200).json({
             _id: user._id,
-            name: user.nane,
+            name: user.name,
             email: user.email,
             token: generateToken(user._id)
         })

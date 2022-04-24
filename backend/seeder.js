@@ -18,8 +18,6 @@ import TrackingProgress from './models/trackingProgressModel.js'
 import User from './models/userModel.js'
 import Workout from './models/workoutModel.js'
 import Exercise from './models/exerciseModel.js'
-
-
 import connectDB from './config/db.js'
 
 dotenv.config()
