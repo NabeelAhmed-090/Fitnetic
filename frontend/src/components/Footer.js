@@ -15,21 +15,21 @@ const Footer = () => {
                         <Row style={{ marginTop: "20px" }}>
                             <Col md={12} lg={12} sm={12}>
                                 <pre>
-                                    <i class="fa-solid fa-phone"></i> <b>  : 0300 1234567     </b>
+                                    <i className="fa-solid fa-phone"></i> <b>  : 0300 1234567     </b>
                                 </pre>
                             </Col>
                         </Row>
                         <Row >
                             <Col md={12} lg={12} sm={12}>
                                 <pre>
-                                    <i class="fa-solid fa-at"></i> <b>  : test@gmail.com   </b>
+                                    <i className="fa-solid fa-at"></i> <b>  : test@gmail.com   </b>
                                 </pre>
                             </Col>
                         </Row>
                         <Row>
                             <Col md={12} lg={12} sm={12}>
                                 <pre>
-                                    <i class="fa-solid fa-envelope"></i> <b>  : PO-BOX 123 Lahore</b>
+                                    <i className="fa-solid fa-envelope"></i> <b>  : PO-BOX 123 Lahore</b>
                                 </pre>
                             </Col>
                         </Row>
@@ -38,24 +38,24 @@ const Footer = () => {
                         <h3><b>Connect With Us</b></h3>
                         <Row style={{ textAlign: "center", marginTop: "20px" }}>
                             <Col md={4} lg={4} sm={4}>
-                                <i class="fa-brands fa-facebook fa-2x"></i>
+                                <i className="fa-brands fa-facebook fa-2x"></i>
                             </Col>
                             <Col md={4} lg={4} sm={4}>
-                                <i class="fa-brands fa-twitter fa-2x"></i>
+                                <i className="fa-brands fa-twitter fa-2x"></i>
                             </Col>
                             <Col md={4} lg={4} sm={4}>
-                                <i class="fa-brands fa-instagram fa-2x"></i>
+                                <i className="fa-brands fa-instagram fa-2x"></i>
                             </Col>
                         </Row>
                         <Row style={{ textAlign: "center", marginTop: "20px" }}>
                             <Col md={4} lg={4} sm={4}>
-                                <i class="fa-brands fa-snapchat fa-2x"></i>
+                                <i className="fa-brands fa-snapchat fa-2x"></i>
                             </Col>
                             <Col md={4} lg={4} sm={4}>
-                                <i class="fa-brands fa-linkedin fa-2x"></i>
+                                <i className="fa-brands fa-linkedin fa-2x"></i>
                             </Col>
                             <Col md={4} lg={4} sm={4}>
-                                <i class="fa-brands fa-github fa-2x"></i>
+                                <i className="fa-brands fa-github fa-2x"></i>
                             </Col>
                         </Row>
                     </Col>
