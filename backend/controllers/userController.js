@@ -48,14 +48,11 @@ const getUserProfile = asyncHandler(async (req, res) => {
 //@route  Get /api/products
 //@access Public
 const registerUser = asyncHandler(async (req, res) => {
-    console.log("Register User")
     const { name, age, password, weight, email, height, image } = req.body
     const userExists = await User.findOne({ email })
-
     if (userExists) {
         res.status(400).json({ message: "User already exists" })
     }
-
     const user = await User.create({
         name,
         age,
@@ -67,12 +64,14 @@ const registerUser = asyncHandler(async (req, res) => {
     })
 
     if (user) {
-        res.status(200).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            token: generateToken(user._id)
-        })
+        res.json(
+            {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                token: generateToken(user._id)
+            }
+        )
     } else {
         res.status(400)
         throw new Error('Invalid User Data')

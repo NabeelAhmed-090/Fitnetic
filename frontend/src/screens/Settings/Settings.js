@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { update } from '../../actions/userActions'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
@@ -8,7 +8,7 @@ const Settings = () => {
     const dispatch = useDispatch()
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
-    const { "email": email } = userInfo || ""
+    const { email } = userInfo || ""
     const [name, setName] = useState("")
     const [age, setAge] = useState(0)
     const [password, setPassword] = useState("")

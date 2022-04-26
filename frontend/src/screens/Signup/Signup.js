@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import './Signup.css'
 import { signup } from '../../actions/userActions'
 
 const Signup = () => {
     const dispatch = useDispatch()
-    const userLogin = useSelector((state) => state.userLogin)
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
     const [age, setAge] = useState(0)
@@ -76,9 +75,9 @@ const Signup = () => {
                                 <Row>
                                     <Col md={12} lg={12} sm={12} style={{ display: "flex" }}>
                                         <Button variant="dark" type="submit" style={{ marginLeft: "auto", marginTop: "5vh" }}
-                                        onClick={()=>{
-                                            dispatch(signup(name, age, weight, password, height, image, email))
-                                        }}>
+                                            onClick={() => {
+                                                dispatch(signup(name, age, password, weight, email, height, image))
+                                            }}>
                                             Signup
                                         </Button>
                                     </Col>
