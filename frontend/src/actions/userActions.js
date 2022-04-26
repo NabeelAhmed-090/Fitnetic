@@ -66,6 +66,7 @@ export const signup = (name, age, password, weight, email, height, image) => asy
 }
 
 export const update = (name, age, weight, password, height, image, email) => async (dispatch) => {
+
     try {
         dispatch({
             type: USER_UPDATE_REQUEST,
@@ -75,7 +76,6 @@ export const update = (name, age, weight, password, height, image, email) => asy
                 'Content-Type': 'application/json',
             },
         }
-        console.log("check")
         const { data } = await axios.post('/api/users/settings',
             { name, age, weight, password, height, image, email },
             config)

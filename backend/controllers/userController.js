@@ -31,7 +31,6 @@ const authUser = asyncHandler(async (req, res) => {
 //@access Private
 const getUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
-    console.log(user)
     if (user) {
         res.json({
             _id: user._id,
@@ -89,9 +88,8 @@ const updateUser = asyncHandler(async (req, res) => {
     var { name, age, weight, password, height, image, email } = req.body
 
     const user = await User.findOne({ email })
-
     if (user) {
-        if (name === "")
+        if (name.length === 0)
             name = user.name
         if (age === 0)
             age = user.age
@@ -99,9 +97,9 @@ const updateUser = asyncHandler(async (req, res) => {
             weight = user.weight
         if (height === 0)
             height = user.height
-        if (image === "")
+        if (image.length === 0)
             image = user.image
-        if (password === "") {
+        if (password.length === 0) {
             password = user.password
         }
         else {
