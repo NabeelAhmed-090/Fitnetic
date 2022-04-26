@@ -49,6 +49,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 //@route  Get /api/products
 //@access Public
 const registerUser = asyncHandler(async (req, res) => {
+    console.log("Register User")
     const { name, age, password, weight, email, height, image } = req.body
     const userExists = await User.findOne({ email })
 
