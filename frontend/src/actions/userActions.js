@@ -36,6 +36,13 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
+export const logout = () => async (dispatch) => {
+    localStorage.removeItem('userInfo')
+    dispatch({
+        type: USER_LOGOUT
+    })
+}
+
 export const signup = (name, age, password, weight, email, height, image) => async (dispatch) => {
     try {
         dispatch({
@@ -46,6 +53,7 @@ export const signup = (name, age, password, weight, email, height, image) => asy
                 'Content-Type': 'application/json',
             },
         }
+
         const { data } = await axios.post('/api/users/signup',
             { name, age, password, weight, email, height, image },
             config)
@@ -54,6 +62,12 @@ export const signup = (name, age, password, weight, email, height, image) => asy
             type: USER_SIGNUP_SUCCESS,
             payload: data
         })
+
+        dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: data
+        })
+
         localStorage.setItem('userInfo', JSON.stringify(data))
     }
     catch (error) {
@@ -83,6 +97,12 @@ export const update = (name, age, weight, password, height, image, email) => asy
             type: USER_UPDATE_SUCCESS,
             payload: data
         })
+
+        dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: data
+        })
+
         localStorage.setItem('userInfo', JSON.stringify(data))
     }
     catch (error) {

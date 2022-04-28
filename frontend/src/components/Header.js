@@ -1,14 +1,12 @@
 import React from 'react'
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { useDispatch } from 'react-redux'
-import { USER_LOGOUT } from '../constants/userConstants'
+import { logout } from '../actions/userActions'
 
 const Header = () => {
     const dispatch = useDispatch()
     const handleLogout = () => {
-        dispatch({
-            type: USER_LOGOUT,
-        })
+        dispatch(logout())
     }
     return (
         <>
