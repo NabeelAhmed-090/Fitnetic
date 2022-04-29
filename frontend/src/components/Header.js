@@ -14,16 +14,16 @@ const Header = () => {
                 <Container>
                     <Navbar.Brand href="/AboutUs"><b>FITNETIC</b></Navbar.Brand>
                     <Nav className="ms-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="/Settings">Updates</Nav.Link>
-                        <Nav.Link href="#pricing">Dashboard</Nav.Link>
+                        <Nav.Link href="/api/homepage">Home</Nav.Link>
+                        <Nav.Link href="#">Goal</Nav.Link>
+                        <Nav.Link href="#">Dashboard</Nav.Link>
                         <Nav>
                             <NavDropdown
                                 id="nav-dropdown-dark-example"
-                                title="Dropdown"
+                                title="Profile"
                                 menuVariant="dark"
                             >
-                                <NavDropdown.Item href="/api/users/profile/update">Update Profile</NavDropdown.Item>
+                                <NavDropdown.Item href="/api/users/profile/update">Settings</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={handleLogout} href="/api/users/login">
                                     Logout

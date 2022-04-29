@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { update, deleteUser } from '../../actions/userActions'
 import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap'
@@ -20,6 +20,13 @@ const Settings = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        if (!userInfo) {
+            history("/api/users/login")
+        }
+    }, [dispatch, history, userInfo])
+
     const deleteAccount = () => {
         dispatch(deleteUser(email))
         history("/api/users/login")

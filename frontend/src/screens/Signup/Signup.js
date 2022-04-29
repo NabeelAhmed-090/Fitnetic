@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import './Signup.css'
 import { signup } from '../../actions/userActions'
 
@@ -14,6 +15,15 @@ const Signup = () => {
     const [height, setHeight] = useState(0)
     const [image, setImage] = useState("")
 
+    let history = useNavigate()
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+
+    useEffect(() => {
+        if (userInfo) {
+            history("/api/homepage")
+        }
+    }, [dispatch, history, userInfo])
 
     return (
         <>

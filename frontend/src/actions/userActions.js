@@ -1,7 +1,8 @@
 import {
     USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT,
     USER_UPDATE_SUCCESS, USER_UPDATE_REQUEST, USER_UPDATE_FAIL,
-    USER_SIGNUP_SUCCESS, USER_SIGNUP_REQUEST, USER_SIGNUP_FAIL, USER_DELETE_REQUEST, USER_DELETE_SUCCESS, USER_DELETE_FAIL,
+    USER_SIGNUP_SUCCESS, USER_SIGNUP_REQUEST, USER_SIGNUP_FAIL,
+    USER_DELETE_REQUEST, USER_DELETE_SUCCESS, USER_DELETE_FAIL
 } from "../constants/userConstants";
 
 import axios from 'axios'
@@ -115,7 +116,6 @@ export const update = (name, age, weight, password, height, image, email) => asy
 
 export const deleteUser = (email) => async (dispatch) => {
     try {
-        console.log(email)
         dispatch({
             type: USER_DELETE_REQUEST
         })
@@ -125,7 +125,7 @@ export const deleteUser = (email) => async (dispatch) => {
             },
         }
         await axios.delete('/api/users/profile/delete',
-            email,
+            { data: { email: email } },
             config)
         dispatch({
             type: USER_DELETE_SUCCESS

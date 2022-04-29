@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { login } from '../../actions/userActions'
 import { Container, Row, Col, Form, Button, Carousel } from 'react-bootstrap'
 import img1 from '../../Image/img1.jpg'
@@ -8,9 +9,18 @@ import img3 from '../../Image/img3.jpg'
 import './Login.css'
 
 const Login = () => {
+    let history = useNavigate()
     const dispatch = useDispatch()
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    useEffect(() => {
+        if (userInfo) {
+            history("/api/homepage")
+        }
+    }, [dispatch, history, userInfo])
 
     return (
         <>

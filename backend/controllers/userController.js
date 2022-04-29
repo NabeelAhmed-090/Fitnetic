@@ -135,15 +135,12 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 //@route  DELETE /api/users/profile/delete
 //@access Private
 const deleteUserProfile = asyncHandler(async (req, res) => {
-    const { email } = req.body || ""
-    console.log(email)
+    const { email } = req.body
     User.deleteOne({ email: email })
         .then(() => {
-            console.log("User Deleted")
             res.send("Account Deleted")
         })
         .catch((error) => {
-            console.log("Error")
             res.send("error in account deletion")
         })
 })
