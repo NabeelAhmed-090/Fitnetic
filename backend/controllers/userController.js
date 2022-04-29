@@ -31,7 +31,6 @@ const authUser = asyncHandler(async (req, res) => {
 //@access Private
 const getUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
-    console.log(user)
     if (user) {
         res.json({
             _id: user._id,
@@ -51,11 +50,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
     const { name, age, password, weight, email, height, image } = req.body
     const userExists = await User.findOne({ email })
-
     if (userExists) {
         res.status(400).json({ message: "User already exists" })
     }
-
     const user = await User.create({
         name,
         age,
@@ -67,12 +64,14 @@ const registerUser = asyncHandler(async (req, res) => {
     })
 
     if (user) {
-        res.status(200).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            token: generateToken(user._id)
-        })
+        res.json(
+            {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                token: generateToken(user._id)
+            }
+        )
     } else {
         res.status(400)
         throw new Error('Invalid User Data')
@@ -81,52 +80,50 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
 //@desc   Update Users
-//@route  POST /api/users/settings
+//@route  PUT /api/users/settings
 //@access Private
-const updateUser = asyncHandler(async (req, res) => {
-
+const updateUserProfile = asyncHandler(async (req, res) => {
     var { name, age, weight, password, height, image, email } = req.body
-
     const user = await User.findOne({ email })
-
     if (user) {
-        if (name === "")
-            name = user.name
-        if (age === 0)
-            age = user.age
-        if (weight === 0)
-            weight = user.weight
-        if (height === 0)
-            height = user.height
-        if (image === "")
-            image = user.image
-        if (password === "") {
-            password = user.password
-        }
-        else {
-            const salt = await bcrypt.genSalt(10)
-            password = await bcrypt.hash(password, salt)
-        }
 
-        const updateUser = await User.findOneAndUpdate(
-            { email: email },
-            {
-                $set: {
-                    name: name,
-                    age: age,
-                    password: password,
-                    weight: weight,
-                    email: email,
-                    height: height,
-                    image: image
-                }
-            }
-        )
+        if (name.length !== 0)
+            user.name = name
+        if (age !== 0)
+            user.age = age
+        if (weight !== 0)
+            user.weight = weight
+        if (height !== 0)
+            user.height = height
+        if (image.length !== 0)
+            user.image = image
+        if (password.length !== 0)
+            user.password = password
+        // else {
+        //     const salt = await bcrypt.genSalt(10)
+        //     password = await bcrypt.hash(password, salt)
+        // }
+
+        const updatedUser = await user.save()
+        // const updateUser = await User.findOneAndUpdate(
+        //     { email: email },
+        //     {
+        //         $set: {
+        //             name: name,
+        //             age: age,
+        //             password: password,
+        //             weight: weight,
+        //             email: email,
+        //             height: height,
+        //             image: image
+        //         }
+        //     }
+        // )
         res.json({
-            _id: updateUser._id,
+            _id: updatedUser._id,
             name: name,
-            email: updateUser.email,
-            token: generateToken(updateUser._id)
+            email: updatedUser.email,
+            token: generateToken(updatedUser._id)
         })
     }
     else {
@@ -134,9 +131,29 @@ const updateUser = asyncHandler(async (req, res) => {
     }
 })
 
+//@desc   Delete User
+//@route  DELETE /api/users/profile/delete
+//@access Private
+const deleteUserProfile = asyncHandler(async (req, res) => {
+    const { email } = req.body || ""
+    console.log(email)
+    User.deleteOne({ email: email })
+        .then(() => {
+            console.log("User Deleted")
+            res.send("Account Deleted")
+        })
+        .catch((error) => {
+            console.log("Error")
+            res.send("error in account deletion")
+        })
+})
+
+
+
 export {
     authUser,
     registerUser,
     getUserProfile,
-    updateUser,
+    updateUserProfile,
+    deleteUserProfile,
 }

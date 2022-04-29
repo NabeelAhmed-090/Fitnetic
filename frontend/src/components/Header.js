@@ -1,15 +1,21 @@
 import React from 'react'
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
+import { useDispatch } from 'react-redux'
+import { logout } from '../actions/userActions'
 
 const Header = () => {
+    const dispatch = useDispatch()
+    const handleLogout = () => {
+        dispatch(logout())
+    }
     return (
         <>
             <Navbar style={{ height: "8vh", backgroundColor: "#FEE715CF" }} >
                 <Container>
-                    <Navbar.Brand href="#home"><b>FITNETIC</b></Navbar.Brand>
+                    <Navbar.Brand href="/AboutUs"><b>FITNETIC</b></Navbar.Brand>
                     <Nav className="ms-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#features">Updates</Nav.Link>
+                        <Nav.Link href="/Settings">Updates</Nav.Link>
                         <Nav.Link href="#pricing">Dashboard</Nav.Link>
                         <Nav>
                             <NavDropdown
@@ -17,9 +23,11 @@ const Header = () => {
                                 title="Dropdown"
                                 menuVariant="dark"
                             >
-                                <NavDropdown.Item href="#action/3.1">Update Profile</NavDropdown.Item>
+                                <NavDropdown.Item href="/api/users/profile/update">Update Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
+                                <NavDropdown.Item onClick={handleLogout} href="/api/users/login">
+                                    Logout
+                                </NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Nav>
