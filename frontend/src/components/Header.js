@@ -23,7 +23,7 @@ const Header = () => {
                                 title="Dropdown"
                                 menuVariant="dark"
                             >
-                                <NavDropdown.Item href="/api/users/settings">Update Profile</NavDropdown.Item>
+                                <NavDropdown.Item href="/api/users/profile/update">Update Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={handleLogout} href="/api/users/login">
                                     Logout

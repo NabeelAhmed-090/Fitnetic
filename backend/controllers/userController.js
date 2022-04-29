@@ -80,51 +80,50 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
 //@desc   Update Users
-//@route  POST /api/users/settings
+//@route  PUT /api/users/settings
 //@access Private
-const updateUser = asyncHandler(async (req, res) => {
-
+const updateUserProfile = asyncHandler(async (req, res) => {
     var { name, age, weight, password, height, image, email } = req.body
-
     const user = await User.findOne({ email })
     if (user) {
-        if (name.length === 0)
-            name = user.name
-        if (age === 0)
-            age = user.age
-        if (weight === 0)
-            weight = user.weight
-        if (height === 0)
-            height = user.height
-        if (image.length === 0)
-            image = user.image
-        if (password.length === 0) {
-            password = user.password
-        }
-        else {
-            const salt = await bcrypt.genSalt(10)
-            password = await bcrypt.hash(password, salt)
-        }
 
-        const updateUser = await User.findOneAndUpdate(
-            { email: email },
-            {
-                $set: {
-                    name: name,
-                    age: age,
-                    password: password,
-                    weight: weight,
-                    email: email,
-                    height: height,
-                    image: image
-                }
-            }
-        )
+        if (name.length !== 0)
+            user.name = name
+        if (age !== 0)
+            user.age = age
+        if (weight !== 0)
+            user.weight = weight
+        if (height !== 0)
+            user.height = height
+        if (image.length !== 0)
+            user.image = image
+        if (password.length !== 0)
+            user.password = password
+        // else {
+        //     const salt = await bcrypt.genSalt(10)
+        //     password = await bcrypt.hash(password, salt)
+        // }
+
+        const updatedUser = await user.save()
+        // const updateUser = await User.findOneAndUpdate(
+        //     { email: email },
+        //     {
+        //         $set: {
+        //             name: name,
+        //             age: age,
+        //             password: password,
+        //             weight: weight,
+        //             email: email,
+        //             height: height,
+        //             image: image
+        //         }
+        //     }
+        // )
         res.json({
-            _id: updateUser._id,
+            _id: updatedUser._id,
             name: name,
-            email: updateUser.email,
-            token: generateToken(updateUser._id)
+            email: updatedUser.email,
+            token: generateToken(updatedUser._id)
         })
     }
     else {
@@ -136,5 +135,5 @@ export {
     authUser,
     registerUser,
     getUserProfile,
-    updateUser,
+    updateUserProfile,
 }
