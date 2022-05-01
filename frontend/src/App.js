@@ -15,11 +15,11 @@ const App = () => {
       <div style={{ backgroundColor: "#C8C8C8", minHeight: "90vh", margin: "0" }}>
         <Router>
           <Routes>
-            <Route path="/api/homepage" element={<Homepage />} exact />
+            <Route path="/" element={<Homepage />} exact />
             <Route path="/api/users/signup" element={<Signup />} exact />
             <Route path="/api/users/login" element={<Login />} exact />
             <Route path="/api/users/profile/update" element={<Settings />} exact />
-            <Route path="/api/dashboard" element={<DashboardQuestion/>} exact />
+            <Route path="/api/dashboard" element={<DashboardQuestion />} exact />
           </Routes>
         </Router>
       </div>

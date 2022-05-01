@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../actions/userActions'
 import { Container, Row, Col, Form, Button, Carousel } from 'react-bootstrap'
-import img1 from '../../Image/img1.jpg'
 import img2 from '../../Image/img2.jpg'
 import img3 from '../../Image/img3.jpg'
 import loginPNG from '../../Image/Login.png'
@@ -25,11 +24,11 @@ const Login = () => {
 
     return (
         <>
-            <Row style={{ marginBottom: "0" }}>
-                <Col md={6} sm={12} lg={6}>
+            <Row style={{ paddingBottom: "0" }}>
+                <Col md={6} sm={12} lg={6} style={{ marginBottom: "0" }}>
                     <Carousel>
                         <Carousel.Item className="carousel-item">
-                            <div style={{ height: "90vh" }}>
+                            <div style={{ height: "100vh" }}>
                                 <img
                                     className="d-block w-100"
                                     src={loginPNG}
@@ -43,7 +42,7 @@ const Login = () => {
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
-                            <div style={{ height: "90vh" }}>
+                            <div style={{ height: "100vh" }}>
                                 <img
                                     className="d-block w-100"
                                     src={img2}
@@ -58,7 +57,7 @@ const Login = () => {
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
-                            <div style={{ height: "90vh" }}>
+                            <div style={{ height: "100vh" }}>
                                 <img
                                     className="d-block w-100"
                                     src={img3}
@@ -73,16 +72,6 @@ const Login = () => {
                         </Carousel.Item>
                     </Carousel>
                 </Col>
-                {/* <Col md={6} sm={12} lg={6}>
-                    <div style={{ height: "90vh" }}>
-                        <img
-                            className="d-block w-100"
-                            src={loginPNG}
-                            alt="First slide"
-                            style={{ height: "100%", width: "100%" }}
-                        />
-                    </div>
-                </Col> */}
                 <Col md={6} sm={12} lg={6} style={{ display: 'flex', justifyContent: 'center', paddingTop: "20vh", minHeight: "45vh" }}>
                     <Container style={{ minWidth: "35vw", maxWidth: "80%" }} className="shadow p-3 mb-5 bg-white rounded">
                         <Form >

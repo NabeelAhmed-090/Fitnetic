@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { useDispatch } from 'react-redux'
 import { logout } from '../actions/userActions'
@@ -14,9 +15,9 @@ const Header = () => {
                 <Container>
                     <Navbar.Brand href="/AboutUs"><b>FITNETIC</b></Navbar.Brand>
                     <Nav className="ms-auto">
-                        <Nav.Link href="/api/homepage">Home</Nav.Link>
-                        <Nav.Link href="#">Goal</Nav.Link>
                         <Nav.Link href="/api/dashboard">Dashboard</Nav.Link>
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="#">Goal</Nav.Link>
                         <Nav>
                             <NavDropdown
                                 id="nav-dropdown-dark-example"
