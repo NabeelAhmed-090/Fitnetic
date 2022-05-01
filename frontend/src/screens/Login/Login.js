@@ -6,6 +6,7 @@ import { Container, Row, Col, Form, Button, Carousel } from 'react-bootstrap'
 import img1 from '../../Image/img1.jpg'
 import img2 from '../../Image/img2.jpg'
 import img3 from '../../Image/img3.jpg'
+import loginPNG from '../../Image/Login.png'
 import './Login.css'
 
 const Login = () => {
@@ -31,13 +32,13 @@ const Login = () => {
                             <div style={{ height: "90vh" }}>
                                 <img
                                     className="d-block w-100"
-                                    src={img1}
+                                    src={loginPNG}
                                     alt="First slide"
                                     style={{ height: "100%", width: "100%" }}
                                 />
                             </div>
                             <Carousel.Caption style={{ color: "black" }}>
-                                <h3>First slide label</h3>
+                                <h2><b>First slide label</b></h2>
                                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                             </Carousel.Caption>
                         </Carousel.Item>
@@ -72,6 +73,16 @@ const Login = () => {
                         </Carousel.Item>
                     </Carousel>
                 </Col>
+                {/* <Col md={6} sm={12} lg={6}>
+                    <div style={{ height: "90vh" }}>
+                        <img
+                            className="d-block w-100"
+                            src={loginPNG}
+                            alt="First slide"
+                            style={{ height: "100%", width: "100%" }}
+                        />
+                    </div>
+                </Col> */}
                 <Col md={6} sm={12} lg={6} style={{ display: 'flex', justifyContent: 'center', paddingTop: "20vh", minHeight: "45vh" }}>
                     <Container style={{ minWidth: "35vw", maxWidth: "80%" }} className="shadow p-3 mb-5 bg-white rounded">
                         <Form >
