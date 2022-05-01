@@ -6,8 +6,8 @@ const getQuestions = asyncHandler(async (req, res) => {
     const questions=data.map((i)=>{
         return i.questions
     })
-    res.json({
-       questions:questions
-    })
+    res.json(
+       questions
+    )
 })
 export {getQuestions}

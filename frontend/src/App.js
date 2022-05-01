@@ -6,6 +6,7 @@ import Signup from './screens/Signup/Signup'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Homepage from './screens/Homepage/Homepage'
+import DashboardQuestion from './screens/Dashboard/DashboardQuestion'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/api/users/signup" element={<Signup />} exact />
             <Route path="/api/users/login" element={<Login />} exact />
             <Route path="/api/users/profile/update" element={<Settings />} exact />
+            <Route path="/api/dashboard" element={<DashboardQuestion/>} exact />
           </Routes>
         </Router>
       </div>

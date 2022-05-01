@@ -16,7 +16,7 @@ const Header = () => {
                     <Nav className="ms-auto">
                         <Nav.Link href="/api/homepage">Home</Nav.Link>
                         <Nav.Link href="#">Goal</Nav.Link>
-                        <Nav.Link href="#">Dashboard</Nav.Link>
+                        <Nav.Link href="/api/dashboard">Dashboard</Nav.Link>
                         <Nav>
                             <NavDropdown
                                 id="nav-dropdown-dark-example"
