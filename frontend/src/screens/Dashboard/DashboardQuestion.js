@@ -18,7 +18,7 @@ const DashboardQuestion = () => {
         <Container >
             {
                 questions.map(i => {
-                    return <QuestionCard key={i} quest={i} />
+                    return <QuestionCard key={i._id}  id={i._id} quest={i.questions} />
                 })
             }
         </Container>

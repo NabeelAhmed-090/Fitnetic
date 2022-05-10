@@ -6,9 +6,9 @@ const dashboardSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    answer: {
-        type: String,
-    },
+    answer: [
+         String
+    ],
 })
 
 const Dashboard = mongoose.model('Dashboard', dashboardSchema)
