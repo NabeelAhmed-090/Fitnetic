@@ -20,7 +20,8 @@ const getQuestions = asyncHandler(async (req, res) => {
 const getAnswers = asyncHandler(async (req, res) => {
     
     var id=req.params.id;
-    id=id.slice(0,-1);
+    if (id.length==25)
+        id=id.slice(0,-1);
     const _id=ObjectId(id)
     const data=await Dashboard.findById(_id)
     const {answer}=data
