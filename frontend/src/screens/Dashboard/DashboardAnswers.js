@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import axios from "axios"
-import { useParams } from "react-router-dom"
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 
 const DashboardAnswers = () => {
   const [answers, setAnswers] = useState([])
   const { id } = useParams()
   useEffect(() => {
-
     async function getAnswers() {
-      console.log(id)
       const result = await axios.get(`/api/dashboard/answers/${id}`)
       const { data } = result
       setAnswers(data)

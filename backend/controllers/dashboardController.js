@@ -30,4 +30,20 @@ const getAnswers = asyncHandler(async (req, res) => {
     )
 })
 
-export { getQuestions, getAnswers }
+const postQuestion = asyncHandler(async (req, res) => {
+
+    var { questions } = req.body
+    const answer = []
+    await Dashboard.create({
+        questions,
+        answer
+    })
+    res.json(
+        {
+            message: "question is successfully posted"
+        }
+    )
+    res.end()
+})
+
+export { getQuestions, getAnswers, postQuestion }
