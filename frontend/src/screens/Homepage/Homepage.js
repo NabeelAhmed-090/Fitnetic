@@ -10,7 +10,7 @@ const Homepage = () => {
 
     useEffect(() => {
         if (!userInfo) {
-            history("/api/users/login")
+            history("/api/login")
         }
     }, [dispatch, history, userInfo])
 

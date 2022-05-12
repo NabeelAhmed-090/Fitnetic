@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../actions/userActions'
-import { Container, Row, Col, Form, Button, Carousel } from 'react-bootstrap'
-import img2 from '../../Image/img2.jpg'
-import img3 from '../../Image/img3.jpg'
+import { adminLoginFunc } from '../../actions/adminActions'
+import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import loginPNG from '../../Image/Login.png'
 import './Login.css'
 
@@ -12,21 +11,26 @@ const Login = () => {
     let history = useNavigate()
     const dispatch = useDispatch()
     const userLogin = useSelector((state) => state.userLogin)
+    const adminLogin = useSelector((state) => state.adminLogin)
     const { userInfo } = userLogin
+    const { adminInfo } = adminLogin
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     useEffect(() => {
+        if (adminInfo) {
+            history("/api/admin")
+        }
         if (userInfo) {
             history("/api/homepage")
         }
-    }, [dispatch, history, userInfo])
+    }, [dispatch, history, userInfo, adminInfo])
 
     return (
         <>
             <Row style={{ paddingBottom: "0" }}>
                 <Col md={6} sm={12} lg={6} style={{ marginBottom: "0" }}>
-                    <Carousel>
+                    {/* <Carousel>
                         <Carousel.Item className="carousel-item">
                             <div style={{ height: "100vh" }}>
                                 <img
@@ -70,10 +74,18 @@ const Login = () => {
                                 <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                             </Carousel.Caption>
                         </Carousel.Item>
-                    </Carousel>
+                    </Carousel> */}
+                    <div style={{ height: "100vh" }}>
+                        <img
+                            className="d-block w-100"
+                            src={loginPNG}
+                            alt="First slide"
+                            style={{ height: "100%", width: "100%" }}
+                        />
+                    </div>
                 </Col>
                 <Col md={6} sm={12} lg={6} style={{ display: 'flex', justifyContent: 'center', paddingTop: "20vh", minHeight: "45vh" }}>
-                    <Container style={{ minWidth: "35vw", maxWidth: "80%" }} className="shadow p-3 mb-5 bg-white rounded">
+                    <Container style={{ minWidth: "35vw", maxWidth: "80%", backgroundColor: "#F0F0F0" }} className="shadow p-3 mb-5 rounded">
                         <Form >
                             <Row>
                                 <Col style={{ textAlign: "center", justifyContent: 'center' }}>
@@ -100,7 +112,12 @@ const Login = () => {
                             <Row>
                                 <Col md={12} lg={12} sm={12} style={{ display: "flex" }}>
                                     <Button className="btn-block w-100 p-2 my-2" variant="dark" type="button" style={{ marginLeft: "auto", marginTop: "5vh" }} onClick={() => {
-                                        dispatch(login(email, password))
+                                        if (email === "nabeel@gmail.com" || email === "ayesha@gmail.com" || email === "laiba@gmail.com" || email === "hadiya@gmail.com") {
+                                            dispatch(adminLoginFunc(email, password))
+                                        }
+                                        else {
+                                            dispatch(login(email, password))
+                                        }
                                     }}>
                                         Login
                                     </Button>

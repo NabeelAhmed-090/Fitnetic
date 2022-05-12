@@ -86,7 +86,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     var { name, age, weight, password, height, image, email } = req.body
     const user = await User.findOne({ email })
     if (user) {
-
         if (name.length !== 0)
             user.name = name
         if (age !== 0)

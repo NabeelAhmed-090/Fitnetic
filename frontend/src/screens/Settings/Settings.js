@@ -23,13 +23,13 @@ const Settings = () => {
 
     useEffect(() => {
         if (!userInfo) {
-            history("/api/users/login")
+            history("/api/login")
         }
     }, [dispatch, history, userInfo])
 
     const deleteAccount = () => {
         dispatch(deleteUser(email))
-        history("/api/users/login")
+        history("/api/login")
     }
 
     return (
@@ -37,7 +37,7 @@ const Settings = () => {
             <Container style={{ paddingTop: "9vh" }}>
                 <Row>
                     <Col md={12} sm={12} lg={12} style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Container style={{ width: "50vw" }} className="shadow p-3 mb-5 bg-white rounded">
+                        <Container style={{ width: "50vw", backgroundColor: "#F0F0F0" }} className="shadow p-3 mb-5 rounded">
                             <Form>
                                 <Row>
                                     <Col md={6} lg={6} sm={12}>
@@ -96,7 +96,7 @@ const Settings = () => {
                 </Row>
                 <Row>
                     <Col md={12} sm={12} lg={12} style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Container style={{ width: "50vw" }} className="shadow p-3 mb-5 bg-white rounded">
+                        <Container style={{ width: "50vw", backgroundColor: "#F0F0F0" }} className="shadow p-3 mb-5 rounded">
                             <Row>
                                 <Col md={12} lg={12} sm={12}>
                                     <h5><b>Do you want to delete your account permanently? </b></h5>
