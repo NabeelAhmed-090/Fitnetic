@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import Homepage from './screens/Homepage/Homepage'
 import DashboardQuestion from './screens/Dashboard/DashboardQuestion'
+import DashboardAnswers from './screens/Dashboard/DashboardAnswers'
 
 const App = () => {
   return (
@@ -15,11 +16,12 @@ const App = () => {
       <div style={{ backgroundColor: "#C8C8C8", minHeight: "90vh", margin: "0" }}>
         <Router>
           <Routes>
-            <Route path="/api/homepage" element={<Homepage />} exact />
+            <Route path="/" element={<Homepage />} exact />
             <Route path="/api/users/signup" element={<Signup />} exact />
             <Route path="/api/users/login" element={<Login />} exact />
             <Route path="/api/users/profile/update" element={<Settings />} exact />
-            <Route path="/api/dashboard" element={<DashboardQuestion/>} exact />
+            <Route path="/api/dashboard" element={<DashboardQuestion />} exact />
+            <Route path="/api/dashboard/answers/:id" element={<DashboardAnswers />} exact />
           </Routes>
         </Router>
       </div>
