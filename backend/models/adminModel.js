@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import bcrypt from "bcryptjs";
 
 const adminSchema = mongoose.Schema({
     email: {
@@ -13,6 +13,12 @@ const adminSchema = mongoose.Schema({
     },
 })
 
+adminSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password)
+}
+
+
 const Admin = mongoose.model('Admin', adminSchema)
+
 
 export default Admin

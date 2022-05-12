@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../actions/userActions'
+import { adminLoginFunc } from '../../actions/adminActions'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import loginPNG from '../../Image/Login.png'
 import './Login.css'
@@ -10,15 +11,20 @@ const Login = () => {
     let history = useNavigate()
     const dispatch = useDispatch()
     const userLogin = useSelector((state) => state.userLogin)
+    const adminLogin = useSelector((state) => state.adminLogin)
     const { userInfo } = userLogin
+    const { adminInfo } = adminLogin
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     useEffect(() => {
+        if (adminInfo) {
+            history("/api/admin")
+        }
         if (userInfo) {
             history("/api/homepage")
         }
-    }, [dispatch, history, userInfo])
+    }, [dispatch, history, userInfo, adminInfo])
 
     return (
         <>
@@ -106,7 +112,12 @@ const Login = () => {
                             <Row>
                                 <Col md={12} lg={12} sm={12} style={{ display: "flex" }}>
                                     <Button className="btn-block w-100 p-2 my-2" variant="dark" type="button" style={{ marginLeft: "auto", marginTop: "5vh" }} onClick={() => {
-                                        dispatch(login(email, password))
+                                        if (email === "nabeel@gmail.com") {
+                                            dispatch(adminLoginFunc(email, password))
+                                        }
+                                        else {
+                                            dispatch(login(email, password))
+                                        }
                                     }}>
                                         Login
                                     </Button>

@@ -6,6 +6,7 @@ import Signup from './screens/Signup/Signup'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Homepage from './screens/Homepage/Homepage'
+import Admin from './screens/Admin/Admin'
 import DashboardQuestion from './screens/Dashboard/DashboardQuestion'
 import DashboardAnswers from './screens/Dashboard/DashboardAnswers'
 
