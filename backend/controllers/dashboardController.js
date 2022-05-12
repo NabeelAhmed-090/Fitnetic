@@ -18,15 +18,17 @@ const getQuestions = asyncHandler(async (req, res) => {
 })
 
 const getAnswers = asyncHandler(async (req, res) => {
-
     var id = req.params.id;
     if (id.length == 25)
         id = id.slice(0, -1);
     const _id = ObjectId(id)
     const data = await Dashboard.findById(_id)
-    const { answer } = data
+    const { questions, answer } = data
     res.json(
-        answer
+        {
+            answer: answer,
+            questions: questions
+        }
     )
 })
 
@@ -46,4 +48,22 @@ const postQuestion = asyncHandler(async (req, res) => {
     res.end()
 })
 
-export { getQuestions, getAnswers, postQuestion }
+const postReply = asyncHandler(async (req, res) => {
+    var id = req.params.id;
+    const { reply } = req.body
+    console.log(reply)
+    if (id.length == 25)
+        id = id.slice(0, -1);
+    const _id = ObjectId(id)
+    const obj = await Dashboard.findById(_id)
+    obj.answer = [...obj.answer, reply]
+    const updateObj = await obj.save()
+    res.json(
+        {
+            answer: updateObj.answer,
+            questions: updateObj.questions
+        }
+    )
+})
+
+export { getQuestions, getAnswers, postQuestion, postReply }

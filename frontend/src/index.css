@@ -13,3 +13,7 @@ code {
     outline: none !important;
     outline-offset: none !important;
 }
+
+.fonts {
+    font-family: 'Playfair Display', serif;
+}

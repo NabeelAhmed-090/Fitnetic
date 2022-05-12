@@ -13,7 +13,6 @@ const DashboardQuestion = () => {
     const [keyword, setKeyword] = useState("")
 
     useEffect(() => {
-
         async function getQuestions() {
             const result = await axios.get("/api/dashboard")
             const { data } = result
@@ -21,7 +20,6 @@ const DashboardQuestion = () => {
             if (filteredQuestionsList.length === 0) {
                 setFilteredQuestionsList(data)
             }
-
         }
         getQuestions()
     }, [])
@@ -46,6 +44,7 @@ const DashboardQuestion = () => {
 
             setQuestions("")
         }
+
     }
 
     const filterFunc = () => {
@@ -71,7 +70,7 @@ const DashboardQuestion = () => {
                                 </h5>
                             </Col>
                             <Col sm={12} md={2} lg={2} >
-                                <Button variant="dark" className="btn-block w-100 my-1 mb-1" type="button" onClick={postQuestionFunc}>
+                                <Button variant="dark" className="btn-block w-100 my-1 mb-1" onClick={postQuestionFunc}>
                                     POST
                                 </Button>
                             </Col>
@@ -106,7 +105,7 @@ const DashboardQuestion = () => {
                 {userLogin.userInfo && <hr />}
 
                 <Row>
-                    <Col md={7} sm={12} lg={7} style={{ marginBottom: "2vh" }}>
+                    <Col md={6} sm={12} lg={6} style={{ marginBottom: "2vh" }}>
                         <FormControl
 
                             type="search"
@@ -120,8 +119,8 @@ const DashboardQuestion = () => {
                             }}
                         />
                     </Col>
-                    <Col md={1} sm={12} lg={1}>
-                        <Button className="btn-block" type="button" variant="success" onClick={filterFunc}>Filter</Button>
+                    <Col md={2} sm={12} lg={2}>
+                        <Button className="btn-block w-100" type="button" variant="success" onClick={filterFunc}>Filter</Button>
                     </Col>
                     <Col style={{ maxHeight: "35vh" }} md={4} sm={12} lg={4}>
                         <div style={{ height: "100%" }}>

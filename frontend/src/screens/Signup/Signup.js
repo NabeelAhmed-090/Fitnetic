@@ -42,8 +42,8 @@ const Signup = () => {
                         />
                     </div>
                     <Carousel.Caption style={{ color: "black" }}>
-                        <h2><b>First slide label</b></h2>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <h2><b>A Feeble Body Weakens The Mind</b></h2>
+                        <p>Our website provides you with <b>workout plans</b> to get fitter and better</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item className="carousel-item">
@@ -56,8 +56,8 @@ const Signup = () => {
                         />
                     </div>
                     <Carousel.Caption style={{ color: "black" }}>
-                        <h2><b>First slide label</b></h2>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <h2><b>Track Your Health Progress </b></h2>
+                        <p>Our website helps you <b>keep track of your health</b> and provide you the data in an interactive manner. </p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item className="carousel-item">
@@ -70,8 +70,8 @@ const Signup = () => {
                         />
                     </div>
                     <Carousel.Caption style={{ color: "black" }}>
-                        <h2><b>First slide label</b></h2>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <h2><b>Eat Health, Stay Healthy</b></h2>
+                        <p>Our website provides the best <b>diet plans</b> formulated by world renowned health nutritionists. </p>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
