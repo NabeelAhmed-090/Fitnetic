@@ -24,6 +24,7 @@ const App = () => {
             <Route path="/api/users/profile/update" element={<Settings />} exact />
             <Route path="/api/dashboard" element={<DashboardQuestion />} exact />
             <Route path="/api/dashboard/answers/:id" element={<DashboardAnswers />} exact />
+            <Route path="/api/admin" element={<Admin />} exact />
           </Routes>
         </Router>
       </div>
