@@ -12,8 +12,9 @@ import DashboardAnswers from './screens/Dashboard/DashboardAnswers'
 const App = () => {
   return (
     <>
+      {/* backgroundColor: "#C8C8C8" */}
       <Header />
-      <div style={{ backgroundColor: "#C8C8C8", minHeight: "90vh", margin: "0" }}>
+      <div style={{ minHeight: "90vh", margin: "0" }}>
         <Router>
           <Routes>
             <Route path="/" element={<Homepage />} exact />
