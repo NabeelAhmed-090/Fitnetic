@@ -135,6 +135,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 //@access Private
 const deleteUserProfile = asyncHandler(async (req, res) => {
     const { email } = req.body
+    console.log(email)
+
     User.deleteOne({ email: email })
         .then(() => {
             res.send("Account Deleted")

@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Admin from '../models/adminModel.js'
+import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 
 
@@ -23,4 +24,19 @@ const authUser = asyncHandler(async (req, res) => {
     }
 })
 
-export { authUser }
+const getUser = asyncHandler(async (req, res) => {
+    const users = await User.find({})
+    const userList = users.map((i) => {
+        return (
+            {
+                email: i.email,
+                name: i.name
+            }
+        )
+    })
+    res.json(userList)
+})
+
+
+
+export { authUser, getUser }
