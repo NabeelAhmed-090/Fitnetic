@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, Button, Container } from "react-bootstrap";
 import './QuestionCard.css'
+import axios from "axios";
 
-const QuestionCard = ({ quest, id }) => {
+const QuestionCard = ({ quest, id, ButtonText }) => {
    return (
       <>
          <hr />
@@ -19,13 +20,22 @@ const QuestionCard = ({ quest, id }) => {
                      {quest}
                   </pre>
                </Col>
-               <Col md={12} lg={12} sm={12} style={{ display: "flex" }}>
+               <Col md={11} lg={11} sm={11} style={{ display: "flex" }}>
                   <Link to={`/api/dashboard/answers/${id}`} style={{ marginLeft: "auto", marginTop: "5vh" }}>
                      <Button variant="dark" type="button" >
-                        Answer
+                        {ButtonText}
                      </Button>
                   </Link>
                </Col>
+               {ButtonText === "Reply" ? (<Col md={1} lg={1} sm={1} style={{ display: "flex" }}>
+                  <Button onClick={async () => {
+                     await axios.delete(`/api/dashboard/remove/${id}`)
+                     window.location.reload(false);
+                  }} style={{ marginLeft: "auto", marginTop: "5vh" }} variant="dark" type="submit" >
+                     <i className="fa-solid fa-trash"></i>
+                  </Button>
+               </Col>) : ''
+               }
             </Row>
          </Container>
       </>

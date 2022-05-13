@@ -43,6 +43,7 @@ const DashboardQuestion = () => {
                 config)
 
             setQuestions("")
+            window.location.reload(false);
         }
 
     }
@@ -135,7 +136,7 @@ const DashboardQuestion = () => {
                 </Row>
                 {
                     filteredQuestionsList.map(i => {
-                        return <QuestionCard key={i._id} id={i._id} quest={i.questions} />
+                        return <QuestionCard key={i._id} id={i._id} quest={i.questions} ButtonText="Answer" />
                     })
                 }
             </Container>

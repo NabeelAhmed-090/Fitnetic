@@ -32,6 +32,20 @@ const getAnswers = asyncHandler(async (req, res) => {
     )
 })
 
+const deleteUserProfile = asyncHandler(async (req, res) => {
+    var id = req.params.id;
+    if (id.length == 25)
+        id = id.slice(0, -1);
+
+    Dashboard.deleteOne({ _id: id })
+        .then(() => {
+            res.send("Question Deleted")
+        })
+        .catch((error) => {
+            res.send("error in question deletion")
+        })
+})
+
 const postQuestion = asyncHandler(async (req, res) => {
 
     var { questions } = req.body
@@ -66,4 +80,4 @@ const postReply = asyncHandler(async (req, res) => {
     )
 })
 
-export { getQuestions, getAnswers, postQuestion, postReply }
+export { getQuestions, getAnswers, postQuestion, postReply, deleteUserProfile }
