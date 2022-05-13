@@ -92,33 +92,39 @@ const DashboardAnswers = () => {
               </Container>
             </Col>
             <Col sm={12} md={12} lg={12}>
-              <pre >
-                {
-                  answers.map((i) => {
-                    return <AnswerCard key={i} answer={i} />
-                  })
-                }
-              </pre>
+              <Container>
+                <pre >
+                  {
+                    answers.map((i) => {
+                      return <AnswerCard key={i} answer={i} />
+                    })
+                  }
+                </pre>
+              </Container>
             </Col>
             <Col md={10} sm={12} lg={10} className="mt-1">
-              <Form.Control onChange={(event) => {
-                if (event.target.value.length <= 400)
-                  setReply(event.target.value)
-              }
-              }
-                type="text"
-                placeholder='Reply to the thread'
-                id="postAReply"
-                aria-describedby="postAReplyBlock"
-                value={reply}
-              />
-              <Form.Text id="postAReply" muted>
-                Your reply should not be more than 400 characters.
-              </Form.Text>
+              <Container>
+                <Form.Control onChange={(event) => {
+                  if (event.target.value.length <= 400)
+                    setReply(event.target.value)
+                }
+                }
+                  type="text"
+                  placeholder='Reply to the thread'
+                  id="postAReply"
+                  aria-describedby="postAReplyBlock"
+                  value={reply}
+                />
+
+                <Form.Text id="postAReply" style={{ marginLeft: "2vh" }} muted>
+                  Your reply should not be more than 400 characters.
+                </Form.Text>
+              </Container>
             </Col>
             <Col md={2} sm={12} lg={2} className="mt-1">
               <Button className="btn-block w-100" type="button" variant="dark" onClick={postAReply}>Reply</Button>
             </Col>
+
           </Row>
         </Container>
       }

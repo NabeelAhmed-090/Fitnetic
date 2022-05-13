@@ -1,13 +1,14 @@
-.answerCard {
+.questionCard {
     min-height: 10vh;
     max-height: 20%;
     text-decoration: none;
     min-width: 35vw;
     max-width: 65%;
+    background-color: #F0F0F0
 }
 
 @media only screen and (max-width: 768px) {
-    .answerCard {
+    .questionCard {
         max-width: 100%;
     }
 }

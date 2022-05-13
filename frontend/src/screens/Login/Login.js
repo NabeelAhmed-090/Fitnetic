@@ -22,7 +22,7 @@ const Login = () => {
             history("/api/admin")
         }
         if (userInfo) {
-            history("/api/homepage")
+            history("/")
         }
     }, [dispatch, history, userInfo, adminInfo])
 

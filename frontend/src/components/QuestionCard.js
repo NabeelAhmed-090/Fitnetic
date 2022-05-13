@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, Button, Container } from "react-bootstrap";
-
+import './QuestionCard.css'
 
 const QuestionCard = ({ quest, id }) => {
    return (
       <>
          <hr />
          <Container style={{ justifyContent: 'center', paddingTop: "2vh", paddingBottom: "1vh" }}>
-            <Row style={{ minHeight: "10vh", maxHeight: "20%", textDecoration: "none", minWidth: "35vw", maxWidth: "65%", backgroundColor: "#F0F0F0" }} className="shadow p-3 mb-3 rounded">
+            <Row className="shadow p-3 mb-3 rounded questionCard">
                <Col sm={12} md={12} lg={12} >
                   <h5 >
                      QUESTION

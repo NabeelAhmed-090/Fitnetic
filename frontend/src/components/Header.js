@@ -14,11 +14,9 @@ const Header = () => {
     const dispatch = useDispatch()
     const handleLogout = () => {
         if (userLogin.userInfo) {
-            console.log("user")
             dispatch(logout())
         }
         else {
-            console.log("check")
             dispatch(adminlogoutFunc())
         }
     }
@@ -28,11 +26,12 @@ const Header = () => {
                 <Container>
                     <Navbar.Brand href="/AboutUs" className="fonts"><b>FITNETIC</b></Navbar.Brand>
                     <Nav className="ms-auto">
-                        <Nav.Link href="/api/dashboard">Dashboard</Nav.Link>
+                        {adminLogin.adminInfo && <Nav.Link href="/api/login" onClick={handleLogout}>Logout</Nav.Link>}
+                        {!adminLogin.adminInfo && <Nav.Link href="/api/dashboard">Dashboard</Nav.Link>}
                         {!userLogin.userInfo && !adminLogin.adminInfo && <Nav.Link href="/api/login">Login</Nav.Link>}
-                        {(userLogin.userInfo || adminLogin.adminInfo) && <Nav.Link href="/">Home</Nav.Link>}
+                        {(userLogin.userInfo && !adminLogin.adminInfo) && <Nav.Link href="/">Home</Nav.Link>}
                         {userLogin.userInfo && <Nav.Link href="#">Goal</Nav.Link>}
-                        {(userLogin.userInfo || adminLogin.adminInfo) && <Nav>
+                        {(userLogin.userInfo && !adminLogin.adminInfo) && <Nav>
                             <NavDropdown
                                 id="nav-dropdown-dark-example"
                                 title="Profile"
