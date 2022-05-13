@@ -13,7 +13,12 @@ const workoutSchema = mongoose.Schema({
     totalCaloriesCount: {
         type: Number,
         required: true
-    }
+    },
+    tags: [
+        {
+            type: String,
+        }
+    ]
 })
 
 const Workout = mongoose.model('Workout', workoutSchema)
