@@ -1,19 +1,8 @@
 const workouts = [
     {
-        totalCaloriesCount: 20
-    },
-    {
-        totalCaloriesCount: 30
-    },
-    {
-        totalCaloriesCount: 40
-    },
-    {
-        totalCaloriesCount: 50
-    },
-    {
-        totalCaloriesCount: 60
-    },
+        exercises: ["627ecbe9078a8c69bcac43ca"],
+        totalCaloriesCount: 20,
+        name: "Test"
+    }
 ]
-
 export default workouts

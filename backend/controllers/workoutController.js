@@ -1,6 +1,6 @@
-import Exercise from '../models/exerciseModel.js'
 import Workout from '../models/workoutModel.js'
 import asyncHandler from "express-async-handler";
+import Exercise from '../models/exerciseModel.js';
 import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 
@@ -21,14 +21,15 @@ const getExercises = asyncHandler(async (req, res) => {
 })
 
 const addWorkout = asyncHandler(async (req, res) => {
-    const { workout, totalCaloriesCount, tags } = req.body
+    const { workout, totalCaloriesCount, tags, name } = req.body
     const exercises = workout.map(i => {
         return i._id
     })
     await Workout.create({
         exercises,
         totalCaloriesCount,
-        tags
+        tags,
+        name
     })
     res.json(
         {
@@ -37,4 +38,34 @@ const addWorkout = asyncHandler(async (req, res) => {
     )
 })
 
-export { getExercises, addWorkout }
+const checkName = asyncHandler(async (req, res) => {
+    const { name } = req.body
+    console.log(name)
+    const workout = await Workout.findOne({ name: name })
+    if (workout) {
+        res.json({
+            check: false
+        })
+    }
+    else {
+        res.json({
+            check: true
+        })
+    }
+})
+
+// getWorkouts
+const getWorkouts = asyncHandler(async (req, res) => {
+    const workouts = await Workout.find({})
+    const workoutsList = workouts.map((i) => {
+        return (
+            {
+                name: i.name,
+            }
+        )
+    })
+    res.json(workoutsList)
+})
+
+
+export { getExercises, addWorkout, checkName, getWorkouts }

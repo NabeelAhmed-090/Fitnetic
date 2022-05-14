@@ -67,7 +67,7 @@ const Admin = () => {
                         <Card.Body style={{ height: "20vh" }}>
                             <Card.Title style={{ textAlign: "center" }}><b>Workout</b></Card.Title>
                             <Card.Text style={{ textAlign: "center" }}>
-                                Add/update/delete workout plans
+                                Add/delete workout plans
                             </Card.Text>
                         </Card.Body>
                         <Card.Body>
@@ -88,7 +88,7 @@ const Admin = () => {
                         <Card.Body style={{ height: "20vh" }}>
                             <Card.Title style={{ textAlign: "center" }}><b>Diet</b></Card.Title>
                             <Card.Text style={{ textAlign: "center" }}>
-                                Add/update/delete diet plans
+                                Add/delete diet plans
                             </Card.Text>
                         </Card.Body>
                         <Card.Body>

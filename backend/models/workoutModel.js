@@ -18,7 +18,12 @@ const workoutSchema = mongoose.Schema({
         {
             type: String,
         }
-    ]
+    ],
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    }
 })
 
 const Workout = mongoose.model('Workout', workoutSchema)

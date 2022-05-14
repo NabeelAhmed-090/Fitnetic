@@ -15,7 +15,7 @@ const App = () => {
     <>
       {/* backgroundColor: "#C8C8C8" */}
       <Header />
-      <div style={{ minHeight: "90vh", margin: "0" }}>
+      <div style={{ minHeight: "90vh", margin: "0", }}>
         <Router>
           <Routes>
             <Route path="/" element={<Homepage />} exact />
