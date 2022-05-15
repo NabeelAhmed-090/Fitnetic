@@ -9,7 +9,7 @@ const QuestionCard = ({ quest, id, ButtonText }) => {
       <>
          <hr />
          <Container style={{ justifyContent: 'center', paddingTop: "2vh", paddingBottom: "1vh" }}>
-            <Row className="shadow p-3 mb-3 rounded questionCard">
+            <Row className="shadow p-3 mb-3 rounded questionCard" style={ButtonText === "Reply" ? questionCardAdmin : questionCardDashBoard}>
                <Col sm={12} md={12} lg={12} >
                   <h5 >
                      QUESTION
@@ -40,6 +40,24 @@ const QuestionCard = ({ quest, id, ButtonText }) => {
          </Container>
       </>
    )
+}
+
+const questionCardDashBoard = {
+   minHeight: "10vh",
+   maxHeight: "20%",
+   textDecoration: "none",
+   minWidth: "35vw",
+   maxWidth: "65%",
+   backgroundColor: "#F0F0F0"
+}
+
+const questionCardAdmin = {
+   minHeight: "10vh",
+   maxHeight: "20%",
+   textDecoration: "none",
+   minWidth: "35vw",
+   maxWidth: "100%",
+   backgroundColor: "#F0F0F0"
 }
 export default QuestionCard
 

@@ -12,8 +12,8 @@ import User from '../../components/User'
 
 const Admin = () => {
     const [userState, setUserState] = useState(false)
-    const [questionState, setQuestionState] = useState(false)
-    const [workoutState, setWorkoutState] = useState(true)
+    const [questionState, setQuestionState] = useState(true)
+    const [workoutState, setWorkoutState] = useState(false)
     const [dietState, setDietState] = useState(false)
     return (
         <Container style={{ paddingTop: "5vh" }}>

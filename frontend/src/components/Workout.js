@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Container, Row, Col, Button, Dropdown, Form } from 'react-bootstrap'
 import workoutPNG from '../Image/gym.png'
 import deletePNG from '../Image/delete.png'
-
+import './Workout.css'
 
 
 const Workout = () => {
@@ -47,12 +47,12 @@ const Workout = () => {
     return (
         <Container>
             <Row style={{ backgroundColor: "#F0F0F0", marginTop: "3vh", minHeight: "60vh" }}>
-                <Row style={{ padding: "3vh", minHeight: "20vh" }}>
-                    <Col md={10} sm={10} lg={10} className="mt-3">
-                        <h2 style={{ marginLeft: "5vw" }}><b>Include</b></h2>
+                <Row style={{ padding: "3vh", maxHeight: "15vh" }}>
+                    <Col md={10} sm={12} lg={10} className="mt-3">
+                        <h2 className='cols'><b>Include</b></h2>
                     </Col>
-                    <Col md={2} sm={2} lg={2}>
-                        <div style={{ height: "15vh" }}>
+                    <Col md={2} sm={12} lg={2}>
+                        <div style={{ height: "15vh", display: "flex", justifyContent: "center" }}>
                             <img
                                 className="d-block"
                                 src={workoutPNG}
@@ -62,9 +62,10 @@ const Workout = () => {
                         </div>
                     </Col>
                 </Row>
-                <Row style={{ padding: "3vh", minHeight: "10vh", maxHeight: "20%", textDecoration: "none", minWidth: "35vw", marginLeft: "4vw" }}>
-                    <Col sm={4} md={4} lg={4} >
+                <Row style={{ minHeight: "10vh", maxHeight: "20%", minWidth: "35vw" }} className="mt-4">
+                    <Col sm={6} md={4} lg={4} >
                         <Form.Control
+                            className="cols"
                             onChange={(event) => setName(event.target.value)}
                             type="text"
                             placeholder="Enter a unique name for this workout"
@@ -76,25 +77,25 @@ const Workout = () => {
                             {!check && <pre style={{ color: "red" }}>Name already exists</pre>}
                         </Form.Text>
                     </Col>
-                    <Col sm={2} md={2} lg={2}>
-                        <Button variant="dark" className="btn-block w-100" onClick={checkName}><b>save</b></Button>
+                    <Col sm={6} md={3} lg={3}>
+                        <Button variant="dark" className="btn-block w-100 cols" onClick={checkName}><b>save</b></Button>
                     </Col>
                 </Row>
-                <Row style={{ padding: "3vh", minHeight: "80vh", marginLeft: "4vw" }}>
-                    <Col md={4} sm={4} lg={4}>
+                <Row style={{ padding: "3vh", minHeight: "80vh" }}>
+                    <Col md={4} sm={12} lg={4} className="cols">
                         <Row className="p-3" style={{ minHeight: "30vh" }}>
                             <Container>
                                 <Row>
                                     {
                                         tag.map(i => {
                                             return (
-                                                <Col className="mt-1" style={{ textAlign: "center", justifyContent: "center" }} md={4} sm={2} lg={4}>
+                                                <Col className="mt-2" style={{ textAlign: "center" }} md={6} sm={6} lg={6}>
                                                     <Row>
-                                                        <Col style={{ backgroundColor: "#FEE715CF", borderRadius: "50%" }} md={7} sm={4} lg={7} className="shadow p-1 rounded" >
+                                                        <Col style={{ backgroundColor: "#FEE715CF" }} md={7} sm={4} lg={7} className="shadow p-1 rounded" >
                                                             <pre>{i}</pre>
                                                         </Col>
-                                                        <Col md={5} sm={8} lg={5}>
-                                                            <Button variant="dark" className="btn-block w-100" onClick={() => {
+                                                        <Col md={3} sm={4} lg={3} style={{ justifyContent: "right" }}>
+                                                            <Button variant="dark" onClick={() => {
                                                                 if (tags.length < 5) {
                                                                     setTags([...tags, i])
                                                                     setTag(tag.filter(itr => itr !== i))
@@ -160,9 +161,9 @@ const Workout = () => {
                             </Col>
                         </Row>
                     </Col>
-                    <Col md={3} lg={3} sm={3}>
+                    <Col md={3} lg={3} sm={12}>
                         <Dropdown>
-                            <Dropdown.Toggle style={{ position: "static !important", width: "100% !important" }} className="btn-block w-100 mt-3 p-1" variant="dark" id="dropdown-basic">
+                            <Dropdown.Toggle style={{ position: "static !important", width: "100% !important" }} className="btn-block w-100 mt-3" variant="dark" id="dropdown-basic">
                                 View Exercises
                             </Dropdown.Toggle>
                             <Dropdown.Menu style={{ position: "static !important", width: "100% !important", textAlign: "center" }} className="btn-block w-100 mt-3 p-1">
@@ -199,7 +200,7 @@ const Workout = () => {
                             </Dropdown.Menu>
                         </Dropdown>
                     </Col>
-                    <Col md={5} lg={5} sm={5}>
+                    <Col md={4} lg={4} sm={12}>
                         <div style={{
                             textAlign: "center",
                             height: "80vh",
@@ -218,7 +219,7 @@ const Workout = () => {
                                     workout.map(i => {
                                         return (
                                             <>
-                                                <Col md={5} sm={5} lg={5}>
+                                                <Col md={6} sm={6} lg={6}>
                                                     <Row>
                                                         <Col md={8} sm={8} lg={8}>
                                                             <h5> {i.name} </h5>
@@ -241,12 +242,12 @@ const Workout = () => {
                         </div>
                     </Col >
                     <Col md={11} sm={11} lg={11}>
-                        <hr />
+                        <hr className='buttons' />
                     </Col>
                 </Row >
-                <Row style={{ marginLeft: "7vw" }}>
+                <Row>
                     <Row className="mb-3">
-                        <Col md={5} sm={5} lg={5}>
+                        <Col md={5} sm={12} lg={5} className="buttons">
                             <Col md={12} sm={12} lg={12}>
                                 <Button variant="dark" className="btn-block w-100 mt-3" onClick={() => {
                                     setTag([...tags, ...tag])
@@ -256,7 +257,7 @@ const Workout = () => {
                                 }}>Reset</Button>
                             </Col>
                         </Col>
-                        <Col md={5} sm={5} lg={5}>
+                        <Col md={5} sm={12} lg={5} className="buttons">
                             <Button variant="dark" className="btn-block w-100 mt-3" onClick={async () => {
                                 var totalCaloriesCount = 0
                                 workout.map(i => {
@@ -278,11 +279,11 @@ const Workout = () => {
             </Row>
             <Row style={{ backgroundColor: "#F0F0F0", marginTop: "3vh", minHeight: "60vh" }}>
                 <Row style={{ padding: "3vh", maxHeight: "15vh" }}>
-                    <Col md={10} sm={10} lg={10} className="mt-3">
-                        <h2 style={{ marginLeft: "5vw" }}><b>Delete</b></h2>
+                    <Col md={10} sm={12} lg={10} className="mt-3">
+                        <h2 className='cols'><b>Delete</b></h2>
                     </Col>
-                    <Col md={2} sm={2} lg={2}>
-                        <div style={{ maxHeight: "15vh" }}>
+                    <Col md={2} sm={12} lg={2}>
+                        <div style={{ maxHeight: "15vh", display: "flex", justifyContent: "center" }}>
                             <img
                                 className="d-block"
                                 src={deletePNG}
@@ -292,29 +293,30 @@ const Workout = () => {
                         </div>
                     </Col>
                 </Row>
-                <Row>
-                    {
-                        workoutList.map(i => {
-
-                            return (
-                                <>
-                                    <Col md={12} sm={12} lg={12} key={i.name}>
+                <Row style={{ marginTop: "10vh" }}>
+                    <Col md={12} sm={12} lg={12}>
+                        {
+                            workoutList.map(i => {
+                                return (
+                                    <>
                                         <Row>
-                                            <Col md={10} sm={10} lg={10}><h4 style={{ marginLeft: "5vw" }}>{i.name}</h4></Col>
-                                            <Col md={2} sm={2} lg={2}>
-                                                <Button style={{ marginLeft: "2vw" }} variant="dark"><i className="fa-solid fa-trash"></i></Button>
+                                            <Col className="cols" md={10} sm={12} lg={10}>
+                                                <h4><b>{i.name}</b></h4>
                                             </Col>
-                                        </Row>
-                                        <hr />
-                                    </Col>
+                                            <Col md={1} sm={12} lg={1} className="delete">
+                                                <Button variant="dark" className="btn-block w-100"><i className="fa-solid fa-trash"></i></Button>
+                                            </Col>
+                                            <Col className="cols"><hr /></Col>
 
-                                </>
-                            )
-                        })
-                    }
+                                        </Row>
+                                    </>
+                                )
+                            })
+                        }
+                    </Col>
                 </Row>
             </Row>
-        </Container >
+        </Container>
     )
 }
 
