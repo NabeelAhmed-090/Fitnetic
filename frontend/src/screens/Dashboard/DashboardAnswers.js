@@ -116,8 +116,8 @@ const DashboardAnswers = () => {
                   value={reply}
                 />
 
-                <Form.Text id="postAReply" style={{ marginLeft: "2vh" }} muted>
-                  Your reply should not be more than 400 characters.
+                <Form.Text id="postAReply" className="mb-5" muted>
+                  <p style={{ marginLeft: "2vh" }}> <br />Max Characters (400)<br />Current Characters ({reply.length}/400)</p>
                 </Form.Text>
               </Container>
             </Col>
@@ -128,7 +128,7 @@ const DashboardAnswers = () => {
           </Row>
         </Container>
       }
-    </div>
+    </div >
   )
 }
 

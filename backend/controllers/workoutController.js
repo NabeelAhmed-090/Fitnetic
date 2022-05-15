@@ -38,23 +38,6 @@ const addWorkout = asyncHandler(async (req, res) => {
     )
 })
 
-const checkName = asyncHandler(async (req, res) => {
-    const { name } = req.body
-    console.log(name)
-    const workout = await Workout.findOne({ name: name })
-    if (workout) {
-        res.json({
-            check: false
-        })
-    }
-    else {
-        res.json({
-            check: true
-        })
-    }
-})
-
-// getWorkouts
 const getWorkouts = asyncHandler(async (req, res) => {
     const workouts = await Workout.find({})
     const workoutsList = workouts.map((i) => {
@@ -68,4 +51,4 @@ const getWorkouts = asyncHandler(async (req, res) => {
 })
 
 
-export { getExercises, addWorkout, checkName, getWorkouts }
+export { getExercises, addWorkout, getWorkouts }

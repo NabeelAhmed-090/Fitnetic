@@ -20,21 +20,22 @@ const QuestionCard = ({ quest, id, ButtonText }) => {
                      {quest}
                   </pre>
                </Col>
-               <Col md={11} lg={11} sm={11} style={{ display: "flex" }}>
+               <Col md={11} lg={11} sm={12} style={{ display: "flex" }}>
                   <Link to={`/api/dashboard/answers/${id}`} style={{ marginLeft: "auto", marginTop: "5vh" }}>
-                     <Button variant="dark" type="button" >
+                     <Button className="btn-block w-100" variant="dark" type="button" >
                         {ButtonText}
                      </Button>
                   </Link>
                </Col>
-               {ButtonText === "Reply" ? (<Col md={1} lg={1} sm={1} style={{ display: "flex" }}>
-                  <Button onClick={async () => {
-                     await axios.delete(`/api/dashboard/remove/${id}`)
-                     window.location.reload(false);
-                  }} style={{ marginLeft: "auto", marginTop: "5vh" }} variant="dark" type="submit" >
-                     <i className="fa-solid fa-trash"></i>
-                  </Button>
-               </Col>) : ''
+               {ButtonText === "Reply" ? (
+                  <Col md={1} lg={1} sm={12} style={{ display: "flex" }}>
+                     <Button className="btn-block w-100" onClick={async () => {
+                        await axios.delete(`/api/dashboard/remove/${id}`)
+                        window.location.reload(false);
+                     }} style={{ marginLeft: "auto", marginTop: "5vh" }} variant="dark" type="submit" >
+                        <i className="fa-solid fa-trash"></i>
+                     </Button>
+                  </Col>) : ''
                }
             </Row>
          </Container>
