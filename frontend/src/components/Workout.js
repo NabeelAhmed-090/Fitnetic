@@ -272,14 +272,15 @@ const Workout = () => {
                                                     'Content-Type': 'application/json',
                                                 },
                                             }
-                                            await axios.post('/api/workout/add',
+                                            const result=await axios.post('/api/workout/add',
                                                 { workout, totalCaloriesCount, tags, name },
                                                 config)
+                                            const{data}=result
                                             setTag([...tags, ...tag])
                                             setTags([])
                                             setExerciesList([...exercisesList, ...workout])
                                             setWorkout([])
-                                            setWorkoutList([...workoutList, name])
+                                            setWorkoutList([...workoutList, data])
                                             setName("")
                                             setLoading(false)
                                         }
@@ -315,7 +316,20 @@ const Workout = () => {
                                                         <h4><b>{i.name}</b></h4>
                                                     </Col>
                                                     <Col md={1} sm={12} lg={1} className="delete">
-                                                        <Button variant="dark" className="btn-block w-100 ml-4"><i className="fa-solid fa-trash"></i></Button>
+                                                        <Button variant="dark" className="btn-block w-100 ml-4" onClick={async()=>
+                                                        {
+                                                            setLoading(true)
+                                                            var config = {
+                                                                headers: {
+                                                                    'Content-Type': 'application/json',
+                                                                },
+                                                            }
+                                                            await axios.delete('/api/workout/delete',
+                                                                { data: { name: i.name } },
+                                                                config)
+                                                            setWorkoutList(workoutList.filter(itr => itr.name!== i.name))
+                                                            setLoading(false)
+                                                        }}><i className="fa-solid fa-trash"></i></Button>
                                                     </Col>
                                                     <Col className="cols"><hr /></Col>
 

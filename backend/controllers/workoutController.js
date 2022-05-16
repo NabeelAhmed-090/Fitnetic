@@ -25,16 +25,14 @@ const addWorkout = asyncHandler(async (req, res) => {
     const exercises = workout.map(i => {
         return i._id
     })
-    await Workout.create({
+    const newWorkout=await Workout.create({
         exercises,
         totalCaloriesCount,
         tags,
         name
     })
     res.json(
-        {
-            message: "Workout Added"
-        }
+        newWorkout
     )
 })
 
@@ -50,5 +48,17 @@ const getWorkouts = asyncHandler(async (req, res) => {
     res.json(workoutsList)
 })
 
+const deleteWorkout=asyncHandler((req, res)=>{
+    const { name } = req.body
 
-export { getExercises, addWorkout, getWorkouts }
+    Workout.deleteOne({ name: name })
+        .then(() => {
+            res.send("Workout Deleted")
+        })
+        .catch((error) => {
+            res.send("Error in Workout deletion")
+        })
+
+})
+
+export { deleteWorkout, getExercises, addWorkout, getWorkouts }

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { login } from '../../actions/userActions'
 import { adminLoginFunc } from '../../actions/adminActions'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
-import loginPNG from '../../Image/login.png'
+import loginPNG from '../../Image/Login.png'
 import './Login.css'
 
 const Login = () => {

@@ -11,6 +11,10 @@ const dietSchema = mongoose.Schema({
     totalCaloriesCount: {
         type: Number,
         required: true
+    },
+    name: {
+        type: String,
+        required: true
     }
 })
 
