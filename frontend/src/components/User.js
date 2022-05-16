@@ -4,7 +4,6 @@ import logoPNG from '../Image/user.png'
 import userPNG from '../Image/adminUser.png'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import Loader from './Loader'
-import plusPNG from '../Image/plus.png'
 import './User.css'
 
 const User = () => {

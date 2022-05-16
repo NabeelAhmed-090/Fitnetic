@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Container, Row, Col, Button, Dropdown, Form } from 'react-bootstrap'
-import workoutPNG from '../Image/gym.png'
 import plusPNG from '../Image/plus.png'
 import deletePNG from '../Image/delete.png'
 import './Workout.css'
@@ -59,14 +58,15 @@ const Workout = () => {
                             <Col sm={6} md={4} lg={4} >
                                 <Form.Control
                                     className="cols"
-                                    onChange={async (event) => {
+                                    onChange={(event) => {
                                         setName(event.target.value)
-                                        await workoutList.map(i => {
+                                        workoutList.map(i => {
                                             if (i.name === event.target.value) {
                                                 setCheck(false)
                                             }
                                             if (i.name !== event.target.value)
                                                 setCheck(true)
+                                            return 0
                                         })
                                     }}
                                     type="text"

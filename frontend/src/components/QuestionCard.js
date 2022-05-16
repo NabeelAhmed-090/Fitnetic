@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { Col, Row, Button, Container } from "react-bootstrap";
 import './QuestionCard.css'
 import axios from "axios";
+import Highlighted from "./Highlight";
 
-const QuestionCard = ({ quest, id, ButtonText }) => {
+const QuestionCard = ({ quest, id, ButtonText, keyword = "" }) => {
    return (
       <>
          <hr />
@@ -17,7 +18,7 @@ const QuestionCard = ({ quest, id, ButtonText }) => {
                </Col>
                <Col sm={12} md={12} lg={12}>
                   <pre >
-                     {quest}
+                     <Highlighted text={quest} highlight={keyword} />
                   </pre>
                </Col>
                <Col md={11} lg={11} sm={12} style={{ display: "flex" }}>

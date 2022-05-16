@@ -7,6 +7,7 @@ import dashboardPNG from '../../Image/Dashboard.png'
 import './DashboardQuestions.css';
 import Loader from "../../components/Loader";
 
+
 const DashboardQuestion = () => {
     const [questionsList, setQuestionsList] = useState([])
     const [questions, setQuestions] = useState("")
@@ -139,7 +140,7 @@ const DashboardQuestion = () => {
                     </Row>
                     {
                         filteredQuestionsList.map(i => {
-                            return <QuestionCard key={i._id} id={i._id} quest={i.questions} ButtonText="Answer" />
+                            return <QuestionCard key={i._id} id={i._id} quest={i.questions} keyword={keyword} ButtonText="Answer" />
                         })
                     }
                 </>
