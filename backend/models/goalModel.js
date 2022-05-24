@@ -7,10 +7,6 @@ const goalSchema = mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    goalBenefits: {
-        type: String,
-        required: true
-    },
     diet: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

@@ -1,7 +1,8 @@
 import express from "express";
 const router = express.Router()
-import { getWorkouts, getDiets } from '../controllers/goalController.js'
+import { getWorkouts, getDiets, saveGoal } from '../controllers/goalController.js'
 
-router.get('/workouts', getWorkouts)
-router.get('/diet', getDiets)
+router.post('/workouts', getWorkouts)
+router.post('/diet', getDiets)
+router.post('/save', saveGoal)
 export default router

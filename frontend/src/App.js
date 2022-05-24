@@ -9,6 +9,7 @@ import Homepage from './screens/Homepage/Homepage'
 import Admin from './screens/Admin/Admin'
 import DashboardQuestion from './screens/Dashboard/DashboardQuestion'
 import DashboardAnswers from './screens/Dashboard/DashboardAnswers'
+import Goal from './screens/Goal/Goal'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="/api/dashboard" element={<DashboardQuestion />} exact />
             <Route path="/api/dashboard/answers/:id" element={<DashboardAnswers />} exact />
             <Route path="/api/admin" element={<Admin />} exact />
+            <Route path="/api/users/goal" element={<Goal />} exact />
           </Routes>
         </Router>
       </div>

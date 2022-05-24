@@ -30,7 +30,7 @@ const Header = () => {
                         {!adminLogin.adminInfo && <Nav.Link href="/api/dashboard">Dashboard</Nav.Link>}
                         {!userLogin.userInfo && !adminLogin.adminInfo && <Nav.Link href="/api/login">Login</Nav.Link>}
                         {(userLogin.userInfo && !adminLogin.adminInfo) && <Nav.Link href="/">Home</Nav.Link>}
-                        {userLogin.userInfo && <Nav.Link href="#">Goal</Nav.Link>}
+                        {userLogin.userInfo && <Nav.Link href="/api/users/goal">Goal</Nav.Link>}
                         {(userLogin.userInfo && !adminLogin.adminInfo) && <Nav>
                             <NavDropdown
                                 id="nav-dropdown-dark-example"
