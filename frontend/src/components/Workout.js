@@ -9,7 +9,8 @@ import Loader from './Loader'
 const Workout = () => {
     const [loading, setLoading] = useState(false)
     const [tags, setTags] = useState([])
-    const [tag, setTag] = useState(["ABCDEF", "BCD", "CEF", "DEF", "EFG", "FGH", "GHI", "HIJ", "IJK", "JKL", "KLM", "LMN", "MNO"])
+    // 13
+    const [tag, setTag] = useState(["WeightLoss", "WeightGain", "Core", "Cardio", "flexibility", "UpperBody", "LowerBody", "MuscleGain", "Endurance"])
     const [name, setName] = useState("")
     const [exercisesList, setExerciesList] = useState([])
     const [workout, setWorkout] = useState([])

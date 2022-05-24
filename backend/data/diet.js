@@ -1,21 +1,9 @@
 const diets = [
     {
-        totalCaloriesCount: 20
-    },
-    {
-        totalCaloriesCount: 30
-    },
-    {
-        totalCaloriesCount: 40
-    },
-    {
-        totalCaloriesCount: 50
-    },
-    {
-        totalCaloriesCount: 60
-    },
-    {
-        totalCaloriesCount: 70
+        name: "Test Diet",
+        food: ["628d1dd15d6c385b8a2b3460"],
+        totalCaloriesCount: 20,
+        tags: ["Cardio", "WeightLoss"],
     },
 ]
 

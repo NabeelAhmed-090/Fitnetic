@@ -4,7 +4,7 @@ import admins from "./data/admins.js";
 import foods from "./data/food.js";
 import exercises from "./data/exercises.js";
 import dashboard from "./data/dashboard.js";
-import workouts from "./data/workout.js";
+// import workouts from "./data/workout.js";
 import diets from "./data/diet.js";
 import dotenv from 'dotenv'
 
@@ -43,7 +43,9 @@ const importData = async () => {
         await User.insertMany(users)
         await Admin.insertMany(admins)
         await Dashboard.insertMany(dashboard)
-        await Workout.insertMany(workouts)
+        await Diet.insertMany(diets)
+
+        // await Workout.insertMany(workouts)
 
         console.log("Data Imported")
         process.exit()

@@ -7,8 +7,8 @@ const goalSchema = mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    goalWeight: {
-        type: Number,
+    goalBenefits: {
+        type: String,
         required: true
     },
     diet: {

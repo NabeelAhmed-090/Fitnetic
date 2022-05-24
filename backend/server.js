@@ -5,6 +5,8 @@ import userRoutes from './routes/userRoutes.js'
 import dashboardRoutes from './routes/dashboardRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import workoutRoutes from './routes/workoutRoutes.js'
+import goalRoutes from './routes/goalRoutes.js'
+import dietRoutes from './routes/dietRoutes.js'
 
 import cors from 'cors'
 
@@ -22,6 +24,8 @@ app.use('/api/users', userRoutes)
 app.use('/api/dashboard', dashboardRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/workout', workoutRoutes)
+app.use('/api/diet', dietRoutes)
+app.use('/api/goal', goalRoutes)
 
 
 app.use("*", (req, res) => {

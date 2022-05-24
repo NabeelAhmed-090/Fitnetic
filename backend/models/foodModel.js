@@ -10,6 +10,10 @@ const foodSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+    benefit: {
+        type: String,
+        required: true
+    }
 })
 
 const Food = mongoose.model('Food', foodSchema)
