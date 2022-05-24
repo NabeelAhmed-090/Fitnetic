@@ -43,9 +43,12 @@ const importData = async () => {
         await User.insertMany(users)
         await Admin.insertMany(admins)
         await Dashboard.insertMany(dashboard)
+<<<<<<< HEAD
         await Diet.insertMany(diets)
 
         // await Workout.insertMany(workouts)
+=======
+>>>>>>> 952d75478d08de4b56f5ca139ecee6c14259841b
 
         console.log("Data Imported")
         process.exit()

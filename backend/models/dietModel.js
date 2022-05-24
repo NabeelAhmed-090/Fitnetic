@@ -16,11 +16,18 @@ const dietSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+<<<<<<< HEAD
     tags: [
         {
             type: String,
         }
     ],
+=======
+    name: {
+        type: String,
+        required: true
+    }
+>>>>>>> 952d75478d08de4b56f5ca139ecee6c14259841b
 })
 
 const Diet = mongoose.model('Diet', dietSchema)
