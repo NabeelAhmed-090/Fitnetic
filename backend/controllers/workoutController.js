@@ -25,7 +25,7 @@ const addWorkout = asyncHandler(async (req, res) => {
     const exercises = workout.map(i => {
         return i._id
     })
-    const newWorkout=await Workout.create({
+    const newWorkout = await Workout.create({
         exercises,
         totalCaloriesCount,
         tags,
@@ -36,19 +36,32 @@ const addWorkout = asyncHandler(async (req, res) => {
     )
 })
 
+async function promises(exercises) {
+    const unresolved = exercises.map(async (obj) => {
+        const exerciese = await Exercise.findById(obj)
+        return exerciese.name
+    })
+    const exerciseName = await Promise.all(unresolved)
+    return exerciseName
+}
+
+
 const getWorkouts = asyncHandler(async (req, res) => {
     const workouts = await Workout.find({})
-    const workoutsList = workouts.map((i) => {
+    const unresolved = workouts.map(async (i) => {
+        const exerciseName = await promises(i.exercises)
         return (
             {
+                exercises: exerciseName,
                 name: i.name,
             }
         )
     })
+    const workoutsList = await Promise.all(unresolved)
     res.json(workoutsList)
 })
 
-const deleteWorkout=asyncHandler((req, res)=>{
+const deleteWorkout = asyncHandler((req, res) => {
     const { name } = req.body
 
     Workout.deleteOne({ name: name })

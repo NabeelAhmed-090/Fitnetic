@@ -8,8 +8,6 @@ import bcrypt from "bcryptjs";
 //@access Public
 const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body
-    console.log("Login verification : ", email, password)
-
     const user = await User.findOne({ email: email }) //user or null
     if (user && (await user.matchPassword(password))) {
         res.json(
@@ -48,10 +46,11 @@ const getUserProfile = asyncHandler(async (req, res) => {
 //@route  Get /api/products
 //@access Public
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, age, password, weight, email, height, image } = req.body
+    const { name, age, password, weight, email, height } = req.body
     const userExists = await User.findOne({ email })
     if (userExists) {
-        res.status(400).json({ message: "User already exists" })
+        res.status(400)
+        throw new Error('User already exists')
     }
     const user = await User.create({
         name,
@@ -60,7 +59,6 @@ const registerUser = asyncHandler(async (req, res) => {
         weight,
         email,
         height,
-        image
     })
 
     if (user) {
@@ -148,10 +146,31 @@ const deleteUserProfile = asyncHandler(async (req, res) => {
 
 
 
+
+const verifyEmail = asyncHandler(async (req, res) => {
+    const { email } = req.body
+    const user = await User.findOne({ email: email }) //user or null
+    if (user) {
+        res.json(
+            {
+                check: true,
+            }
+        )
+    } else {
+        res.json(
+            {
+                check: false,
+            }
+        )
+    }
+})
+
 export {
     authUser,
     registerUser,
     getUserProfile,
     updateUserProfile,
     deleteUserProfile,
+    verifyEmail
 }
+

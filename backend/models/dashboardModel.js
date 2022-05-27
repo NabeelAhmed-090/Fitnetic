@@ -7,8 +7,12 @@ const dashboardSchema = mongoose.Schema({
         required: true
     },
     answer: [
-         String
+        String
     ],
+    user: {
+        type: String,
+        required: true,
+    }
 })
 
 const Dashboard = mongoose.model('Dashboard', dashboardSchema)

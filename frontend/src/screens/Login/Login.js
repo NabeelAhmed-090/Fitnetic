@@ -12,10 +12,12 @@ const Login = () => {
     const dispatch = useDispatch()
     const userLogin = useSelector((state) => state.userLogin)
     const adminLogin = useSelector((state) => state.adminLogin)
-    const { userInfo } = userLogin
+    const { userInfo, error } = userLogin
     const { adminInfo } = adminLogin
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [passwordCheck, setPasswordCheck] = useState(false)
+    const [emailCheck, setEmailCheck] = useState(false)
 
     useEffect(() => {
         if (adminInfo) {
@@ -26,55 +28,18 @@ const Login = () => {
         }
     }, [dispatch, history, userInfo, adminInfo])
 
+    const passwordFunc = (event) => {
+        setPassword(event.target.value)
+    }
+
+    const emailFunc = (event) => {
+        setEmail(event.target.value)
+    }
+
     return (
         <>
             <Row style={{ paddingBottom: "0" }}>
                 <Col md={6} sm={12} lg={6} style={{ marginBottom: "0" }}>
-                    {/* <Carousel>
-                        <Carousel.Item className="carousel-item">
-                            <div style={{ height: "100vh" }}>
-                                <img
-                                    className="d-block w-100"
-                                    src={loginPNG}
-                                    alt="First slide"
-                                    style={{ height: "100%", width: "100%" }}
-                                />
-                            </div>
-                            <Carousel.Caption style={{ color: "black" }}>
-                                <h2><b>First slide label</b></h2>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <div style={{ height: "100vh" }}>
-                                <img
-                                    className="d-block w-100"
-                                    src={img2}
-                                    alt="First slide"
-                                    style={{ height: "100%", width: "100%" }}
-                                />
-                            </div>
-
-                            <Carousel.Caption>
-                                <h3>Second slide label</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <div style={{ height: "100vh" }}>
-                                <img
-                                    className="d-block w-100"
-                                    src={img3}
-                                    alt="First slide"
-                                    style={{ height: "100%", width: "100%" }}
-                                />
-                            </div>
-                            <Carousel.Caption>
-                                <h3>Third slide label</h3>
-                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                    </Carousel> */}
                     <div style={{ height: "100vh" }}>
                         <img
                             className="d-block w-100"
@@ -96,7 +61,7 @@ const Login = () => {
                                 <Col md={12} lg={12} sm={12}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Email</Form.Label>
-                                        <Form.Control className="shadow-none" style={{ border: "0.5px solid #000000", outline: "none" }} type="text" placeholder="Enter Email" onChange={(event) => setEmail(event.target.value)} />
+                                        <Form.Control className="shadow-none" style={{ border: "0.5px solid #000000", outline: "none" }} type="email" placeholder="Enter Email" onChange={(event) => emailFunc(event)} />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -104,7 +69,7 @@ const Login = () => {
                                 <Col md={12} lg={12} sm={12}>
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label>Password</Form.Label>
-                                        <Form.Control className="shadow-none" style={{ border: "0.5px solid #000000" }} type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
+                                        <Form.Control className="shadow-none" style={{ border: "0.5px solid #000000" }} type="password" placeholder="Password" onChange={(event) => passwordFunc(event)} />
                                     </Form.Group>
                                 </Col>
                             </Row>

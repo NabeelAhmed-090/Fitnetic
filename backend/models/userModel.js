@@ -27,9 +27,6 @@ const userSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    image: {
-        type: String,
-    }
 })
 
 userSchema.methods.matchPassword = async function (enteredPassword) {

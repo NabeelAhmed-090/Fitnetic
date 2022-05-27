@@ -23,11 +23,12 @@ const getAnswers = asyncHandler(async (req, res) => {
         id = id.slice(0, -1);
     const _id = ObjectId(id)
     const data = await Dashboard.findById(_id)
-    const { questions, answer } = data
+    const { questions, answer, user } = data
     res.json(
         {
             answer: answer,
-            questions: questions
+            questions: questions,
+            user: user
         }
     )
 })

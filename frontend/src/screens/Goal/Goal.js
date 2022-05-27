@@ -21,50 +21,56 @@ const Goal = () => {
                 <Col md={6} sm={6} lg={6}>
                     <Card>
                         <Card.Header style={{ textAlign: "center", color: "white", backgroundColor: "black" }}>Workout Plan</Card.Header>
-                        <Card.Body>
+                        <Card.Body style={{ textAlign: "center" }}>
                             <blockquote className="blockquote mb-0">
-                                <h6>
+                                <h5>
                                     {selectedWorkout.name}
-
-                                </h6>
+                                </h5>
                             </blockquote>
+                            <hr />
+                            {selectedWorkout.exercises && selectedWorkout.exercises.map((i) => {
+                                return (
+                                    <h6>{i}</h6>
+                                )
+                            })}
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col md={6} sm={6} lg={6}>
                     <Card>
                         <Card.Header style={{ textAlign: "center", color: "white", backgroundColor: "black" }}>Diet Plan</Card.Header>
-                        <Card.Body>
+                        <Card.Body style={{ textAlign: "center" }}>
                             <blockquote className="blockquote mb-0">
                                 <h6>
                                     {selectedDiet.name}
                                 </h6>
                             </blockquote>
+                            <hr />
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col md={12} sm={12} lg={12}>
-                    <Button variant="dark" className="btn-block mt-2" style={{ float: "right" }}>
+                    <Button variant="dark" className="btn-block mt-4" style={{ float: "right" }}>
                         Save Goal
                     </Button>
                 </Col>
                 <hr className='mt-2' />
             </Row>
             <Row>
-                <Col style={{ height: "60vh" }}>
+                <Col style={{ minHeight: "60vh" }}>
                     <Row className="p-3" style={{ minHeight: "30vh" }}>
                         <Container>
-                            <Row>
+                            <Row className="p-3">
                                 {
                                     tag.map(i => {
                                         return (
-                                            <Col className="mt-2" style={{ textAlign: "center" }} md={6} sm={6} lg={6}>
+                                            <Col className="mt-2" style={{ textAlign: "center" }} md={6} sm={12} lg={6}>
                                                 <Row>
-                                                    <Col style={{ backgroundColor: "#FEE715CF" }} md={9} sm={8} lg={9} className="shadow p-1 rounded" >
+                                                    <Col style={{ backgroundColor: "#FEE715CF" }} md={10} sm={12} lg={10} className="shadow p-1 rounded" >
                                                         <pre>{i}</pre>
                                                     </Col>
-                                                    <Col md={3} sm={4} lg={3} style={{ justifyContent: "right" }}>
-                                                        <Button variant="dark" onClick={() => {
+                                                    <Col md={2} sm={12} lg={2} style={{ justifyContent: "right" }}>
+                                                        <Button variant="dark btn-block w-100 mt-1" onClick={() => {
                                                             if (selectedTags.length < 3) {
                                                                 setSelectedTags([...selectedTags, i])
                                                                 setTag(tag.filter(itr => itr !== i))
@@ -89,7 +95,7 @@ const Goal = () => {
                             return (
                                 <>
                                     <Row>
-                                        <Col md={8} sm={8} lg={8}>
+                                        <Col md={9} sm={9} lg={9}>
                                             <h5> {i} </h5>
                                         </Col>
                                         <Col md={3} sm={3} lg={3}>
@@ -107,7 +113,7 @@ const Goal = () => {
                 </Col>
             </Row>
             <Row>
-                <Col md={6} sm={6} lg={6}>
+                <Col md={6} sm={12} lg={6}>
                     <Button className="btn-block w-100 my-3 p-1" variant='dark' onClick={async () => {
                         setLoadingWorkout(true)
                         var config = {
@@ -125,8 +131,9 @@ const Goal = () => {
                                 return (
                                     {
                                         name: i.name,
-                                        calories: i.totalCaloriesCount,
-                                        id: i._id
+                                        calories: i.calories,
+                                        id: i._id,
+                                        exercises: i.exercises
                                     }
                                 )
                             }
@@ -139,7 +146,7 @@ const Goal = () => {
                         setLoadingWorkout(false)
                     }}>Suggest Workout</Button>
                 </Col>
-                <Col md={6} sm={6} lg={6}>
+                <Col md={6} sm={12} lg={6}>
                     <Button className="btn-block w-100 my-3 p-1" variant='dark' onClick={async () => {
                         setLoadingDiet(true)
                         var config = {
@@ -180,7 +187,7 @@ const Goal = () => {
                         </Col>
                         <hr />
                     </Row>
-                    <Row>
+                    <Row className="mt-3 mb-3">
                         {loadingWorkout === true ? <Loader /> : <>
                             {
                                 workouts.map((i) => {
@@ -216,7 +223,7 @@ const Goal = () => {
                         </Col>
                         <hr />
                     </Row>
-                    <Row>
+                    <Row className="mt-3 mb-3">
                         {loadingDiet === true ? <Loader /> : <>
                             {
                                 diet.map((i) => {
@@ -244,7 +251,7 @@ const Goal = () => {
                         }
                     </Row>
                 </Col>
-            </Row>
+            </Row >
 
         </Container >
     )

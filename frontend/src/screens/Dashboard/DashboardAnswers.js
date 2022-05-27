@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import AnswerCard from '../../components/AnswerCard';
@@ -8,20 +9,33 @@ import './DashboardAnswers.css'
 
 
 const DashboardAnswers = () => {
+  // const admins = ['nabeel@gmail.com', 'laiba@gmai.com', 'hadiya@gmail.com', 'ayesha@gmail.com']
   const [answers, setAnswers] = useState([])
   const [question, setQuestion] = useState("")
   const [reply, setReply] = useState("")
+  const userLogin = useSelector((state) => state.userLogin)
+  const adminLogin = useSelector((state) => state.adminLogin)
+  const { userInfo } = userLogin
+  const { adminInfo } = adminLogin
   const { id } = useParams()
+  const [verify, setVerify] = useState(true)
   useEffect(() => {
     async function getAnswers() {
       const result = await axios.get(`/api/dashboard/answers/${id}`)
       const { data } = result
-      const { questions, answer } = data
+      const { questions, answer, user } = data
+
+      if ((userInfo && user.localeCompare(userInfo.email) === 0) || adminInfo) {
+        setVerify(true)
+      }
+      else {
+        setVerify(false)
+      }
       setQuestion(questions)
       setAnswers(answer)
     }
     getAnswers()
-  }, [answers])
+  }, [])
 
   const postAReply = async () => {
     if (reply.length !== 0) {
@@ -102,29 +116,32 @@ const DashboardAnswers = () => {
                 </pre>
               </Container>
             </Col>
-            <Col md={10} sm={12} lg={10} className="mt-1">
-              <Container>
-                <Form.Control onChange={(event) => {
-                  if (event.target.value.length <= 400)
-                    setReply(event.target.value)
-                }
-                }
-                  type="text"
-                  placeholder='Reply to the thread'
-                  id="postAReply"
-                  aria-describedby="postAReplyBlock"
-                  value={reply}
-                />
+            {verify ?
+              <>
+                <Col md={10} sm={12} lg={10} className="mt-1">
+                  <Container>
+                    <Form.Control onChange={(event) => {
+                      if (event.target.value.length <= 400)
+                        setReply(event.target.value)
+                    }
+                    }
+                      type="text"
+                      placeholder='Reply to the thread'
+                      id="postAReply"
+                      aria-describedby="postAReplyBlock"
+                      value={reply}
+                    />
 
-                <Form.Text id="postAReply" className="mb-5" muted>
-                  <p style={{ marginLeft: "2vh" }}> <br />Max Characters (400)<br />Current Characters ({reply.length}/400)</p>
-                </Form.Text>
-              </Container>
-            </Col>
-            <Col md={2} sm={12} lg={2} className="mt-1">
-              <Button className="btn-block w-100" type="button" variant="dark" onClick={postAReply}>Reply</Button>
-            </Col>
-
+                    <Form.Text id="postAReply" className="mb-5" muted>
+                      <p style={{ marginLeft: "2vh" }}> <br />Max Characters (400)<br />Current Characters ({reply.length}/400)</p>
+                    </Form.Text>
+                  </Container>
+                </Col>
+                <Col md={2} sm={12} lg={2} className="mt-1">
+                  <Button className="btn-block w-100" type="button" variant="dark" onClick={postAReply}>Reply</Button>
+                </Col>
+              </>
+              : ''}
           </Row>
         </Container>
       }

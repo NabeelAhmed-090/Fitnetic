@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import User from '../models/userModel.js'
+import Diet from '../models/dietModel.js'
+import Workout from '../models/workoutModel.js'
 
 
 const goalSchema = mongoose.Schema({

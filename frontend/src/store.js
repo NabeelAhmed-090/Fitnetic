@@ -18,6 +18,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localS
 const adminInfoFromStorage = localStorage.getItem('adminInfo') ? JSON.parse(localStorage.getItem('adminInfo')) : null
 
 const initialState = {
+    userSignup: { userInfo: null },
     userLogin: { userInfo: userInfoFromStorage },
     adminLogin: { adminInfo: adminInfoFromStorage }
 }

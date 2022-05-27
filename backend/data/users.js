@@ -8,7 +8,6 @@ const users = [
         weight: 48,
         email: 'HK@gmail.com',
         height: 5.3,
-        image: ''
     },
     {
         name: 'Laiba Arshad',
@@ -17,7 +16,6 @@ const users = [
         weight: 48,
         email: 'LA@gmail.com',
         height: 5.3,
-        image: ''
     },
     {
         name: 'Ayesha Rizwan',
@@ -26,7 +24,6 @@ const users = [
         weight: 48,
         email: 'AR@gmail.com',
         height: 5.3,
-        image: ''
     },
     {
         name: 'Nabeel Ahmed',
@@ -35,7 +32,6 @@ const users = [
         weight: 48,
         email: 'NA@gmail.com',
         height: 5.3,
-        image: ''
     },
 ]
 

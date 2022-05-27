@@ -44,7 +44,7 @@ export const logout = () => async (dispatch) => {
     })
 }
 
-export const signup = (name, age, password, weight, email, height, image) => async (dispatch) => {
+export const signup = (name, age, password, weight, email, height) => async (dispatch) => {
     try {
         dispatch({
             type: USER_SIGNUP_REQUEST,
@@ -56,7 +56,7 @@ export const signup = (name, age, password, weight, email, height, image) => asy
         }
 
         const { data } = await axios.post('/api/users/signup',
-            { name, age, password, weight, email, height, image },
+            { name, age, password, weight, email, height },
             config)
 
         dispatch({
@@ -68,7 +68,6 @@ export const signup = (name, age, password, weight, email, height, image) => asy
             type: USER_LOGIN_SUCCESS,
             payload: data
         })
-
         localStorage.setItem('userInfo', JSON.stringify(data))
     }
     catch (error) {
@@ -134,8 +133,6 @@ export const deleteUser = (email) => async (dispatch) => {
         dispatch({
             type: USER_LOGOUT
         })
-
-
     }
     catch (error) {
         dispatch({
