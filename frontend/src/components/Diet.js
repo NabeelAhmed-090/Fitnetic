@@ -217,12 +217,24 @@ const Diet = () => {
                                             diet.map(i => {
                                                 return (
                                                     <>
-                                                        <Col md={6} sm={6} lg={6}>
+                                                        <Col md={12} sm={12} lg={12}>
                                                             <Row>
-                                                                <Col md={8} sm={8} lg={8}>
+                                                                <Col md={5} sm={5} lg={5}>
                                                                     <h5> {i.name} </h5>
                                                                 </Col>
                                                                 <Col md={4} sm={4} lg={4}>
+                                                                    <Form.Control
+                                                                        onChange={(event) => {
+                                                                            i.quantity = event.target.value
+                                                                        }}
+                                                                        type="text"
+                                                                        placeholder="Quantity"
+                                                                        id="quantity"
+                                                                        aria-describedby="quanitytBlock"
+
+                                                                    />
+                                                                </Col>
+                                                                <Col md={2} sm={2} lg={2}>
                                                                     <Button variant="dark" className="btn-block w-100" onClick={() => {
                                                                         setFoodList([...foodList, i])
                                                                         setDiet(diet.filter(itr => itr.name !== i.name))

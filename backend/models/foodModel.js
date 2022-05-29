@@ -13,6 +13,16 @@ const foodSchema = mongoose.Schema({
     benefit: {
         type: String,
         required: true
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        default: 1
+    },
+    unit: {
+        type: String,
+        required: true,
+        default: "grams"
     }
 })
 

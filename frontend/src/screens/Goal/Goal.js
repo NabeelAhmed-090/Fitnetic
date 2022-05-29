@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Col, Container, Row, Button, Card } from 'react-bootstrap'
 import axios from 'axios'
 import Loader from '../../components/Loader'
+import { useSelector, useDispatch } from 'react-redux'
 
 const Goal = () => {
     const [loadingWorkout, setLoadingWorkout] = useState(false)
@@ -12,6 +13,11 @@ const Goal = () => {
     const [diet, setDiet] = useState([])
     const [selectedWorkout, setSelectedWorkout] = useState({})
     const [selectedDiet, setSelectedDiet] = useState({})
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+    const { _id } = userInfo
+
     return (
         <Container>
             <Row className="mb-2">
@@ -24,13 +30,15 @@ const Goal = () => {
                         <Card.Body style={{ textAlign: "center" }}>
                             <blockquote className="blockquote mb-0">
                                 <h5>
-                                    {selectedWorkout.name}
+                                    <b>{selectedWorkout.name}</b>
                                 </h5>
                             </blockquote>
                             <hr />
                             {selectedWorkout.exercises && selectedWorkout.exercises.map((i) => {
                                 return (
-                                    <h6>{i}</h6>
+                                    <>
+                                        <h6>{i.name} x {i.sets} x {i.reps}</h6>
+                                    </>
                                 )
                             })}
                         </Card.Body>
@@ -41,16 +49,39 @@ const Goal = () => {
                         <Card.Header style={{ textAlign: "center", color: "white", backgroundColor: "black" }}>Diet Plan</Card.Header>
                         <Card.Body style={{ textAlign: "center" }}>
                             <blockquote className="blockquote mb-0">
-                                <h6>
-                                    {selectedDiet.name}
-                                </h6>
+                                <h5>
+                                    <b>{selectedDiet.name}</b>
+                                </h5>
                             </blockquote>
                             <hr />
+                            {selectedDiet.food && selectedDiet.food.map((i) => {
+                                return (
+                                    <>
+                                        <h6 className="mt-1">{i.name} {i.quantity} ({i.unit})</h6>
+                                    </>
+                                )
+                            })}
+
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col md={12} sm={12} lg={12}>
-                    <Button variant="dark" className="btn-block mt-4" style={{ float: "right" }}>
+                    <Button variant="dark" className="btn-block mt-4" style={{ float: "right" }} onClick={async () => {
+
+                        var config = {
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        }
+
+                        const user_id = _id
+                        const workout_id = selectedWorkout.id
+                        const diet_id = selectedDiet.id
+
+                        const result = await axios.post('/api/goal/save',
+                            { data: { user: user_id, diet: diet_id, workout: workout_id } },
+                            config)
+                    }}>
                         Save Goal
                     </Button>
                 </Col>
@@ -132,7 +163,7 @@ const Goal = () => {
                                     {
                                         name: i.name,
                                         calories: i.calories,
-                                        id: i._id,
+                                        id: i.id,
                                         exercises: i.exercises
                                     }
                                 )
@@ -163,9 +194,10 @@ const Goal = () => {
                             if (i != null) {
                                 return (
                                     {
+                                        food: i.food,
                                         name: i.name,
-                                        calories: i.totalCaloriesCount,
-                                        id: i._id
+                                        calories: i.calories,
+                                        id: i.id
                                     }
                                 )
                             }
@@ -203,7 +235,6 @@ const Goal = () => {
                                                 <Col md={3} sm={3} lg={3}>
                                                     <Button variant="dark" className="btn-block w-100 mb-3" onClick={() => {
                                                         setSelectedWorkout(i)
-                                                        console.log(selectedWorkout.name)
                                                     }}><b>+</b></Button>
                                                 </Col>
                                             </Row>

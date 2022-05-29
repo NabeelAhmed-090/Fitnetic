@@ -43,7 +43,7 @@ const importData = async () => {
         await User.insertMany(users)
         await Admin.insertMany(admins)
         await Dashboard.insertMany(dashboard)
-        await Diet.insertMany(diets)
+        // await Diet.insertMany(diets)
 
         // await Workout.insertMany(workouts)
 

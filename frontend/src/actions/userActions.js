@@ -89,7 +89,7 @@ export const update = (name, age, weight, password, height, image, email) => asy
                 'Content-Type': 'application/json',
             },
         }
-        const { data } = await axios.post('/api/users/profile/update',
+        const { data } = await axios.put('/api/users/profile/update',
             { name, age, weight, password, height, image, email },
             config)
         dispatch({

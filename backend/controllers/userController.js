@@ -1,7 +1,10 @@
 import asyncHandler from "express-async-handler";
 import User from '../models/userModel.js'
+import TrackingProgress from "../models/trackingProgressModel.js";
 import generateToken from "../utils/generateToken.js";
 import bcrypt from "bcryptjs";
+import DailyUpdates from "../models/dailyUpdatesModel.js";
+import { ObjectId } from 'mongodb';
 
 //@desc   Auth user & get token
 //@route  POST /api/users/login
@@ -28,18 +31,22 @@ const authUser = asyncHandler(async (req, res) => {
 //@route  GET /api/users/profile
 //@access Private
 const getUserProfile = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id)
+    const { _id } = req.body
+    const user = await User.findById(_id)
     if (user) {
-        res.json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-        })
+        res.json(
+            {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                age: user.age,
+                height: user.height,
+                weight: user.weight
+            })
     }
     else {
         res.status(404).json({ message: "User not found" })
     }
-    res.json({ message: 'Success' })
 })
 
 //@desc   Get users
@@ -165,12 +172,36 @@ const verifyEmail = asyncHandler(async (req, res) => {
     }
 })
 
+
+const dailyUpdate = asyncHandler(async (req, res) => {
+    const { dietUpdate, workoutUpdate, _id } = req.body
+    const user_id = ObjectId(_id)
+    console.log(user_id)
+    const progress = await TrackingProgress.findOne({ user: user_id }) //user or null
+    if (progress) {
+        const DU = new DailyUpdates({
+            food: dietUpdate,
+            workout: workoutUpdate,
+        })
+        console.log("----------------------------------------------------------------")
+        console.log(DU)
+        progress.dailyUpdates = [...progress.dailyUpdates, DU._id]
+        await progress.save()
+        res.json(progress)
+    }
+    else {
+        res.json({ message: "Error in finding object" })
+    }
+})
+
+
 export {
     authUser,
     registerUser,
     getUserProfile,
     updateUserProfile,
     deleteUserProfile,
-    verifyEmail
+    verifyEmail,
+    dailyUpdate
 }
 

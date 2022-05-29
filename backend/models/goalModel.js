@@ -20,6 +20,11 @@ const goalSchema = mongoose.Schema({
         required: true,
         ref: 'Workout'
     },
+    days: {
+        type: Number,
+        required: true,
+        default: 30
+    }
 })
 
 const Goal = mongoose.model('Goal', goalSchema)

@@ -7,9 +7,16 @@ const dietSchema = mongoose.Schema({
     },
     food: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Food'
+            foodName: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: 'Food'
+            },
+            quantity: {
+                type: String,
+                required: true,
+                default: 1
+            }
         }
     ],
     totalCaloriesCount: {

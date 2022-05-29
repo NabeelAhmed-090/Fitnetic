@@ -10,7 +10,7 @@ const Settings = () => {
     let history = useNavigate()
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
-    const { email } = userInfo || ""
+    const email = userInfo.email
     const [name, setName] = useState("")
     const [age, setAge] = useState(0)
     const [password, setPassword] = useState("")
@@ -44,6 +44,7 @@ const Settings = () => {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
+        console.log(email)
         if (!userInfo) {
             history("/api/login")
         }
@@ -150,6 +151,7 @@ const Settings = () => {
                                     <Col md={12} lg={12} sm={12} style={{ display: "flex" }}>
                                         <Button variant="dark" type="button" style={{ marginLeft: "auto", marginTop: "5vh" }} onClick={() => {
                                             dispatch(update(name, age, weight, password, height, image, email))
+                                            console.log(email)
                                         }}>
                                             Update Profile
                                         </Button>

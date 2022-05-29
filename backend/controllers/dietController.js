@@ -12,7 +12,9 @@ const getFood = asyncHandler(async (req, res) => {
             name: i.name,
             calories: i.calories,
             _id: i._id,
-            benefit: i.benefit
+            benefit: i.benefit,
+            quantity: i.quantity,
+
         }
     })
     res.json(
@@ -23,7 +25,12 @@ const getFood = asyncHandler(async (req, res) => {
 const addDiet = asyncHandler(async (req, res) => {
     const { diet, totalCaloriesCount, tags, name } = req.body
     const food = diet.map(i => {
-        return i._id
+        return (
+            {
+                foodName: i._id,
+                quantity: i.quantity,
+            }
+        )
     })
     await Diet.create({
         name,
