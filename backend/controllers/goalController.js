@@ -123,30 +123,28 @@ const saveGoal = asyncHandler(async (req, res) => {
     const goal = await Goal.findOne({ user: user_id })
 
     if (goal) {
-        goal.diet = diet_id
-        goal.workout = workout_id
-        const updatedGoal = await goal.save()
-        res.json(updatedGoal)
-    } else {
-        const newGoal = new Goal({
-            user: user_id,
-            diet: diet_id,
-            workout: workout_id,
-        })
-        const newTrack = new TrackingProgress({
-            user: user_id,
-            dailyUpdates: []
-        })
-        await Goal.create(newGoal)
-        const check = await TrackingProgress.create(newTrack)
-        res.json(newGoal)
+        await Goal.deleteOne({ user: user_id })
+        await TrackingProgress.deleteOne({ user: user_id })
     }
+
+    const newGoal = new Goal({
+        user: user_id,
+        diet: diet_id,
+        workout: workout_id,
+    })
+    const newTrack = new TrackingProgress({
+        user: user_id,
+        dailyUpdates: []
+    })
+    const _goal = await Goal.create(newGoal)
+    const check = await TrackingProgress.create(newTrack)
+    console.log(_goal)
+    res.json(newGoal)
+
 })
 
 
 // getUserGoal
-
-
 
 const getUserGoal = asyncHandler(async (req, res) => {
     const { _id } = req.body
@@ -199,4 +197,38 @@ const getWorkoutList = asyncHandler(async (req, res) => {
 })
 
 
-export { getWorkouts, getDiets, saveGoal, getUserGoal, getFoodList, getWorkoutList }
+const getGoalWorkout = asyncHandler(async (req, res) => {
+    const { _id } = req.body
+    const goal = await Goal.findOne({ user: _id })
+    if (goal) {
+        const workout_id = ObjectId(goal.workout)
+        const workout = await Workout.findById(workout_id)
+        var workouts = []
+        workouts = await promisesWorkout(workout.exercises)
+        const retObject = {
+            exercises: workouts,
+            name: workout.name
+        }
+        res.json(retObject)
+    }
+    else res.json({})
+})
+
+const getGoalDiet = asyncHandler(async (req, res) => {
+    const { _id } = req.body
+    const goal = await Goal.findOne({ user: _id })
+    if (goal) {
+        const diet_id = ObjectId(goal.diet)
+        const diet = await Diet.findById(diet_id)
+        var foodName = []
+        foodName = await promisesDiet(diet.food)
+        const retObject = {
+            food: foodName,
+            name: diet.name
+        }
+        res.json(retObject)
+    }
+    else res.json({})
+})
+
+export { getWorkouts, getDiets, saveGoal, getUserGoal, getFoodList, getWorkoutList, getGoalWorkout, getGoalDiet }

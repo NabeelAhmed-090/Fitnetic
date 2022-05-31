@@ -233,7 +233,6 @@ const Workout = () => {
                                                             </Row>
                                                             <hr />
                                                         </Col>
-
                                                     </>
                                                 )
                                             })

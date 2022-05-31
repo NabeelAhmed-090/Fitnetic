@@ -49,11 +49,12 @@ const deleteUserProfile = asyncHandler(async (req, res) => {
 
 const postQuestion = asyncHandler(async (req, res) => {
 
-    var { questions } = req.body
+    var { questions, user } = req.body
     const answer = []
     await Dashboard.create({
         questions,
-        answer
+        answer,
+        user
     })
     res.json(
         {

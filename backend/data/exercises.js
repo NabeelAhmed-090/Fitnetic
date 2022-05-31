@@ -6,7 +6,7 @@ const exercises = [
         sets: 15,
         name: 'Squats',
         benefit: 'Posture',
-        caloriesBurnt: 30
+        caloriesBurnt: 45
 
     },
     {
@@ -16,7 +16,7 @@ const exercises = [
         sets: 15,
         name: 'Lunges',
         benefit: 'Back',
-        caloriesBurnt: 20
+        caloriesBurnt: 90
     },
     {
         suggestedTime: 15,
@@ -25,7 +25,7 @@ const exercises = [
         sets: 15,
         name: 'Pushups',
         benefit: 'Muscles',
-        caloriesBurnt: 100
+        caloriesBurnt: 90
 
     },
     {
@@ -35,7 +35,7 @@ const exercises = [
         sets: 30,
         name: 'Jogging',
         benefit: 'Legs',
-        caloriesBurnt: 100
+        caloriesBurnt: 90
 
     },
     {
@@ -45,7 +45,7 @@ const exercises = [
         sets: 15,
         name: 'Crunches',
         benefit: 'Stomach',
-        caloriesBurnt: 80
+        caloriesBurnt: 135
 
     },
     {
@@ -55,7 +55,7 @@ const exercises = [
         sets: 15,
         name: 'Dumbbell',
         benefit: 'Strength',
-        caloriesBurnt: 100
+        caloriesBurnt: 135
 
     },
     {
@@ -65,7 +65,7 @@ const exercises = [
         sets: 30,
         name: 'Plank',
         benefit: 'Back',
-        caloriesBurnt: 100
+        caloriesBurnt: 120
 
     }
 ]

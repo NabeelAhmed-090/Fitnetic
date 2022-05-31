@@ -1,0 +1,18 @@
+.workout {
+    margin-top: 5vh;
+    display: flex;
+    justify-content: center
+}
+
+.diet {
+    margin-top: 5vh;
+    display: flex;
+    justify-content: center
+}
+
+@media only screen and (max-width: 768px) {
+    .workout {
+        margin-top: 1vh;
+        margin-bottom: 15vh
+    }
+}

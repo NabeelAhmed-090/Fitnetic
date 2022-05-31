@@ -7,6 +7,7 @@ import adminRoutes from './routes/adminRoutes.js'
 import workoutRoutes from './routes/workoutRoutes.js'
 import goalRoutes from './routes/goalRoutes.js'
 import dietRoutes from './routes/dietRoutes.js'
+import trackingProgressRoutes from './routes/trackingProgressRoutes.js'
 
 import cors from 'cors'
 
@@ -26,6 +27,7 @@ app.use('/api/admin', adminRoutes)
 app.use('/api/workout', workoutRoutes)
 app.use('/api/diet', dietRoutes)
 app.use('/api/goal', goalRoutes)
+app.use('/api/trackingProgress', trackingProgressRoutes)
 
 
 app.use("*", (req, res) => {

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import dashboardPNG from '../../Image/Dashboard.png'
 import './DashboardQuestions.css';
 import Loader from "../../components/Loader";
+import { use } from "express/lib/router";
 
 
 const DashboardQuestion = () => {
@@ -14,6 +15,13 @@ const DashboardQuestion = () => {
     const [filteredQuestionsList, setFilteredQuestionsList] = useState([])
     const [keyword, setKeyword] = useState("")
     const [loading, setLoading] = useState(false)
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+    var user = ""
+    if (userInfo) {
+        const { email } = userInfo
+        user = email
+    }
     useEffect(() => {
         async function getQuestions() {
             setLoading(true)
@@ -43,7 +51,7 @@ const DashboardQuestion = () => {
             }
 
             await axios.post('/api/dashboard/post',
-                { questions },
+                { questions, user },
                 config)
 
             setQuestions("")
@@ -59,7 +67,7 @@ const DashboardQuestion = () => {
         )
     }
 
-    const userLogin = useSelector(state => state.userLogin)
+
 
     return (
         <>

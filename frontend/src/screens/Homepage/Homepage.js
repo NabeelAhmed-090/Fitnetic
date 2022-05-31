@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap'
 import axios from 'axios'
 import Loader from '../../components/Loader'
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import './Homepage.css';
 
 const Homepage = () => {
     const dispatch = useDispatch()
@@ -20,6 +23,8 @@ const Homepage = () => {
     const [food, setFood] = useState([])
     const [workoutUpdate, setWorkoutUpdate] = useState([])
     const [dietUpdate, setDietUpdate] = useState([])
+    const [workoutProgess, setWorkoutProgress] = useState(70)
+    const [dietProgess, setDietProgress] = useState(35)
 
 
     var danger = 'progress-bar bg-danger'
@@ -50,6 +55,7 @@ const Homepage = () => {
                     config)
                 const { data } = result
                 setGoal(data)
+                console.log(data)
             }
             async function getInfo() {
                 var config = {
@@ -63,6 +69,7 @@ const Homepage = () => {
                     config)
                 const { data } = workouts
                 setWorkout(data)
+                console.log(data)
 
                 const food = await axios.post('/api/goal/get/food',
                     { _id },
@@ -146,6 +153,7 @@ const Homepage = () => {
     const handleUpdate = async () => {
         let w_list = workoutUpdate.filter(i => i !== null && i !== 0)
         let d_list = dietUpdate.filter(i => i !== null && i !== 0)
+        console.log(w_list, d_list)
         var config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -319,12 +327,86 @@ const Homepage = () => {
                                         <Button variant="dark" className="btn-block w-100" onClick={handleUpdate}>Update Progress</Button>
                                     </Col>
                                 </Row>
-                                <Row className="shadow p-3 mb-4 rounded">
-                                    <Col style={{ textAlign: "center" }} md={12} sm={12} lg={12}>
-                                        <h3><b>Progress</b></h3>
-                                    </Col>
-                                </Row>
+                                <Container>
+                                    <Row className="shadow p-3 mb-4 rounded">
+                                        <Row>
+                                            <Col style={{ textAlign: "center" }} md={12} sm={12} lg={12}>
+                                                <h3><b>Progress</b></h3>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h3><b></b></h3>
+
+                                            </Col>
+                                        </Row>
+
+                                        <Row>
+                                            <ul>
+                                                <li style={{ color: "rgb(0, 128, 128)" }}><h5><b>Workout</b></h5></li>
+                                                <li style={{ color: "rgb(128, 0, 0)" }}><h5><b>Diet</b></h5></li>
+                                            </ul>
+                                        </Row>
+                                        <Row className="mt-5 mb-5">
+                                            <Col className="workout" md={6} sm={12} lg={6}>
+                                                <div style={{ width: "35vh", height: "35vh" }}>
+                                                    <CircularProgressbar value={workoutProgess} text={`${workoutProgess} %`}
+                                                        styles={{
+                                                            // Customize the root svg element
+                                                            root: {},
+                                                            // Customize the path, i.e. the "completed progress"
+                                                            path: {
+                                                                // Path color
+                                                                stroke: `rgb(0, 128, 128)`,
+                                                                strokeLinecap: 'round',
+                                                                transition: 'stroke-dashoffset 0.5s ease 0s',
+                                                                transformOrigin: 'center center',
+                                                            },
+                                                            trail: {
+                                                                stroke: 'white',
+                                                                strokeLinecap: 'round',
+                                                                transformOrigin: 'center center',
+                                                            },
+                                                            // Customize the text
+                                                            text: {
+                                                                fill: 'black',
+                                                                fontSize: '16px',
+                                                            },
+                                                        }} />
+                                                </div>
+                                            </Col>
+                                            <Col className="diet" md={6} sm={12} lg={6}>
+                                                <div style={{ width: "35vh", height: "35vh" }}>
+                                                    <CircularProgressbar value={dietProgess} text={`${dietProgess} %`}
+                                                        styles={{
+                                                            // Customize the root svg element
+                                                            root: {},
+                                                            // Customize the path, i.e. the "completed progress"
+                                                            path: {
+                                                                // Path color
+                                                                stroke: `rgb(128, 0, 0)`,
+                                                                strokeLinecap: 'round',
+                                                                transition: 'stroke-dashoffset 0.5s ease 0s',
+                                                                transformOrigin: 'center center',
+                                                            },
+                                                            trail: {
+                                                                stroke: 'white',
+                                                                strokeLinecap: 'round',
+                                                                transformOrigin: 'center center',
+                                                            },
+                                                            // Customize the text
+                                                            text: {
+                                                                fill: 'black',
+                                                                fontSize: '16px',
+                                                            },
+                                                        }} />
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </Row>
+                                </Container>
                             </Row>
+
                         </>
                     ) : (
                         <>
@@ -342,6 +424,7 @@ const Homepage = () => {
                             </Row>
                         </>
                     )}
+
                 </Container>
             )
             }
@@ -365,6 +448,7 @@ const overWeight = {
 const obese = {
     width: "100%"
 }
+
 
 export default Homepage
 
