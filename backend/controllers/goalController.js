@@ -138,7 +138,7 @@ const saveGoal = asyncHandler(async (req, res) => {
             dailyUpdates: []
         })
         await Goal.create(newGoal)
-        await TrackingProgress.create(newTrack)
+        const check = await TrackingProgress.create(newTrack)
         res.json(newGoal)
     }
 })
@@ -170,6 +170,7 @@ const getUserGoal = asyncHandler(async (req, res) => {
         }
         res.json(obj)
     }
+    res.json({})
 })
 
 const getFoodList = asyncHandler(async (req, res) => {

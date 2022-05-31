@@ -79,7 +79,7 @@ export const signup = (name, age, password, weight, email, height) => async (dis
     }
 }
 
-export const update = (name, age, weight, password, height, image, email) => async (dispatch) => {
+export const update = (name, age, weight, password, height, email) => async (dispatch) => {
     try {
         dispatch({
             type: USER_UPDATE_REQUEST,
@@ -90,7 +90,7 @@ export const update = (name, age, weight, password, height, image, email) => asy
             },
         }
         const { data } = await axios.put('/api/users/profile/update',
-            { name, age, weight, password, height, image, email },
+            { name, age, weight, password, height, email },
             config)
         dispatch({
             type: USER_UPDATE_SUCCESS,

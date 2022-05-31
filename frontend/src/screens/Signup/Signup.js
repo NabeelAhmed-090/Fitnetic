@@ -8,7 +8,6 @@ import signup1PNG from '../../Image/signup1.png'
 import signup2PNG from '../../Image/signup2.png'
 import signup3PNG from '../../Image/signup3.png'
 import axios from 'axios'
-import { unstable_HistoryRouter } from 'react-router-dom'
 
 const Signup = () => {
     const dispatch = useDispatch()
@@ -27,7 +26,7 @@ const Signup = () => {
 
 
 
-    const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})");
     const emailRegex = new RegExp("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$");
 
     const passwordFunc = (event) => {
@@ -55,7 +54,6 @@ const Signup = () => {
 
     let history = useNavigate()
     const userLogin = useSelector((state) => state.userLogin)
-    const userSignup = useSelector((state) => state.userSignup)
     const { userInfo } = userLogin
     useEffect(() => {
         if (userInfo) {

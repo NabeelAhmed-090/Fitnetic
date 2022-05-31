@@ -28,7 +28,6 @@ const Workout = () => {
             const result = await axios.get("/api/workout/data")
             const { data } = result
             setWorkoutList(data)
-            console.log(data)
             setLoading(false)
         }
         getExercises()
@@ -273,10 +272,10 @@ const Workout = () => {
                                                     'Content-Type': 'application/json',
                                                 },
                                             }
-                                            const result=await axios.post('/api/workout/add',
+                                            const result = await axios.post('/api/workout/add',
                                                 { workout, totalCaloriesCount, tags, name },
                                                 config)
-                                            const{data}=result
+                                            const { data } = result
                                             setTag([...tags, ...tag])
                                             setTags([])
                                             setExerciesList([...exercisesList, ...workout])
@@ -317,8 +316,7 @@ const Workout = () => {
                                                         <h4><b>{i.name}</b></h4>
                                                     </Col>
                                                     <Col md={1} sm={12} lg={1} className="delete">
-                                                        <Button variant="dark" className="btn-block w-100 ml-4" onClick={async()=>
-                                                        {
+                                                        <Button variant="dark" className="btn-block w-100 ml-4" onClick={async () => {
                                                             setLoading(true)
                                                             var config = {
                                                                 headers: {
@@ -328,7 +326,7 @@ const Workout = () => {
                                                             await axios.delete('/api/workout/delete',
                                                                 { data: { name: i.name } },
                                                                 config)
-                                                            setWorkoutList(workoutList.filter(itr => itr.name!== i.name))
+                                                            setWorkoutList(workoutList.filter(itr => itr.name !== i.name))
                                                             setLoading(false)
                                                         }}><i className="fa-solid fa-trash"></i></Button>
                                                     </Col>

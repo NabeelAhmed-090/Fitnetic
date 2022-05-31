@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Col, Container, Row, Button, Card } from 'react-bootstrap'
 import axios from 'axios'
 import Loader from '../../components/Loader'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const Goal = () => {
     const [loadingWorkout, setLoadingWorkout] = useState(false)
@@ -78,7 +78,7 @@ const Goal = () => {
                         const workout_id = selectedWorkout.id
                         const diet_id = selectedDiet.id
 
-                        const result = await axios.post('/api/goal/save',
+                        await axios.post('/api/goal/save',
                             { data: { user: user_id, diet: diet_id, workout: workout_id } },
                             config)
                     }}>

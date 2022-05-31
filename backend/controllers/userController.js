@@ -11,7 +11,7 @@ import { ObjectId } from 'mongodb';
 //@access Public
 const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body
-    const user = await User.findOne({ email: email }) //user or null
+    const user = await User.findOne({ email: email })
     if (user && (await user.matchPassword(password))) {
         res.json(
             {
@@ -22,7 +22,8 @@ const authUser = asyncHandler(async (req, res) => {
             }
         )
     } else {
-        res.status(401).json({ message: "Invalid Email or Password" })
+        res.status(401)
+        throw new Error('Invalid Email or Password')
     }
 })
 
@@ -88,7 +89,7 @@ const registerUser = asyncHandler(async (req, res) => {
 //@route  PUT /api/users/settings
 //@access Private
 const updateUserProfile = asyncHandler(async (req, res) => {
-    var { name, age, weight, password, height, image, email } = req.body
+    var { name, age, weight, password, height, email } = req.body
     const user = await User.findOne({ email })
     if (user) {
         if (name.length !== 0)
@@ -99,30 +100,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
             user.weight = weight
         if (height !== 0)
             user.height = height
-        if (image.length !== 0)
-            user.image = image
         if (password.length !== 0)
             user.password = password
-        // else {
-        //     const salt = await bcrypt.genSalt(10)
-        //     password = await bcrypt.hash(password, salt)
-        // }
 
         const updatedUser = await user.save()
-        // const updateUser = await User.findOneAndUpdate(
-        //     { email: email },
-        //     {
-        //         $set: {
-        //             name: name,
-        //             age: age,
-        //             password: password,
-        //             weight: weight,
-        //             email: email,
-        //             height: height,
-        //             image: image
-        //         }
-        //     }
-        // )
         res.json({
             _id: updatedUser._id,
             name: name,
@@ -140,7 +121,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 //@access Private
 const deleteUserProfile = asyncHandler(async (req, res) => {
     const { email } = req.body
-    console.log(email)
 
     User.deleteOne({ email: email })
         .then(() => {
@@ -174,17 +154,15 @@ const verifyEmail = asyncHandler(async (req, res) => {
 
 
 const dailyUpdate = asyncHandler(async (req, res) => {
-    const { dietUpdate, workoutUpdate, _id } = req.body
+    const { d_list, w_list, _id } = req.body
     const user_id = ObjectId(_id)
-    console.log(user_id)
     const progress = await TrackingProgress.findOne({ user: user_id }) //user or null
     if (progress) {
         const DU = new DailyUpdates({
-            food: dietUpdate,
-            workout: workoutUpdate,
+            food: d_list,
+            workout: w_list,
         })
-        console.log("----------------------------------------------------------------")
-        console.log(DU)
+        await DailyUpdates.create(DU)
         progress.dailyUpdates = [...progress.dailyUpdates, DU._id]
         await progress.save()
         res.json(progress)

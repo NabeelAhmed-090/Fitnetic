@@ -16,18 +16,17 @@ const Settings = () => {
     const [password, setPassword] = useState("")
     const [weight, setWeight] = useState(0)
     const [height, setHeight] = useState(0)
-    const [image, setImage] = useState("")
     const [show, setShow] = useState(false);
 
     const [passwordCheck, setPasswordCheck] = useState(false)
     const [heightCheck, setHeightCheck] = useState(false)
     const [weightCheck, setWeightCheck] = useState(false)
     const [ageCheck, setAgeCheck] = useState(false)
-    const [verifyEmail, setVerifyEmail] = useState(false)
 
 
 
-    const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+
+    const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})");
 
     const passwordFunc = (event) => {
         setPassword(event.target.value)
@@ -44,7 +43,6 @@ const Settings = () => {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        console.log(email)
         if (!userInfo) {
             history("/api/login")
         }
@@ -150,8 +148,7 @@ const Settings = () => {
                                 <Row>
                                     <Col md={12} lg={12} sm={12} style={{ display: "flex" }}>
                                         <Button variant="dark" type="button" style={{ marginLeft: "auto", marginTop: "5vh" }} onClick={() => {
-                                            dispatch(update(name, age, weight, password, height, image, email))
-                                            console.log(email)
+                                            dispatch(update(name, age, weight, password, height, email))
                                         }}>
                                             Update Profile
                                         </Button>

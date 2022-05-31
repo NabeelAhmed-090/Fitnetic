@@ -66,7 +66,6 @@ const postQuestion = asyncHandler(async (req, res) => {
 const postReply = asyncHandler(async (req, res) => {
     var id = req.params.id;
     const { reply } = req.body
-    console.log(reply)
     if (id.length == 25)
         id = id.slice(0, -1);
     const _id = ObjectId(id)

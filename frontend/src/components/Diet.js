@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Container, Row, Col, Button, Dropdown, Form } from 'react-bootstrap'
 import plusPNG from '../Image/plus.png'
-import deletePNG from '../Image/delete.png'
 import './Workout.css'
 import Loader from './Loader'
 
