@@ -5,7 +5,7 @@ const exercises = [
         reps: 3,
         sets: 15,
         name: 'Squats',
-        benefit: 'Posture',
+        benefit: 'Core',
         caloriesBurnt: 45
 
     },
@@ -15,7 +15,7 @@ const exercises = [
         reps: 3,
         sets: 15,
         name: 'Lunges',
-        benefit: 'Back',
+        benefit: 'LowerBody',
         caloriesBurnt: 90
     },
     {
@@ -24,7 +24,7 @@ const exercises = [
         reps: 3,
         sets: 15,
         name: 'Pushups',
-        benefit: 'Muscles',
+        benefit: 'UpperBody',
         caloriesBurnt: 90
 
     },
@@ -34,7 +34,7 @@ const exercises = [
         reps: 1,
         sets: 30,
         name: 'Jogging',
-        benefit: 'Legs',
+        benefit: 'Cardio',
         caloriesBurnt: 90
 
     },
@@ -44,7 +44,7 @@ const exercises = [
         reps: 3,
         sets: 15,
         name: 'Crunches',
-        benefit: 'Stomach',
+        benefit: 'Core',
         caloriesBurnt: 135
 
     },
@@ -54,7 +54,7 @@ const exercises = [
         reps: 3,
         sets: 15,
         name: 'Dumbbell',
-        benefit: 'Strength',
+        benefit: 'Endurance',
         caloriesBurnt: 135
 
     },
@@ -64,7 +64,7 @@ const exercises = [
         reps: 1,
         sets: 30,
         name: 'Plank',
-        benefit: 'Back',
+        benefit: 'flexibility',
         caloriesBurnt: 120
 
     }

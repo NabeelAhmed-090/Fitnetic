@@ -17,7 +17,7 @@ const QuestionCard = ({ quest, id, ButtonText, keyword = "" }) => {
                   </h5>
                </Col>
                <Col sm={12} md={12} lg={12}>
-                  <pre>
+                  <pre className="lightFonts">
                      <Highlighted text={quest} highlight={keyword} />
                   </pre>
                </Col>

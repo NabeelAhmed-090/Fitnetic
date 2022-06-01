@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Row, Col, Form, Button, Carousel } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import './Signup.css'
 import { signup } from '../../actions/userActions'
-import signup1PNG from '../../Image/signup1.png'
-import signup2PNG from '../../Image/signup2.png'
-import signup3PNG from '../../Image/signup3.png'
 import axios from 'axios'
 
 const Signup = () => {

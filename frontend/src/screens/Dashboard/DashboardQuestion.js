@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import dashboardPNG from '../../Image/Dashboard.png'
 import './DashboardQuestions.css';
 import Loader from "../../components/Loader";
-import { use } from "express/lib/router";
 
 
 const DashboardQuestion = () => {

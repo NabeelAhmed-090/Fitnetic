@@ -7,7 +7,7 @@ const users = [
         password: bcrypt.hashSync('11223344', 10),
         weight: 48,
         email: 'HK@gmail.com',
-        height: 5.3,
+        height: 150,
     },
     {
         name: 'Laiba Arshad',
@@ -15,7 +15,7 @@ const users = [
         password: bcrypt.hashSync('11223344', 10),
         weight: 48,
         email: 'LA@gmail.com',
-        height: 5.3,
+        height: 150,
     },
     {
         name: 'Ayesha Rizwan',
@@ -23,7 +23,7 @@ const users = [
         password: bcrypt.hashSync('11223344', 10),
         weight: 48,
         email: 'AR@gmail.com',
-        height: 5.3,
+        height: 150,
     },
     {
         name: 'Nabeel Ahmed',
@@ -31,7 +31,7 @@ const users = [
         password: bcrypt.hashSync('11223344', 10),
         weight: 48,
         email: 'NA@gmail.com',
-        height: 5.3,
+        height: 150,
     },
 ]
 

@@ -2,60 +2,60 @@
 const foods = [
     {
         name: 'Pudding',
-        calories: 161,
+        calories: 5,
         benefit: "WeightGain"
     },
     {
         name: 'Yoghurt',
-        calories: 225,
+        calories: 5,
         benefit: "WeightLoss"
     },
     {
         name: 'Skim milk',
-        calories: 86,
+        calories: 5,
         benefit: "WeightLoss"
 
     },
     {
         name: 'White beans',
-        calories: 249,
+        calories: 5,
         benefit: "Cardio"
 
     },
     {
         name: 'Banana',
-        calories: 105,
+        calories: 5,
         benefit: "MuscleGain"
 
     },
     {
         name: 'Apple Juice',
-        calories: 111,
+        calories: 5,
         benefit: "Endurance"
     },
     {
         name: 'Dates',
-        calories: 228,
+        calories: 5,
         benefit: "Endurance"
     },
     {
         name: 'Pear',
-        calories: 98,
+        calories: 5,
         benefit: "Core"
     },
     {
         name: 'Bread(White)',
-        calories: 61,
+        calories: 5,
         benefit: "WeightGain"
     },
     {
         name: 'Hot dog bun',
-        calories: 119,
+        calories: 5,
         benefit: "WeightGain"
     },
     {
         name: 'Waffles',
-        calories: 130,
+        calories: 5,
         benefit: "WeightGain"
     }
 ]

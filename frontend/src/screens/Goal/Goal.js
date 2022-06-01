@@ -107,7 +107,7 @@ const Goal = () => {
                             </Card>
                         </Col>
                         <Col className="mt-4" md={4} sm={4} lg={4}>
-                            <p style={{ color: "red" }}> {!workoutCheck || !dietCheck ? "* Select Both Workout and Diet Plans" : ''}</p>
+                            <p style={{ color: "red" }} className="lightFonts"> {!workoutCheck || !dietCheck ? "* Select Both Workout and Diet Plans" : ''}</p>
                         </Col>
                         <Col md={8} sm={8} lg={8}>
                             <Button variant="dark" className="btn-block mt-4" style={{ float: "right" }} onClick={async () => {
@@ -136,14 +136,19 @@ const Goal = () => {
                         <Col style={{ minHeight: "60vh" }}>
                             <Row className="p-3" style={{ minHeight: "30vh" }}>
                                 <Container>
+                                    <Row>
+                                        <Col md={12} sm={12} lg={12}>
+                                            <h3 className='lightFonts'>What are you looking for?</h3>
+                                        </Col>
+                                    </Row>
                                     <Row className="p-3">
                                         {
                                             tag.map(i => {
                                                 return (
-                                                    <Col className="mt-2" style={{ textAlign: "center" }} md={6} sm={12} lg={6}>
+                                                    <Col className="mt-2 lightFonts" style={{ textAlign: "center" }} md={6} sm={12} lg={6}>
                                                         <Row>
                                                             <Col style={{ backgroundColor: "#FEE715CF" }} md={10} sm={12} lg={10} className="shadow p-1 rounded" >
-                                                                <pre>{i}</pre>
+                                                                <pre className="lightFonts">{i}</pre>
                                                             </Col>
                                                             <Col md={2} sm={12} lg={2} style={{ justifyContent: "right" }}>
                                                                 <Button variant="dark btn-block w-100 mt-1" onClick={() => {
@@ -151,7 +156,7 @@ const Goal = () => {
                                                                         setSelectedTags([...selectedTags, i])
                                                                         setTag(tag.filter(itr => itr !== i))
                                                                     }
-                                                                }}><b>+</b></Button>
+                                                                }}><b><span className="lightFonts">+</span></b></Button>
                                                             </Col>
                                                         </Row>
                                                     </Col>
@@ -172,13 +177,13 @@ const Goal = () => {
                                         <>
                                             <Row>
                                                 <Col md={9} sm={9} lg={9}>
-                                                    <h5> {i} </h5>
+                                                    <h5 className="lightFonts"> {i} </h5>
                                                 </Col>
                                                 <Col md={3} sm={3} lg={3}>
                                                     <Button variant="dark" className="btn-block w-100" onClick={() => {
                                                         setTag([...tag, i])
                                                         setSelectedTags(selectedTags.filter(itr => itr !== i))
-                                                    }}><b>-</b></Button>
+                                                    }}><b><span className="lightFonts">-</span></b></Button>
                                                 </Col>
                                             </Row>
                                             <hr />
@@ -220,7 +225,7 @@ const Goal = () => {
                                 workoutList = workoutList.filter(i => i !== null)
                                 setWorkouts([...workoutList])
                                 setLoadingWorkout(false)
-                            }}>Suggest Workout</Button>
+                            }}><span className="lightFonts">Suggest Workout</span></Button>
                         </Col>
                         <Col md={6} sm={12} lg={6}>
                             <Button className="btn-block w-100 my-3 p-1" variant='dark' onClick={async () => {
@@ -253,14 +258,14 @@ const Goal = () => {
                                 dietList = dietList.filter(i => i !== null)
                                 setDiet([...dietList])
                                 setLoadingDiet(false)
-                            }}>Suggest Diet</Button>
+                            }}><span className="lightFonts">Suggest Diet</span></Button>
                         </Col>
                     </Row>
                     <Row>
                         <Col md={6} sm={6} lg={6}>
                             <Row>
                                 <Col style={{ textAlign: "center" }}>
-                                    <h1>Workouts</h1>
+                                    <h2 className="boldFonts">Workouts</h2>
                                 </Col>
                                 <hr />
                             </Row>
@@ -272,16 +277,16 @@ const Goal = () => {
                                                 <>
                                                     <Row>
                                                         <Col md={7} sm={7} lg={7}>
-                                                            <h5> {i.name} </h5>
+                                                            <h5 className="lightFonts"> {i.name} </h5>
                                                         </Col>
                                                         <Col md={2} sm={2} lg={2}>
-                                                            <h5> {i.calories} </h5>
+                                                            <h5 className="lightFonts"> {i.calories} </h5>
                                                         </Col>
                                                         <Col md={3} sm={3} lg={3}>
                                                             <Button variant="dark" className="btn-block w-100 mb-3" onClick={() => {
                                                                 setSelectedWorkout(i)
                                                                 setWorkoutCheck(true)
-                                                            }}><b>+</b></Button>
+                                                            }}><b><span className="lightFonts">+</span></b></Button>
                                                         </Col>
                                                     </Row>
                                                     <hr />
@@ -296,7 +301,7 @@ const Goal = () => {
                         <Col md={6} sm={6} lg={6}>
                             <Row>
                                 <Col style={{ textAlign: "center" }}>
-                                    <h1>Diets</h1>
+                                    <h2 className="boldFonts">Diets</h2>
                                 </Col>
                                 <hr />
                             </Row>
@@ -308,16 +313,16 @@ const Goal = () => {
                                                 <>
                                                     <Row>
                                                         <Col md={7} sm={7} lg={7}>
-                                                            <h5> {i.name} </h5>
+                                                            <h5 className="lightFonts"> {i.name} </h5>
                                                         </Col>
                                                         <Col md={2} sm={2} lg={2}>
-                                                            <h5> {i.calories} </h5>
+                                                            <h5 className="lightFonts"> {i.calories} </h5>
                                                         </Col>
                                                         <Col md={3} sm={3} lg={3}>
                                                             <Button variant="dark" className="btn-block w-100 mb-3" onClick={() => {
                                                                 setSelectedDiet(i)
                                                                 setDietCheck(true)
-                                                            }}><b>+</b></Button>
+                                                            }}><b><span className="lightFonts">+</span></b></Button>
                                                         </Col>
                                                     </Row>
                                                     <hr />

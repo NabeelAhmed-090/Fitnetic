@@ -2,48 +2,79 @@ import asyncHandler from "express-async-handler";
 import TrackingProgress from '../models/trackingProgressModel.js'
 import DailyUpdates from '../models/dailyUpdatesModel.js'
 import Exercise from '../models/exerciseModel.js'
+import Food from '../models/foodModel.js'
+import { ObjectId } from 'mongodb';
 
-//total 120
-
-//e 1 20
-//e 2 40 
-//e 3 60
-
-async function promisesWorkout(workout) {
+async function promisesWorkout(obj) {
     var workoutCaloriesBurnt = 0
-    const unresolved = workout.map(async (obj) => {
-        const exercise = await Exercise.findById(obj.exerciseName)
-        const { caloriesBurnt, sets, reps } = exercise
-        var product = Number(sets) * Number(reps)
-        var ratio = (caloriesBurnt) / (product)
-        workoutCaloriesBurnt = workoutCaloriesBurnt + (ratio * obj.setsXreps)
-    })
-    await Promise.all(unresolved)
+    const _id = ObjectId(obj.exerciseName)
+    const exercise = await Exercise.findById(obj.exerciseName)
+    const { caloriesBurnt, sets, reps } = exercise
+    var product = Number(sets) * Number(reps)
+    var ratio = (caloriesBurnt) / (product)
+    workoutCaloriesBurnt = (ratio * obj.setsXreps)
     return workoutCaloriesBurnt
 }
 
+async function promisesDiet(obj) {
+    var dietCaloriesBurnt = 0
+    const _id = ObjectId(obj.foodName)
+    const food = await Food.findById(obj.foodName)
+    const { calories, quantity } = food
+    var totalCalories = calories * quantity
+    var userIntake = obj.quantity * calories
+    return userIntake
+}
+
 async function promisesDailyUpdates(dailyUpdates) {
-    var totalCaloriesBurnt = 0
-    const unresolved = dailyUpdates.map(async (obj) => {
-        const du = await DailyUpdates.findById(obj)
-        totalCaloriesBurnt = totalCaloriesBurnt + promisesWorkout(du.workout)
+    var caloriesBurnt = 0
+    var caloriesIntake = 0
+    const _id = ObjectId(dailyUpdates)
+    const du = await DailyUpdates.findById(_id)
+    const { workout, food } = du
+
+    const unresolved_w = workout.map(async (obj) => {
+        return await promisesWorkout(obj)
     })
-    await Promise.all(unresolved)
-    return totalCaloriesBurnt
+
+    const unresolved_d = food.map(async (obj) => {
+        return await promisesDiet(obj)
+    })
+
+    const arr_w = await Promise.all(unresolved_w)
+    const arr_d = await Promise.all(unresolved_d)
+    arr_w.map(i => {
+        caloriesBurnt += i
+    })
+    arr_d.map(i => {
+        caloriesIntake += i
+    })
+    return {
+        caloriesBurnt: caloriesBurnt,
+        caloriesIntake: caloriesIntake
+    }
 }
 
 const getTrackingProgress = asyncHandler(async (req, res) => {
     const { _id } = req.body
-    var caloriesTillDay = 0
-    const _tp = await TrackingProgress.findOne({ user: _id }) //user or null
+    var caloriesBurntTillDay = 0
+    var caloriesIntakeTillDay = 0
+    const _tp = await TrackingProgress.findOne({ user: _id })
     if (_tp) {
-        const unresolved = _tp.dailyUpdates.map(async (i) => {
-            caloriesTillDay = caloriesTillDay + await promisesDailyUpdates(i)
+        const { dailyUpdates } = _tp
+        const unresolved = dailyUpdates.map(async (i) => {
+            return await promisesDailyUpdates(i)
         })
-        await Promise.all(unresolved)
 
+        const arr_w = await Promise.all(unresolved)
+        arr_w.map(i => {
+            caloriesBurntTillDay += i.caloriesBurnt
+            caloriesIntakeTillDay += i.caloriesIntake
+        })
         res.json({
-            totalCaloriesBurnt: caloriesTillDay
+            totalCaloriesBurnt: caloriesBurntTillDay,
+            totalCaloriesIntake: caloriesIntakeTillDay,
+            days: dailyUpdates.length
         })
     }
     else {

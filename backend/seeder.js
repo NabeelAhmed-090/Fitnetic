@@ -4,8 +4,6 @@ import admins from "./data/admins.js";
 import foods from "./data/food.js";
 import exercises from "./data/exercises.js";
 import dashboard from "./data/dashboard.js";
-// import workouts from "./data/workout.js";
-import diets from "./data/diet.js";
 import dotenv from 'dotenv'
 
 import Admin from './models/adminModel.js'

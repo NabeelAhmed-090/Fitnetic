@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap'
 import axios from 'axios'
 import Loader from '../../components/Loader'
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import './Homepage.css';
 
@@ -15,6 +15,7 @@ const Homepage = () => {
 
     const { userInfo } = userLogin
 
+    const [reload, setReload] = useState(false)
     const [user, setUser] = useState([])
     const [loading, setLoading] = useState(false)
     const [BMI, setBMI] = useState(0)
@@ -23,9 +24,9 @@ const Homepage = () => {
     const [food, setFood] = useState([])
     const [workoutUpdate, setWorkoutUpdate] = useState([])
     const [dietUpdate, setDietUpdate] = useState([])
-    const [workoutProgess, setWorkoutProgress] = useState(70)
-    const [dietProgess, setDietProgress] = useState(35)
-
+    const [workoutProgess, setWorkoutProgress] = useState(0)
+    const [dietProgess, setDietProgress] = useState(0)
+    const [trackingProgress, setTrackingProgress] = useState({})
 
     var danger = 'progress-bar bg-danger'
     var warning = 'progress-bar bg-warning'
@@ -33,7 +34,6 @@ const Homepage = () => {
 
 
     function isEmpty(obj) {
-        console.log(Object.keys(obj).length)
         return Object.keys(obj).length === 0;
     }
 
@@ -43,8 +43,24 @@ const Homepage = () => {
         }
         else {
             const { _id } = userInfo
-            async function getGoal() {
+            async function getUser() {
                 setLoading(true)
+                const { _id } = userInfo
+                var config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+                const result = await axios.post('/api/users/profile',
+                    { _id },
+                    config)
+                const { data } = result
+                var height = (data.height / 100)
+                setBMI(data.weight / (height * height))
+                setUser(data)
+            }
+
+            async function getGoal() {
                 var config = {
                     headers: {
                         'Content-Type': 'application/json',
@@ -55,8 +71,25 @@ const Homepage = () => {
                     config)
                 const { data } = result
                 setGoal(data)
-                console.log(data)
+
+
+                config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+                const _tp = await axios.post('/api/trackingProgress/user/data',
+                    { _id },
+                    config)
+                setTrackingProgress(_tp.data)
+
+                if (data && _tp.data) {
+                    setWorkoutProgress(((_tp.data.totalCaloriesBurnt * 100 / data.WorkoutTotalCalories).toFixed(2)))
+                    setDietProgress(((_tp.data.totalCaloriesIntake * 100 / data.DietTotalCalories).toFixed(2)))
+                }
+
             }
+
             async function getInfo() {
                 var config = {
                     headers: {
@@ -69,7 +102,6 @@ const Homepage = () => {
                     config)
                 const { data } = workouts
                 setWorkout(data)
-                console.log(data)
 
                 const food = await axios.post('/api/goal/get/food',
                     { _id },
@@ -77,83 +109,22 @@ const Homepage = () => {
                 setFood(food.data)
                 setLoading(false)
             }
-            getGoal()
-            getInfo()
-            // setWorkout([{
-            //     name: "Jogging",
-            //     reps: 1,
-            //     sets: 30,
-            //     id: "6293802851a618f005d1735f"
-            // },
-            // {
-            //     name: "Pushups",
-            //     reps: 3,
-            //     sets: 15,
-            //     id: "6293802851a618f005d1735f"
-            // },
-            // {
-            //     name: "Dumbbell",
-            //     reps: 3,
-            //     sets: 15,
-            //     id: "6293802851a618f005d1735f"
-            // }])
-            // setFood([{
-            //     name: "Pudding",
-            //     unit: "grams",
-            //     quantity: "55",
-            //     id: "6293802851a618f005d17354"
-            // },
-            // {
-            //     name: "Yoghurt",
-            //     unit: "grams",
-            //     quantity: "5",
-            //     id: "6293802851a618f005d17354"
-            // },
-            // {
-            //     name: "Banana",
-            //     unit: "grams",
-            //     quantity: "5",
-            //     id: "6293802851a618f005d17354"
-            // }])
             for (let i = 0; i < workout.length; i++) {
                 setWorkoutUpdate([...workoutUpdate, 0])
             }
             for (let i = 0; i < food.length; i++) {
-
                 setDietUpdate([...dietUpdate, 0])
             }
-            setGoal({
-                days: 30,
-                workoutName: "exercise 1",
-                dietName: "diet 1",
-            })
+            getUser()
+            getGoal()
+            getInfo()
         }
 
-        async function getUser() {
-            setLoading(true)
-            const { _id } = userInfo
-            var config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-            const result = await axios.post('/api/users/profile',
-                { _id },
-                config)
-            const { data } = result
-            var height = (data.height / 100)
-            setBMI(data.weight / (height * height))
-            setUser(data)
-            setLoading(false)
-        }
-        getUser()
-
-    }, [dispatch, history, userInfo])
+    }, [dispatch, history, userInfo, reload])
 
     const handleUpdate = async () => {
         let w_list = workoutUpdate.filter(i => i !== null && i !== 0)
         let d_list = dietUpdate.filter(i => i !== null && i !== 0)
-        console.log(w_list, d_list)
         var config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -163,6 +134,7 @@ const Homepage = () => {
         await axios.post('/api/users/profile/dailyUpdate',
             { d_list, w_list, _id },
             config)
+        setReload(!reload)
     }
     return (
         <>
@@ -173,20 +145,20 @@ const Homepage = () => {
                             <Col md={6} sm={12} lg={6}>
                                 <Row>
                                     <Col md={6} sm={4} lg={6}>
-                                        <h6><b>Name    :</b></h6>
+                                        <h6 className="boldFonts"><b>Name    :</b></h6>
                                     </Col>
                                     <Col md={6} sm={4} lg={6}>
-                                        <h6>{user.name}</h6>
+                                        <h6 className="lightFonts">{user.name}</h6>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col md={6} sm={12} lg={6}>
                                 <Row>
                                     <Col md={6} sm={6} lg={6}>
-                                        <h6><b>Age     :</b></h6>
+                                        <h6 className="boldFonts"><b>Age     : </b></h6>
                                     </Col>
                                     <Col md={6} sm={6} lg={6}>
-                                        <h6>{user.age}</h6>
+                                        <h6 className="lightFonts">{user.age}</h6>
                                     </Col>
                                 </Row>
                             </Col>
@@ -195,22 +167,22 @@ const Homepage = () => {
                             <Col md={6} sm={12} lg={6}>
                                 <Row>
                                     <Col md={6} sm={6} lg={6}>
-                                        <h6><b>Weight  :</b></h6>
+                                        <h6 className="boldFonts"><b>Weight  : </b></h6>
 
                                     </Col>
                                     <Col md={6} sm={6} lg={6}>
-                                        <h6>{user.weight} (kg)</h6>
+                                        <h6 className="lightFonts">{user.weight} (kg)</h6>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col md={6} sm={12} lg={6}>
                                 <Row>
                                     <Col md={6} sm={6} lg={6}>
-                                        <h6><b>Height  :</b></h6>
+                                        <h6 className="boldFonts"><b>Height  : </b></h6>
 
                                     </Col>
                                     <Col md={6} sm={6} lg={6}>
-                                        <h6>{user.height} (cm)</h6>
+                                        <h6 className="lightFonts">{user.height} (cm)</h6>
                                     </Col>
                                 </Row>
                             </Col>
@@ -222,12 +194,12 @@ const Homepage = () => {
                         <Col md={12} sm={12} lg={12}>
                             <Card style={{ width: '100%', backgroundColor: "#F0F0F0" }}>
                                 <Card.Body style={{ height: "15vh" }}>
-                                    <Card.Title style={{ textAlign: "center" }}><b>BMI VALUE</b></Card.Title>
-                                    <Card.Text style={{ textAlign: "center" }}>
+                                    <Card.Title style={{ textAlign: "center" }} className="boldFonts"><b>BMI VALUE</b></Card.Title>
+                                    <Card.Text style={{ textAlign: "center" }} className="lightFonts">
                                         Current BMI State ({BMI.toFixed(2)})
                                     </Card.Text>
                                 </Card.Body>
-                                <Card.Body>
+                                <Card.Body className="lightFonts">
                                     <div className="progress">
                                         <div className={((BMI < 18.5) || (BMI >= 25 && BMI < 30)) ? warning :
                                             (BMI >= 30 ? danger : success)} style={BMI < 18.5 ? underWeight :
@@ -242,15 +214,15 @@ const Homepage = () => {
                             <Row className="mt-5">
                                 <hr />
                                 <Col className="mb-2" style={{ textAlign: "center" }} md={12} sm={12} lg={12}>
-                                    <h3><b>Days Left :{goal.days}</b></h3>
+                                    <h3 className="boldFonts"><b>Days Left :{goal.days - trackingProgress.days}</b></h3>
                                 </Col>
                                 <hr />
                                 <Col md={12} sm={12} lg={12}>
                                     <Row className="shadow p-3 mb-5 rounded">
                                         <Col style={{ textAlign: "center" }} md={12} sm={12} lg={12}>
-                                            <h3><b>Workout : {goal.workoutName}</b></h3>
+                                            <h3 className="boldFonts"><b>Workout : {goal.workoutName}</b></h3>
                                         </Col>
-                                        <Row>
+                                        <Row className="boldFonts">
                                             {
                                                 workout.map((i) => {
                                                     return (
@@ -264,7 +236,7 @@ const Homepage = () => {
                                                             <Col md={4} sm={4} lg={4}>
                                                                 <Form.Control
                                                                     type="text"
-                                                                    placeholder="Reps Completed"
+                                                                    placeholder="sets X reps Completed"
                                                                     id={i.name}
                                                                     aria-describedby="descriptionlock"
                                                                     onChange={(event) => {
@@ -285,9 +257,9 @@ const Homepage = () => {
                                     </Row>
                                     <Row className="shadow p-3 mb-4 rounded">
                                         <Col style={{ textAlign: "center" }} md={12} sm={12} lg={12}>
-                                            <h3><b>Diet : {goal.dietName}</b></h3>
+                                            <h3 className="boldFonts"><b>Diet : {goal.dietName}</b></h3>
                                         </Col>
-                                        <Row>
+                                        <Row className="boldFonts">
                                             {
                                                 food.map((i) => {
                                                     return (
@@ -324,89 +296,85 @@ const Homepage = () => {
                                 <Row className="mb-3">
                                     <Col md={4} sm={4} lg={4}></Col>
                                     <Col md={4} sm={4} lg={4}>
-                                        <Button variant="dark" className="btn-block w-100" onClick={handleUpdate}>Update Progress</Button>
+                                        <Button variant="dark" className="btn-block w-100" onClick={handleUpdate}><span className="lightFonts">Update Progress</span></Button>
                                     </Col>
                                 </Row>
                                 <Container>
-                                    <Row className="shadow p-3 mb-4 rounded">
-                                        <Row>
-                                            <Col style={{ textAlign: "center" }} md={12} sm={12} lg={12}>
-                                                <h3><b>Progress</b></h3>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col>
-                                                <h3><b></b></h3>
-
-                                            </Col>
-                                        </Row>
-
-                                        <Row>
-                                            <ul>
-                                                <li style={{ color: "rgb(0, 128, 128)" }}><h5><b>Workout</b></h5></li>
-                                                <li style={{ color: "rgb(128, 0, 0)" }}><h5><b>Diet</b></h5></li>
-                                            </ul>
-                                        </Row>
-                                        <Row className="mt-5 mb-5">
-                                            <Col className="workout" md={6} sm={12} lg={6}>
-                                                <div style={{ width: "35vh", height: "35vh" }}>
-                                                    <CircularProgressbar value={workoutProgess} text={`${workoutProgess} %`}
-                                                        styles={{
-                                                            // Customize the root svg element
-                                                            root: {},
-                                                            // Customize the path, i.e. the "completed progress"
-                                                            path: {
-                                                                // Path color
-                                                                stroke: `rgb(0, 128, 128)`,
-                                                                strokeLinecap: 'round',
-                                                                transition: 'stroke-dashoffset 0.5s ease 0s',
-                                                                transformOrigin: 'center center',
-                                                            },
-                                                            trail: {
-                                                                stroke: 'white',
-                                                                strokeLinecap: 'round',
-                                                                transformOrigin: 'center center',
-                                                            },
-                                                            // Customize the text
-                                                            text: {
-                                                                fill: 'black',
-                                                                fontSize: '16px',
-                                                            },
-                                                        }} />
-                                                </div>
-                                            </Col>
-                                            <Col className="diet" md={6} sm={12} lg={6}>
-                                                <div style={{ width: "35vh", height: "35vh" }}>
-                                                    <CircularProgressbar value={dietProgess} text={`${dietProgess} %`}
-                                                        styles={{
-                                                            // Customize the root svg element
-                                                            root: {},
-                                                            // Customize the path, i.e. the "completed progress"
-                                                            path: {
-                                                                // Path color
-                                                                stroke: `rgb(128, 0, 0)`,
-                                                                strokeLinecap: 'round',
-                                                                transition: 'stroke-dashoffset 0.5s ease 0s',
-                                                                transformOrigin: 'center center',
-                                                            },
-                                                            trail: {
-                                                                stroke: 'white',
-                                                                strokeLinecap: 'round',
-                                                                transformOrigin: 'center center',
-                                                            },
-                                                            // Customize the text
-                                                            text: {
-                                                                fill: 'black',
-                                                                fontSize: '16px',
-                                                            },
-                                                        }} />
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                    </Row>
+                                    {trackingProgress.days !== 0 ? (
+                                        <>
+                                            <Row className="shadow p-3 mb-4 rounded">
+                                                <Row>
+                                                    <Col style={{ textAlign: "center" }} md={12} sm={12} lg={12}>
+                                                        <h3 className="boldFonts"><b>Progress Made In {trackingProgress.days} days</b></h3>
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <ul>
+                                                        <li style={{ color: "rgb(0, 128, 128)" }}><h5 className="boldFonts"><b>Workout</b></h5></li>
+                                                        <li style={{ color: "rgb(128, 0, 0)" }}><h5 className="boldFonts"><b>Diet</b></h5></li>
+                                                    </ul>
+                                                </Row>
+                                                <Row className="mt-5 mb-5">
+                                                    <Col className="workout" md={6} sm={12} lg={6}>
+                                                        <div style={{ width: "35vh", height: "35vh" }}>
+                                                            <CircularProgressbar value={workoutProgess} text={`${workoutProgess} %`}
+                                                                styles={{
+                                                                    // Customize the root svg element
+                                                                    root: {},
+                                                                    // Customize the path, i.e. the "completed progress"
+                                                                    path: {
+                                                                        // Path color
+                                                                        stroke: `rgb(0, 128, 128)`,
+                                                                        strokeLinecap: 'round',
+                                                                        transition: 'stroke-dashoffset 0.5s ease 0s',
+                                                                        transformOrigin: 'center center',
+                                                                    },
+                                                                    trail: {
+                                                                        stroke: 'white',
+                                                                        strokeLinecap: 'round',
+                                                                        transformOrigin: 'center center',
+                                                                    },
+                                                                    // Customize the text
+                                                                    text: {
+                                                                        fill: 'black',
+                                                                        fontSize: '16px',
+                                                                    },
+                                                                }} />
+                                                        </div>
+                                                    </Col>
+                                                    <Col className="diet" md={6} sm={12} lg={6}>
+                                                        <div style={{ width: "35vh", height: "35vh" }}>
+                                                            <CircularProgressbar value={dietProgess} text={`${dietProgess} %`}
+                                                                styles={{
+                                                                    // Customize the root svg element
+                                                                    root: {},
+                                                                    // Customize the path, i.e. the "completed progress"
+                                                                    path: {
+                                                                        // Path color
+                                                                        stroke: `rgb(128, 0, 0)`,
+                                                                        strokeLinecap: 'round',
+                                                                        transition: 'stroke-dashoffset 0.5s ease 0s',
+                                                                        transformOrigin: 'center center',
+                                                                    },
+                                                                    trail: {
+                                                                        stroke: 'white',
+                                                                        strokeLinecap: 'round',
+                                                                        transformOrigin: 'center center',
+                                                                    },
+                                                                    // Customize the text
+                                                                    text: {
+                                                                        fill: 'black',
+                                                                        fontSize: '16px',
+                                                                    },
+                                                                }} />
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </Row>
+                                        </>
+                                    ) : ''}
                                 </Container>
                             </Row>
-
                         </>
                     ) : (
                         <>

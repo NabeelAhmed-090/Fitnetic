@@ -8,6 +8,7 @@ import TrackingProgress from '../models/trackingProgressModel.js'
 
 
 import asyncHandler from "express-async-handler";
+import DailyUpdates from '../models/dailyUpdatesModel.js'
 
 async function promisesWorkout(exercises) {
     const unresolved = exercises.map(async (obj) => {
@@ -19,7 +20,8 @@ async function promisesWorkout(exercises) {
                     {
                         name: exerciese.name,
                         reps: exerciese.reps,
-                        sets: exerciese.sets
+                        sets: exerciese.sets,
+                        id: exerciese._id
                     }
                 )
             }
@@ -74,7 +76,8 @@ async function promisesDiet(food) {
             {
                 name: food.name,
                 unit: food.unit,
-                quantity: obj.quantity
+                quantity: obj.quantity,
+                id: obj.foodName
             }
         )
     })
@@ -115,6 +118,31 @@ const getDiets = asyncHandler(async (req, res) => {
 })
 
 
+async function deleteDailyUpdates(dailyUpdates) {
+    const unresolved = dailyUpdates.map(async (i) => {
+        const id = ObjectId(i)
+        await DailyUpdates.deleteOne({ _id: id })
+    })
+    await Promise.all(unresolved)
+}
+
+
+const deleteGoal = asyncHandler(async (req, res) => {
+    const { id } = req.body
+    const user_id = ObjectId(id)
+    const goal = await Goal.findOne({ user: user_id })
+    if (goal) {
+        await Goal.deleteOne({ user: user_id })
+        const _tp = await TrackingProgress.findOne({ user: id })
+        const { dailyUpdates } = _tp
+        if (dailyUpdates) {
+            await deleteDailyUpdates(dailyUpdates)
+        }
+        await TrackingProgress.deleteOne({ user: user_id })
+    }
+    res.json({})
+})
+
 const saveGoal = asyncHandler(async (req, res) => {
     const { data } = req.body
     const user_id = ObjectId(data.user)
@@ -124,9 +152,13 @@ const saveGoal = asyncHandler(async (req, res) => {
 
     if (goal) {
         await Goal.deleteOne({ user: user_id })
+        const _tp = await TrackingProgress.findOne({ user: _id })
+        const { dailyUpdates } = _tp
+        if (dailyUpdates) {
+            await deleteDailyUpdates(dailyUpdates)
+        }
         await TrackingProgress.deleteOne({ user: user_id })
     }
-
     const newGoal = new Goal({
         user: user_id,
         diet: diet_id,
@@ -138,9 +170,7 @@ const saveGoal = asyncHandler(async (req, res) => {
     })
     const _goal = await Goal.create(newGoal)
     const check = await TrackingProgress.create(newTrack)
-    console.log(_goal)
     res.json(newGoal)
-
 })
 
 
@@ -164,11 +194,13 @@ const getUserGoal = asyncHandler(async (req, res) => {
             workoutName: workout.name,
             dietName: diet.name,
             exercises: exerciseName,
-            food: foodName
+            food: foodName,
+            WorkoutTotalCalories: workout.totalCaloriesCount * goal.days,
+            DietTotalCalories: diet.totalCaloriesCount * goal.days,
         }
         res.json(obj)
     }
-    res.json({})
+    else res.json({})
 })
 
 const getFoodList = asyncHandler(async (req, res) => {
@@ -181,6 +213,7 @@ const getFoodList = asyncHandler(async (req, res) => {
         foodName = await promisesDiet(diet.food)
         res.json(foodName)
     }
+    else res.json({})
 })
 
 
@@ -231,4 +264,4 @@ const getGoalDiet = asyncHandler(async (req, res) => {
     else res.json({})
 })
 
-export { getWorkouts, getDiets, saveGoal, getUserGoal, getFoodList, getWorkoutList, getGoalWorkout, getGoalDiet }
+export { getWorkouts, getDiets, saveGoal, getUserGoal, getFoodList, getWorkoutList, getGoalWorkout, getGoalDiet, deleteGoal }

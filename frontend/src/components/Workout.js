@@ -41,7 +41,7 @@ const Workout = () => {
                     <Row style={{ backgroundColor: "#F0F0F0", marginTop: "3vh", minHeight: "60vh" }}>
                         <Row style={{ padding: "3vh", maxHeight: "25vh" }}>
                             <Col md={10} sm={12} lg={10} className="mt-3">
-                                <h2 className='cols'><b>Include</b></h2>
+                                <h2 className='cols boldFonts'><b>Add Workout</b></h2>
                             </Col>
                             <Col md={2} sm={12} lg={2}>
                                 <div style={{ height: "15vh", display: "flex", justifyContent: "center" }}>
@@ -55,7 +55,7 @@ const Workout = () => {
                             </Col>
                         </Row>
                         <Row style={{ minHeight: "10vh", maxHeight: "20%", minWidth: "35vw" }} className="mt-4">
-                            <Col sm={6} md={4} lg={4} >
+                            <Col sm={6} md={4} lg={4} className="lightFonts">
                                 <Form.Control
                                     className="cols"
                                     onChange={(event) => {
@@ -75,7 +75,7 @@ const Workout = () => {
                                     aria-describedby="descriptionlock"
                                     value={name}
                                 />
-                                <Form.Text id="description" muted>
+                                <Form.Text id="description" className="boldFonts">
                                     {!check && <pre className="cols" style={{ color: "red", marginTop: "3vh" }}>Name already exists</pre>}
                                     {check && name.length !== 0 && <pre className="cols" style={{ color: "green", marginTop: "3vh" }}>Valid Name</pre>}
                                 </Form.Text>
@@ -92,7 +92,7 @@ const Workout = () => {
                                                         <Col className="mt-2" style={{ textAlign: "center" }} md={6} sm={6} lg={6}>
                                                             <Row>
                                                                 <Col style={{ backgroundColor: "#FEE715CF" }} md={7} sm={4} lg={7} className="shadow p-1 rounded" >
-                                                                    <pre>{i}</pre>
+                                                                    <pre className="lightFonts">{i}</pre>
                                                                 </Col>
                                                                 <Col md={3} sm={4} lg={3} style={{ justifyContent: "right" }}>
                                                                     <Button variant="dark" onClick={() => {
@@ -100,7 +100,7 @@ const Workout = () => {
                                                                             setTags([...tags, i])
                                                                             setTag(tag.filter(itr => itr !== i))
                                                                         }
-                                                                    }}><b>+</b></Button>
+                                                                    }}><b><span className="lightFonts">+</span></b></Button>
                                                                 </Col>
                                                             </Row>
                                                         </Col>
@@ -126,7 +126,7 @@ const Workout = () => {
                                         }} >
                                             <Row>
                                                 <Col md={12} sm={12} lg={12}>
-                                                    <h4>#Tags</h4>
+                                                    <h4 className="boldFonts">#Tags</h4>
                                                     <hr />
                                                 </Col>
                                             </Row>
@@ -139,13 +139,13 @@ const Workout = () => {
                                                                 <Col md={6} sm={6} lg={6} className="p-1">
                                                                     <Row>
                                                                         <Col md={8} sm={8} lg={8}>
-                                                                            <h5> #{i} </h5>
+                                                                            <h5 className="lightFonts"> #{i} </h5>
                                                                         </Col>
                                                                         <Col md={3} sm={3} lg={3}>
                                                                             <Button variant="dark" className="btn-block w-100" onClick={() => {
                                                                                 setTag([...tag, i])
                                                                                 setTags(tags.filter(itr => itr !== i))
-                                                                            }}><b>-</b></Button>
+                                                                            }}><b><span className="lightFonts">-</span></b></Button>
                                                                         </Col>
                                                                     </Row>
                                                                     <hr />
@@ -164,15 +164,15 @@ const Workout = () => {
                             <Col md={3} lg={3} sm={12}>
                                 <Dropdown>
                                     <Dropdown.Toggle style={{ position: "static !important", width: "100% !important" }} className="btn-block w-100 mt-3" variant="dark" id="dropdown-basic">
-                                        View Exercises
+                                        <span className="lightFonts">View Exercises</span>
                                     </Dropdown.Toggle>
-                                    <Dropdown.Menu style={{ position: "static !important", width: "100% !important", textAlign: "center" }} className="btn-block w-100 mt-3 p-1">
+                                    <Dropdown.Menu style={{ position: "static !important", width: "100% !important", textAlign: "center" }} className="btn-block w-100 mt-3 p-1 lightFonts">
                                         <Dropdown.Item href="#">
                                             <Row>
-                                                <Col md={6} lg={6} sm={6}>
+                                                <Col md={6} lg={6} sm={6} className="boldFonts">
                                                     <b>Name</b>
                                                 </Col>
-                                                <Col md={6} lg={6} sm={6}>
+                                                <Col md={6} lg={6} sm={6} className="boldFonts">
                                                     <b>Benefit</b>
                                                 </Col>
                                             </Row>
@@ -186,10 +186,10 @@ const Workout = () => {
 
                                                     }}>
                                                         <Row>
-                                                            <Col md={6} lg={6} sm={6}>
+                                                            <Col md={6} lg={6} sm={6} className="lightFonts">
                                                                 {i.name}
                                                             </Col>
-                                                            <Col md={6} lg={6} sm={6}>
+                                                            <Col md={6} lg={6} sm={6} className="lightFonts">
                                                                 {i.benefit}
                                                             </Col>
                                                         </Row>
@@ -210,7 +210,7 @@ const Workout = () => {
                                 }} className="mt-3 p-1">
                                     <Row>
                                         <Col md={12} sm={12} lg={12}>
-                                            <h4>Exercises</h4>
+                                            <h4 className="boldFonts">Exercises</h4>
                                         </Col>
                                     </Row>
                                     <br />
@@ -222,13 +222,13 @@ const Workout = () => {
                                                         <Col md={6} sm={6} lg={6}>
                                                             <Row>
                                                                 <Col md={8} sm={8} lg={8}>
-                                                                    <h5> {i.name} </h5>
+                                                                    <h5 className="lightFonts"> {i.name} </h5>
                                                                 </Col>
                                                                 <Col md={4} sm={4} lg={4}>
                                                                     <Button variant="dark" className="btn-block w-100" onClick={() => {
                                                                         setExerciesList([...exercisesList, i])
                                                                         setWorkout(workout.filter(itr => itr.name !== i.name))
-                                                                    }}><b>-</b></Button>
+                                                                    }}><b><span className="lightFonts">-</span></b></Button>
                                                                 </Col>
                                                             </Row>
                                                             <hr />
@@ -254,7 +254,7 @@ const Workout = () => {
                                             setExerciesList([...exercisesList, ...workout])
                                             setWorkout([])
                                             setName("")
-                                        }}>Reset</Button>
+                                        }}><span className="lightFonts">Reset</span></Button>
                                     </Col>
                                 </Col>
                                 <Col md={5} sm={12} lg={5} className="buttons">
@@ -283,7 +283,7 @@ const Workout = () => {
                                             setName("")
                                             setLoading(false)
                                         }
-                                    }}>Save Workout</Button>
+                                    }}><span className="lightFonts">Save Workout</span></Button>
                                 </Col>
                             </Row>
                         </Row>
@@ -291,7 +291,7 @@ const Workout = () => {
                     <Row style={{ backgroundColor: "#F0F0F0", marginTop: "3vh", minHeight: "60vh" }}>
                         <Row style={{ padding: "3vh", minHeight: "15vh" }}>
                             <Col md={10} sm={12} lg={10} className="mt-3">
-                                <h2 className='cols'><b>Delete</b></h2>
+                                <h2 className='cols boldFonts'><b>Delete Workout</b></h2>
                             </Col>
                             <Col md={2} sm={12} lg={2}>
                                 <div style={{ maxHeight: "15vh", display: "flex", justifyContent: "center" }}>
@@ -312,7 +312,7 @@ const Workout = () => {
                                             <>
                                                 <Row>
                                                     <Col className="cols" md={10} sm={12} lg={10}>
-                                                        <h4><b>{i.name}</b></h4>
+                                                        <h4 className="lightFonts"><b>{i.name}</b></h4>
                                                     </Col>
                                                     <Col md={1} sm={12} lg={1} className="delete">
                                                         <Button variant="dark" className="btn-block w-100 ml-4" onClick={async () => {
@@ -330,7 +330,6 @@ const Workout = () => {
                                                         }}><i className="fa-solid fa-trash"></i></Button>
                                                     </Col>
                                                     <Col className="cols"><hr /></Col>
-
                                                 </Row>
                                             </>
                                         )

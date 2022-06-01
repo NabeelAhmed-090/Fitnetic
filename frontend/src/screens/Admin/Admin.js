@@ -22,8 +22,8 @@ const Admin = () => {
                     <Card style={{ width: '18rem', backgroundColor: "#F0F0F0" }}>
                         <Card.Img style={{ height: "40vh" }} variant="top" src={answerPNG} />
                         <Card.Body style={{ height: "20vh" }}>
-                            <Card.Title style={{ textAlign: "center" }}><b><span className="fonts">Dashboard</span></b></Card.Title>
-                            <Card.Text style={{ textAlign: "center" }}>
+                            <Card.Title style={{ textAlign: "center" }}><b><span className="boldFonts">Dashboard</span></b></Card.Title>
+                            <Card.Text style={{ textAlign: "center" }} className="lightFonts">
                                 Answer Users queries
                             </Card.Text>
                         </Card.Body>
@@ -34,7 +34,7 @@ const Admin = () => {
                                 setDietState(false)
                                 setQuestionState(true)
                             }
-                            }><span className="fonts">View Questions</span></Button>
+                            }><span className="boldFonts">View Questions</span></Button>
                         </Card.Body>
                     </Card>
                     <hr />
@@ -43,8 +43,8 @@ const Admin = () => {
                     <Card style={{ width: '18rem', backgroundColor: "#F0F0F0" }}>
                         <Card.Img style={{ height: "40vh" }} variant="top" src={userPNG} />
                         <Card.Body style={{ height: "20vh" }}>
-                            <Card.Title style={{ textAlign: "center" }}><b><span className="fonts">Users</span></b></Card.Title>
-                            <Card.Text style={{ textAlign: "center" }}>
+                            <Card.Title style={{ textAlign: "center" }}><b><span className="boldFonts">Users</span></b></Card.Title>
+                            <Card.Text style={{ textAlign: "center" }} className="lightFonts">
                                 Remove existing account
                             </Card.Text>
                         </Card.Body>
@@ -55,7 +55,7 @@ const Admin = () => {
                                 setQuestionState(false)
                                 setUserState(true)
                             }
-                            }><span className="fonts">View Users</span></Button>
+                            }><span className="boldFonts">View Users</span></Button>
                         </Card.Body>
                     </Card>
                     <hr />
@@ -65,8 +65,8 @@ const Admin = () => {
                     <Card style={{ width: '18rem', backgroundColor: "#F0F0F0" }}>
                         <Card.Img style={{ height: "40vh" }} variant="top" src={workoutPNG} />
                         <Card.Body style={{ height: "20vh" }}>
-                            <Card.Title style={{ textAlign: "center" }}><b><span className="fonts">Workout</span></b></Card.Title>
-                            <Card.Text style={{ textAlign: "center" }}>
+                            <Card.Title style={{ textAlign: "center" }}><b><span className="boldFonts">Workout</span></b></Card.Title>
+                            <Card.Text style={{ textAlign: "center" }} className="lightFonts">
                                 Add/delete workout plans
                             </Card.Text>
                         </Card.Body>
@@ -77,7 +77,7 @@ const Admin = () => {
                                 setUserState(false)
                                 setWorkoutState(true)
                             }
-                            } ><span className="fonts">View Workout Plans</span></Button>
+                            } ><span className="boldFonts">View Workout Plans</span></Button>
                         </Card.Body>
                     </Card>
                     <hr />
@@ -86,9 +86,9 @@ const Admin = () => {
                     <Card style={{ width: '18rem', backgroundColor: "#F0F0F0" }}>
                         <Card.Img style={{ height: "40vh" }} variant="top" src={dietPNG} />
                         <Card.Body style={{ height: "20vh" }}>
-                            <Card.Title style={{ textAlign: "center" }}><b><span className="fonts">Diet</span></b></Card.Title>
-                            <Card.Text style={{ textAlign: "center" }}>
-                                Add/delete diet plans
+                            <Card.Title style={{ textAlign: "center" }}><b><span className="boldFonts">Diet</span></b></Card.Title>
+                            <Card.Text style={{ textAlign: "center" }} className="lightFonts">
+                                Add diet plans
                             </Card.Text>
                         </Card.Body>
                         <Card.Body>
@@ -98,7 +98,7 @@ const Admin = () => {
                                 setUserState(false)
                                 setDietState(true)
                             }
-                            } ><span className="fonts">View Diet Plans</span></Button>
+                            } ><span className="boldFonts">View Diet Plans</span></Button>
                         </Card.Body>
                     </Card>
                     <hr />

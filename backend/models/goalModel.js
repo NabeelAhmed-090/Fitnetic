@@ -15,7 +15,7 @@ const goalSchema = mongoose.Schema({
         required: true,
         ref: 'Diet'
     },
-    workout: {
+    workout: { // id -> calories
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Workout'

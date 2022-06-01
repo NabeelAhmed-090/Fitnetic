@@ -16,7 +16,9 @@ const Highlighted = ({ text = "", highlight = "" }) => {
                         color: "black",
                     }} className="lightFonts" key={i}>{part}</mark>
                 ) : (
-                    <span key={i} className="lightFonts">{part}</span>
+                    <>
+                        <span key={i} className="lightFonts">{part}</span>
+                    </>
                 );
             })}
         </span>

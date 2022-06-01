@@ -25,26 +25,14 @@ const User = () => {
         <>
             {loading === true ? <Loader /> :
                 <Container style={{ backgroundColor: "#F0F0F0", marginTop: "3vh", minHeight: "60vh" }}>
-                    <Row style={{ maxHeight: "25vh" }}>
-                        <Col md={2} sm={12} lg={2} className="cols mb-5 mt-2">
-                            <div style={{ height: "15vh", display: "flex", justifyContent: "center" }} >
-                                <img
-                                    className="d-block"
-                                    src={logoPNG}
-                                    alt="First slide"
-                                    style={{ height: "100%", width: "60%" }}
-                                />
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
+                    <Row className="mt-2">
                         <Col md={12} lg={12} sm={12}>
                             {
                                 users.map(i => {
                                     return (
                                         <Row key={i.email}>
-                                            <Col sm={3} lg={3} md={3} className="mb-3">
-                                                <div style={{ height: "20vh" }}>
+                                            <Col sm={3} lg={3} md={3} className="mb-2 mt-2">
+                                                <div style={{ height: "30vh" }}>
                                                     <img
                                                         className="d-block"
                                                         src={userPNG}
@@ -56,14 +44,14 @@ const User = () => {
                                             <Col style={{ margin: "auto" }} sm={7} lg={7} md={7}>
                                                 <Row className="mt-1">
                                                     <Col sm={12} lg={6} md={6} style={{ display: "flex" }}>
-                                                        <h5 style={{ margin: "auto" }}><b>{i.email}</b></h5>
+                                                        <h5 style={{ margin: "auto" }} className="lightFonts"><b>{i.email}</b></h5>
                                                     </Col>
                                                     <Col sm={12} lg={6} md={6} style={{ display: "flex" }}>
-                                                        <h5 style={{ margin: "auto" }}><b>{i.name}</b></h5>
+                                                        <h5 style={{ margin: "auto" }} className="lightFonts"><b>{i.name}</b></h5>
                                                     </Col>
                                                 </Row>
                                             </Col>
-                                            <Col style={{ marginTop: "5vh" }} sm={12} lg={1} md={1}>
+                                            <Col style={{ margin: "auto" }} sm={12} lg={1} md={1}>
                                                 <Button className="btn-block w-100 mb-2" onClick={async () => {
                                                     setLoading(true)
                                                     var config = {
@@ -77,7 +65,7 @@ const User = () => {
                                                     setUsers(users.filter(itr => itr.email !== i.email))
                                                     setLoading(false)
                                                 }} variant="dark">
-                                                    <h3 style={{ marginLeft: "auto" }}><i className="fa-solid fa-trash"></i></h3>
+                                                    <h3 style={{ margin: "auto" }}><i className="fa-solid fa-trash"></i></h3>
                                                 </Button>
                                             </Col>
                                             <hr />

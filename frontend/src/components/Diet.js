@@ -39,7 +39,7 @@ const Diet = () => {
                     <Row style={{ backgroundColor: "#F0F0F0", marginTop: "3vh", minHeight: "60vh" }}>
                         <Row style={{ padding: "3vh", maxHeight: "25vh" }}>
                             <Col md={10} sm={12} lg={10} className="mt-3">
-                                <h2 className='cols'><b>Include</b></h2>
+                                <h2 className='cols boldFonts'><b>Add Diet</b></h2>
                             </Col>
                             <Col md={2} sm={12} lg={2}>
                                 <div style={{ height: "15vh", display: "flex", justifyContent: "center" }}>
@@ -73,7 +73,7 @@ const Diet = () => {
                                     aria-describedby="descriptionlock"
                                     value={name}
                                 />
-                                <Form.Text id="diet description" muted>
+                                <Form.Text id="diet description" className="boldFonts">
                                     {!check && <pre className="cols" style={{ color: "red", marginTop: "3vh" }}>Name already exists</pre>}
                                     {check && name.length !== 0 && <pre className="cols" style={{ color: "green", marginTop: "3vh" }}>Valid Name</pre>}
                                 </Form.Text>
@@ -90,7 +90,7 @@ const Diet = () => {
                                                         <Col className="mt-2" style={{ textAlign: "center" }} md={6} sm={6} lg={6}>
                                                             <Row>
                                                                 <Col style={{ backgroundColor: "#FEE715CF" }} md={7} sm={4} lg={7} className="shadow p-1 rounded" >
-                                                                    <pre>{i}</pre>
+                                                                    <pre className="lightFonts">{i}</pre>
                                                                 </Col>
                                                                 <Col md={3} sm={4} lg={3} style={{ justifyContent: "right" }}>
                                                                     <Button variant="dark" onClick={() => {
@@ -98,7 +98,7 @@ const Diet = () => {
                                                                             setTags([...tags, i])
                                                                             setTag(tag.filter(itr => itr !== i))
                                                                         }
-                                                                    }}><b>+</b></Button>
+                                                                    }}><b><span className="lightFonts">+</span></b></Button>
                                                                 </Col>
                                                             </Row>
                                                         </Col>
@@ -124,7 +124,7 @@ const Diet = () => {
                                         }} >
                                             <Row>
                                                 <Col md={12} sm={12} lg={12}>
-                                                    <h4>#Tags</h4>
+                                                    <h4 className="boldFonts">#Tags</h4>
                                                     <hr />
                                                 </Col>
                                             </Row>
@@ -137,23 +137,21 @@ const Diet = () => {
                                                                 <Col md={6} sm={6} lg={6} className="p-1">
                                                                     <Row>
                                                                         <Col md={8} sm={8} lg={8}>
-                                                                            <h5> #{i} </h5>
+                                                                            <h5 className="lightFonts"> #{i} </h5>
                                                                         </Col>
                                                                         <Col md={3} sm={3} lg={3}>
                                                                             <Button variant="dark" className="btn-block w-100" onClick={() => {
                                                                                 setTag([...tag, i])
                                                                                 setTags(tags.filter(itr => itr !== i))
-                                                                            }}><b>-</b></Button>
+                                                                            }}><b><span className="lightFonts">-</span></b></Button>
                                                                         </Col>
                                                                     </Row>
                                                                     <hr />
                                                                 </Col>
-
                                                             </>
                                                         )
                                                     })
                                                 }
-
                                             </Row>
                                         </div>
                                     </Col>
@@ -162,15 +160,15 @@ const Diet = () => {
                             <Col md={3} lg={3} sm={12}>
                                 <Dropdown>
                                     <Dropdown.Toggle style={{ position: "static !important", width: "100% !important" }} className="btn-block w-100 mt-3" variant="dark" id="dropdown-basic">
-                                        View Food List
+                                        <span className="lightFonts">View Food List</span>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu style={{ position: "static !important", width: "100% !important", textAlign: "center" }} className="btn-block w-100 mt-3 p-1">
                                         <Dropdown.Item href="#">
                                             <Row>
-                                                <Col md={6} lg={6} sm={6}>
+                                                <Col md={6} lg={6} sm={6} className="boldFonts">
                                                     <b>Name</b>
                                                 </Col>
-                                                <Col md={6} lg={6} sm={6}>
+                                                <Col md={6} lg={6} sm={6} className="boldFonts">
                                                     <b>Benefit</b>
                                                 </Col>
                                             </Row>
@@ -183,10 +181,10 @@ const Diet = () => {
                                                         setDiet([...diet, i])
                                                     }}>
                                                         <Row>
-                                                            <Col md={6} lg={6} sm={6}>
+                                                            <Col md={6} lg={6} sm={6} className="lightFonts">
                                                                 {i.name}
                                                             </Col>
-                                                            <Col md={6} lg={6} sm={6}>
+                                                            <Col md={6} lg={6} sm={6} className="lightFonts">
                                                                 {i.benefit}
                                                             </Col>
                                                         </Row>
@@ -207,7 +205,7 @@ const Diet = () => {
                                 }} className="mt-3 p-1">
                                     <Row>
                                         <Col md={12} sm={12} lg={12}>
-                                            <h4>Food</h4>
+                                            <h4 className="boldFonts">Food</h4>
                                         </Col>
                                     </Row>
                                     <br />
@@ -219,7 +217,7 @@ const Diet = () => {
                                                         <Col md={12} sm={12} lg={12}>
                                                             <Row>
                                                                 <Col md={5} sm={5} lg={5}>
-                                                                    <h5> {i.name} </h5>
+                                                                    <h5 className="lightFonts"> {i.name} </h5>
                                                                 </Col>
                                                                 <Col md={4} sm={4} lg={4}>
                                                                     <Form.Control
@@ -230,14 +228,14 @@ const Diet = () => {
                                                                         placeholder="Quantity"
                                                                         id="quantity"
                                                                         aria-describedby="quanitytBlock"
-
+                                                                        className="lightFonts"
                                                                     />
                                                                 </Col>
                                                                 <Col md={2} sm={2} lg={2}>
                                                                     <Button variant="dark" className="btn-block w-100" onClick={() => {
                                                                         setFoodList([...foodList, i])
                                                                         setDiet(diet.filter(itr => itr.name !== i.name))
-                                                                    }}><b>-</b></Button>
+                                                                    }}><b><span className="lightFonts">-</span></b></Button>
                                                                 </Col>
                                                             </Row>
                                                             <hr />
@@ -264,7 +262,7 @@ const Diet = () => {
                                             setFoodList([...foodList, ...diet])
                                             setDiet([])
                                             setName("")
-                                        }}>Reset</Button>
+                                        }}><span className="lightFonts">Reset</span></Button>
                                     </Col>
                                 </Col>
                                 <Col md={5} sm={12} lg={5} className="buttons">
@@ -273,7 +271,7 @@ const Diet = () => {
                                             setLoading(true)
                                             var totalCaloriesCount = 0
                                             diet.map(i => {
-                                                totalCaloriesCount += Number(i.calories)
+                                                totalCaloriesCount += i.calories * i.quantity
                                                 return 0
                                             })
                                             var config = {
@@ -292,50 +290,11 @@ const Diet = () => {
                                             setName("")
                                             setLoading(false)
                                         }
-                                    }}>Save Diet</Button>
+                                    }}><span className="lightFonts">Save Diet</span></Button>
                                 </Col>
                             </Row>
                         </Row>
                     </Row>
-                    {/* <Row style={{ backgroundColor: "#F0F0F0", marginTop: "3vh", minHeight: "60vh" }}>
-                        <Row style={{ padding: "3vh", minHeight: "15vh" }}>
-                            <Col md={10} sm={12} lg={10} className="mt-3">
-                                <h2 className='cols'><b>Delete</b></h2>
-                            </Col>
-                            <Col md={2} sm={12} lg={2}>
-                                <div style={{ maxHeight: "15vh", display: "flex", justifyContent: "center" }}>
-                                    <img
-                                        className="d-block"
-                                        src={deletePNG}
-                                        alt="First slide"
-                                        style={{ height: "100%", width: "60%" }}
-                                    />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row style={{ marginTop: "10vh" }}>
-                            <Col md={12} sm={12} lg={12}>
-                                {
-                                    workoutList.map(i => {
-                                        return (
-                                            <>
-                                                <Row>
-                                                    <Col className="cols" md={10} sm={12} lg={10}>
-                                                        <h4><b>{i.name}</b></h4>
-                                                    </Col>
-                                                    <Col md={1} sm={12} lg={1} className="delete">
-                                                        <Button variant="dark" className="btn-block w-100 ml-4"><i className="fa-solid fa-trash"></i></Button>
-                                                    </Col>
-                                                    <Col className="cols"><hr /></Col>
-
-                                                </Row>
-                                            </>
-                                        )
-                                    })
-                                }
-                            </Col>
-                        </Row>
-                    </Row> */}
                 </Container>
             }
         </>
