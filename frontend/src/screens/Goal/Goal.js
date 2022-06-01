@@ -54,19 +54,23 @@ const Goal = () => {
     }, [])
 
     return (
-        <Container>
+        <Container className="lightFonts">
             {pageLoading ? <Loader /> : (
                 <>
                     <Row className="mb-2">
-                        <Col style={{ textAlign: "center" }} className='mb-3 mt-3' md={12} sm={12} lg={12}>
-                            <h1>Current Goal</h1>
+                        <Col style={{ textAlign: "center" }} className='mb-3 mt-3 boldFonts' md={12} sm={12} lg={12}>
+                            <h1 className="boldFonts">Current Goal</h1>
                         </Col>
                         <Col md={6} sm={6} lg={6}>
                             <Card>
-                                <Card.Header style={{ textAlign: "center", color: "white", backgroundColor: "black" }}>Workout Plan</Card.Header>
+                                <Card.Header style={{ textAlign: "center", color: "white", backgroundColor: "black" }}>
+                                    <span className="boldFonts">
+                                        Workout Plan
+                                    </span>
+                                </Card.Header>
                                 <Card.Body style={{ textAlign: "center" }}>
                                     <blockquote className="blockquote mb-0">
-                                        <h5>
+                                        <h5 className="boldFonts">
                                             <b>{selectedWorkout.name}</b>
                                         </h5>
                                     </blockquote>
@@ -74,7 +78,7 @@ const Goal = () => {
                                     {selectedWorkout.exercises && selectedWorkout.exercises.map((i) => {
                                         return (
                                             <>
-                                                <h6>{i.name} x {i.sets} x {i.reps}</h6>
+                                                <h6 className="lightFonts">{i.name} x {i.sets} x {i.reps}</h6>
                                             </>
                                         )
                                     })}
@@ -86,7 +90,7 @@ const Goal = () => {
                                 <Card.Header style={{ textAlign: "center", color: "white", backgroundColor: "black" }}>Diet Plan</Card.Header>
                                 <Card.Body style={{ textAlign: "center" }}>
                                     <blockquote className="blockquote mb-0">
-                                        <h5>
+                                        <h5 className="boldFonts">
                                             <b>{selectedDiet.name}</b>
                                         </h5>
                                     </blockquote>
@@ -94,7 +98,7 @@ const Goal = () => {
                                     {selectedDiet.food && selectedDiet.food.map((i) => {
                                         return (
                                             <>
-                                                <h6 className="mt-1">{i.name} {i.quantity} ({i.unit})</h6>
+                                                <h6 className="mt-1 lightFonts">{i.name} {i.quantity} ({i.unit})</h6>
                                             </>
                                         )
                                     })}
@@ -123,7 +127,7 @@ const Goal = () => {
                                         config)
                                 }
                             }}>
-                                Save Goal
+                                <span className="lightFonts">Save Goal</span>
                             </Button>
                         </Col>
                         <hr className='mt-2' />

@@ -78,34 +78,35 @@ const DashboardQuestion = () => {
                         <Container style={{ marginTop: "5vh", backgroundColor: "#F0F0F0" }} className="shadow p-3 mb-5 rounded">
                             <Row style={{ minHeight: "10vh", maxHeight: "20%", textDecoration: "none", minWidth: "35vw" }}>
                                 <Col sm={12} md={10} lg={10} >
-                                    <h5 className="question">
+                                    <h5 className="question boldFonts">
                                         POST A QUESTION
                                     </h5>
                                 </Col>
                                 <Col sm={12} md={2} lg={2} >
                                     <Button variant="dark" className="btn-block w-100 my-1 mb-1" onClick={postQuestionFunc}>
-                                        POST
+                                        <span className="lightFonts">POST</span>
                                     </Button>
                                 </Col>
                             </Row>
 
-                            <Row style={{ minHeight: "10vh", maxHeight: "20%", textDecoration: "none", minWidth: "35vw" }}>
-                                <Col sm={12} md={12} lg={12} >
+                            <Row style={{ minHeight: "10vh", maxHeight: "20%", textDecoration: "none", minWidth: "35vw" }} className="lightFonts">
+                                <Col sm={12} md={12} lg={12} className="lightFonts">
                                     <Form.Control onChange={textBoxFunc}
                                         type="text"
                                         id="postAQuestion"
                                         aria-describedby="postAQuestionBlock"
                                         value={questions}
+                                        className="lightFonts"
                                     />
-                                    <Form.Text id="postAQuestion" muted>
-                                        Your question would be posted anonymously. It should not be more than 400 characters. Your question will be reviewed by our fitness experts.
+                                    <Form.Text id="postAQuestion" className="lightFonts">
+                                        <span className="boldFonts">Your question would be posted anonymously. It should not be more than 400 characters. Your question will be reviewed by our fitness experts.</span>
                                     </Form.Text>
                                 </Col>
                             </Row>
 
                             <Row >
                                 <Col sm={12} md={12} lg={12} style={{ display: "flex" }}>
-                                    <h5 style={{ marginLeft: "auto" }}>
+                                    <h5 style={{ marginLeft: "auto" }} className="lightFonts">
                                         {
                                             questions.length
                                         }

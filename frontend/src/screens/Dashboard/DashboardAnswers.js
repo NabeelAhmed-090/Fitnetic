@@ -62,7 +62,7 @@ const DashboardAnswers = () => {
 
               <Col sm={12} md={12} lg={12} >
                 <Container>
-                  <h5 className="headings">
+                  <h5 className="headings fonts">
                     <b>
                       QUESTION
                     </b>
@@ -72,7 +72,7 @@ const DashboardAnswers = () => {
               </Col>
               <Col sm={12} md={12} lg={12}>
                 <Container>
-                  <pre >
+                  <pre className="fonts">
                     {question}
                   </pre>
                 </Container>

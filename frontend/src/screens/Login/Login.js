@@ -55,21 +55,21 @@ const Login = () => {
                                 <Form >
                                     <Row>
                                         <Col style={{ textAlign: "center", justifyContent: 'center' }}>
-                                            <h2>Login</h2>
+                                            <h2 className="boldFonts">Login</h2>
                                         </Col>
                                     </Row>
                                     <Row style={{ marginTop: "10vh" }}>
                                         <Col md={12} lg={12} sm={12}>
-                                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Email</Form.Label>
+                                            <Form.Group className="mb-3 lightFonts" controlId="formBasicEmail">
+                                                <Form.Label >Email</Form.Label>
                                                 <Form.Control className="shadow-none" style={{ border: "0.5px solid #000000", outline: "none" }} type="email" placeholder="Enter Email" onChange={(event) => emailFunc(event)} />
                                             </Form.Group>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col md={12} lg={12} sm={12}>
-                                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                                <Form.Label>Password</Form.Label>
+                                            <Form.Group className="mb-3 lightFonts" controlId="formBasicPassword">
+                                                <Form.Label >Password</Form.Label>
                                                 <Form.Control className="shadow-none" style={{ border: "0.5px solid #000000" }} type="password" placeholder="Password" onChange={(event) => passwordFunc(event)} />
                                             </Form.Group>
                                         </Col>
@@ -77,7 +77,7 @@ const Login = () => {
 
                                     <Row>
                                         <Col md={12} lg={12} sm={12} style={{ display: "flex" }}>
-                                            <Button className="btn-block w-100 p-2 my-2" variant="dark" type="button" style={{ marginLeft: "auto", marginTop: "5vh" }} onClick={() => {
+                                            <Button style={{ marginLeft: "auto", marginTop: "5vh" }} type="button" className="btn-block w-100 p-2 my-2" variant="dark" onClick={() => {
                                                 if ((email === "nabeel@gmail.com" || email === "ayesha@gmail.com" || email === "laiba@gmail.com" || email === "hadiya@gmail.com") && password === '11223344') {
                                                     dispatch(adminLoginFunc(email, password))
                                                 }
@@ -85,20 +85,20 @@ const Login = () => {
                                                     dispatch(login(email, password))
                                                 }
                                             }}>
-                                                Login
+                                                <span className="lightFonts">Login</span>
                                             </Button>
                                         </Col>
                                     </Row>
                                     <Row >
                                         {error ?
                                             <Col md={12} sm={12} lg={12} style={{ textAlign: "center" }}>
-                                                <Form.Text style={{ color: "red" }}>
+                                                <Form.Text className="lightFonts" style={{ color: "red" }}>
                                                     * Invalid Email or Password
                                                 </Form.Text>
                                             </Col>
                                             : ''}
                                         <Col md={12} sm={12} lg={12} style={{ textAlign: "center" }}>
-                                            <Form.Text className="text-muted">
+                                            <Form.Text className="text-muted lightFonts">
                                                 If you don't have an account. Click <a href="/api/users/signup">here</a> to sign up.
                                             </Form.Text>
                                         </Col>

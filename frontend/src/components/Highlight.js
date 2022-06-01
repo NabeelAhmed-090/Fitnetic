@@ -8,12 +8,15 @@ const Highlighted = ({ text = "", highlight = "" }) => {
     const parts = text.split(regex);
 
     return (
-        <span>
+        <span className="lightFonts">
             {parts.filter(String).map((part, i) => {
                 return regex.test(part) ? (
-                    <mark style={{ backgroundColor: "#FEE715CF", color: "black" }} key={i}>{part}</mark>
+                    <mark style={{
+                        backgroundColor: "#FEE715CF",
+                        color: "black",
+                    }} className="lightFonts" key={i}>{part}</mark>
                 ) : (
-                    <span key={i}>{part}</span>
+                    <span key={i} className="lightFonts">{part}</span>
                 );
             })}
         </span>

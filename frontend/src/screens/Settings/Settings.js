@@ -55,7 +55,7 @@ const Settings = () => {
 
     return (
         <>
-            <Container style={{ paddingTop: "9vh" }}>
+            <Container style={{ paddingTop: "9vh" }} className="lightFonts">
                 <Row>
                     <Col md={12} sm={12} lg={12} style={{ display: 'flex', justifyContent: 'center' }}>
                         <Container style={{ width: "50vw", backgroundColor: "#F0F0F0" }} className="shadow p-3 mb-5 rounded">
@@ -150,7 +150,7 @@ const Settings = () => {
                                         <Button variant="dark" type="button" style={{ marginLeft: "auto", marginTop: "5vh" }} onClick={() => {
                                             dispatch(update(name, age, weight, password, height, email))
                                         }}>
-                                            Update Profile
+                                            <span className="lightFonts">Update Profile</span>
                                         </Button>
                                     </Col>
                                 </Row>
@@ -169,7 +169,7 @@ const Settings = () => {
                             <Row>
                                 <Col md={12} lg={12} sm={12} style={{ display: "flex" }}>
                                     <Button variant="danger" type="button" style={{ marginLeft: "auto", marginTop: "5vh" }} onClick={handleShow}>
-                                        Delete Account
+                                        <span className="lightFonts">Delete Account</span>
                                     </Button>
                                 </Col>
                             </Row>
@@ -185,7 +185,7 @@ const Settings = () => {
                 <Modal.Body>This will permanently delete your data. </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" onClick={deleteAccount}>
-                        Delete Account
+                        <span className="lightFonts">Delete Account</span>
                     </Button>
                 </Modal.Footer>
             </Modal>

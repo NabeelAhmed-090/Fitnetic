@@ -63,60 +63,20 @@ const Signup = () => {
 
     return (
         <>
+            <Container style={{ marginTop: "10vh" }}>
 
-            <Carousel>
-                <Carousel.Item className="carousel-item">
-                    <div style={{ height: "80vh" }}>
-                        <img
-                            className="d-block w-100"
-                            src={signup1PNG}
-                            alt="First slide"
-                            style={{ height: "100%", width: "100%" }}
-                        />
-                    </div>
-                    <Carousel.Caption style={{ color: "black" }}>
-                        <h2><b>A Feeble Body Weakens The Mind</b></h2>
-                        <p>Our website provides you with <b>workout plans</b> to get fitter and better</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item className="carousel-item">
-                    <div style={{ height: "80vh" }}>
-                        <img
-                            className="d-block w-100"
-                            src={signup2PNG}
-                            alt="First slide"
-                            style={{ height: "100%", width: "100%" }}
-                        />
-                    </div>
-                    <Carousel.Caption style={{ color: "black" }}>
-                        <h2><b>Track Your Health Progress </b></h2>
-                        <p>Our website helps you <b>keep track of your health</b> and provide you the data in an interactive manner. </p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item className="carousel-item">
-                    <div style={{ height: "80vh" }}>
-                        <img
-                            className="d-block w-100"
-                            src={signup3PNG}
-                            alt="First slide"
-                            style={{ height: "100%", width: "100%" }}
-                        />
-                    </div>
-                    <Carousel.Caption style={{ color: "black" }}>
-                        <h2><b>Eat Health, Stay Healthy</b></h2>
-                        <p>Our website provides the best <b>diet plans</b> formulated by world renowned health nutritionists. </p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel>
-
-            <Container style={{ marginTop: "5vh" }}>
                 <Row>
                     <Col md={12} sm={12} lg={12} style={{ display: 'flex', justifyContent: 'center' }}>
                         <Container style={{ width: "50vw", backgroundColor: "#F0F0F0" }} className="shadow p-3 mb-5 rounded">
                             <Form>
                                 <Row>
                                     <Col md={12} lg={12} sm={12}>
-                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Row>
+                                            <Col style={{ textAlign: "center", justifyContent: 'center' }}>
+                                                <h2 className="boldFonts">Signup</h2>
+                                            </Col>
+                                        </Row>
+                                        <Form.Group className="mb-3 lightFonts" controlId="formBasicEmail">
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control className="shadow-none" style={{ border: "0.5px solid #000000", outline: "none" }} type="email" placeholder="Enter Email" onChange={(event) => emailFunc(event)} />
                                             {emailCheck && (email.length !== 0) ?
@@ -233,7 +193,7 @@ const Signup = () => {
                                                     history('/api/login')
                                                 }
                                             }}>
-                                            Signup
+                                            <span className='lightFonts'>Signup</span>
                                         </Button>
                                     </Col>
                                 </Row>

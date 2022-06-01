@@ -12,19 +12,19 @@ const QuestionCard = ({ quest, id, ButtonText, keyword = "" }) => {
          <Container key={id} style={{ justifyContent: 'center', paddingTop: "2vh", paddingBottom: "1vh" }}>
             <Row className={ButtonText === "Reply" ? 'shadow p-3 mb-3 rounded questionCard questionCardAdmin' : 'shadow p-3 mb-3 rounded questionCard questionCardDashboard'}>
                <Col sm={12} md={12} lg={12} >
-                  <h5 >
+                  <h5 className="boldFonts">
                      QUESTION
                   </h5>
                </Col>
                <Col sm={12} md={12} lg={12}>
-                  <pre >
+                  <pre>
                      <Highlighted text={quest} highlight={keyword} />
                   </pre>
                </Col>
                <Col md={11} lg={11} sm={12} style={{ display: "flex" }}>
                   <Link to={`/api/dashboard/answers/${id}`} style={{ marginLeft: "auto", marginTop: "5vh" }}>
                      <Button className="btn-block w-100" variant="dark" type="button" >
-                        {ButtonText}
+                        <span className="lightFonts">{ButtonText}</span>
                      </Button>
                   </Link>
                </Col>

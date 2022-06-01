@@ -24,8 +24,8 @@ const Header = () => {
         <>
             <Navbar style={{ height: "8vh", backgroundColor: "#FEE715CF" }} >
                 <Container>
-                    <Navbar.Brand href="/AboutUs" className="fonts"><b>FITNETIC</b></Navbar.Brand>
-                    <Nav className="ms-auto">
+                    <Navbar.Brand href="/AboutUs" className="boldFonts">FITNETIC</Navbar.Brand>
+                    <Nav className="ms-auto lightFonts">
                         {adminLogin.adminInfo && <Nav.Link href="/api/login" onClick={handleLogout}>Logout</Nav.Link>}
                         {!adminLogin.adminInfo && <Nav.Link href="/api/dashboard">Dashboard</Nav.Link>}
                         {!userLogin.userInfo && !adminLogin.adminInfo && <Nav.Link href="/api/login">Login</Nav.Link>}
