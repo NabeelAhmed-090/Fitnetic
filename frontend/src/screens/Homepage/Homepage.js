@@ -44,6 +44,7 @@ const Homepage = () => {
         else {
             const { _id } = userInfo
             async function getUser() {
+
                 setLoading(true)
                 const { _id } = userInfo
                 var config = {

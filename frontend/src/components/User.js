@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import logoPNG from '../Image/user.png'
 import userPNG from '../Image/adminUser.png'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import Loader from './Loader'

@@ -115,6 +115,7 @@ export const update = (name, age, weight, password, height, email) => async (dis
 
 export const deleteUser = (email) => async (dispatch) => {
     try {
+        localStorage.removeItem('userInfo')
         dispatch({
             type: USER_DELETE_REQUEST
         })
@@ -129,7 +130,6 @@ export const deleteUser = (email) => async (dispatch) => {
         dispatch({
             type: USER_DELETE_SUCCESS
         })
-        localStorage.removeItem('userInfo')
         dispatch({
             type: USER_LOGOUT
         })

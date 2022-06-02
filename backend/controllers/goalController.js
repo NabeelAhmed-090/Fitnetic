@@ -152,7 +152,7 @@ const saveGoal = asyncHandler(async (req, res) => {
 
     if (goal) {
         await Goal.deleteOne({ user: user_id })
-        const _tp = await TrackingProgress.findOne({ user: _id })
+        const _tp = await TrackingProgress.findOne({ user: user_id })
         const { dailyUpdates } = _tp
         if (dailyUpdates) {
             await deleteDailyUpdates(dailyUpdates)
@@ -220,6 +220,7 @@ const getFoodList = asyncHandler(async (req, res) => {
 const getWorkoutList = asyncHandler(async (req, res) => {
     const { _id } = req.body
     const goal = await Goal.findOne({ user: _id })
+
     if (goal) {
         const workout_id = ObjectId(goal.workout)
         const workout = await Workout.findById(workout_id)
@@ -227,6 +228,7 @@ const getWorkoutList = asyncHandler(async (req, res) => {
         workouts = await promisesWorkout(workout.exercises)
         res.json(workouts)
     }
+    else res.json({})
 })
 
 

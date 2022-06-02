@@ -2,9 +2,9 @@ import asyncHandler from "express-async-handler";
 import User from '../models/userModel.js'
 import TrackingProgress from "../models/trackingProgressModel.js";
 import generateToken from "../utils/generateToken.js";
-import bcrypt from "bcryptjs";
 import DailyUpdates from "../models/dailyUpdatesModel.js";
 import { ObjectId } from 'mongodb';
+import Goal from '../models/goalModel.js'
 
 //@desc   Auth user & get token
 //@route  POST /api/users/login
@@ -116,19 +116,33 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     }
 })
 
+
+async function deleteDailyUpdates(dailyUpdates) {
+    const unresolved = dailyUpdates.map(async (i) => {
+        const id = ObjectId(i)
+        await DailyUpdates.deleteOne({ _id: id })
+    })
+    await Promise.all(unresolved)
+}
+
+
 //@desc   Delete User
 //@route  DELETE /api/users/profile/delete
 //@access Private
 const deleteUserProfile = asyncHandler(async (req, res) => {
     const { email } = req.body
-
-    User.deleteOne({ email: email })
-        .then(() => {
-            res.send("Account Deleted")
-        })
-        .catch((error) => {
-            res.send("error in account deletion")
-        })
+    const user = await User.findOne({ email: email })
+    const goal = await Goal.findOne({ user: user._id })
+    if (goal) {
+        await Goal.deleteOne({ user: user._id })
+        const _tp = await TrackingProgress.findOne({ user: user._id })
+        const { dailyUpdates } = _tp
+        if (dailyUpdates) {
+            await deleteDailyUpdates(dailyUpdates)
+        }
+        await TrackingProgress.deleteOne({ user: user._id })
+    }
+    await User.deleteOne({ _: user._id })
 })
 
 
